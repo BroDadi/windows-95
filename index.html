@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 95</title>
+    <link href="styles.css" rel="stylesheet">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="desktop" onclick="disableStart();"></div>
+    <nav id="startbar" onclick="deselectShortcuts();">
+        <div id="left">
+            <button id="start" onclick="enableStart()">
+                <img src="res/start.png"></img><span>Пуск</span>
+            </button>
+            <div id="windowdisplays"></div>
+        </div>
+        <div id="tray">
+            <span id="clock">13:37</span>
+        </div>
+    </nav>
+    <div id="windows" onclick="disableStart(); deselectShortcuts();"></div>
+    <div id="windows" class="nodisplay" onclick="disableStart(); deselectShortcuts();"></div>
+</body>
+</html>

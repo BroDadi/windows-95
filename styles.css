@@ -1,0 +1,604 @@
+@import url("https://fonts.cdnfonts.com/css/fixedsys-62");
+
+@import url("https://fonts.cdnfonts.com/css/microsoft-sans-serif");
+
+button {
+    font-family: "Microsoft Sans Serif";
+    border-image: url(res/button.png) 2;
+    border-width: 2px;
+    background-color: #c0c0c0;
+    min-width: 90px;
+    height: 23px;
+    font-size: 11px;
+    width: auto;
+    user-select: none;
+}
+button:active {
+    border-image: url(res/buttonpressed.png) 2;
+}
+button:focus {
+    outline: none;
+}
+button * {
+    vertical-align: middle;
+    padding-left: 0.5px;
+    padding-right: 0.5px;
+}
+button.tray {
+    border-width: 0;
+    border-image: 0;
+}
+button[disabled] {
+    color: #808080;
+}
+button[disabled]:active {
+    border-image: url(res/button.png) 2;
+}
+#tray {
+    display: flex;
+    align-items: center;
+    height: 18px;
+    border-image: url(res/tray.png) 1;
+    border-width: 1px;
+    border-style: solid;
+    margin-right: 2px;
+    padding: 1px;
+}
+#startmenu {
+    border-image: url(res/button.png) 2;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #c0c0c0;
+    position: absolute;
+    bottom: 24px;
+    left: 2px;
+    display: flex;
+    padding: 1px;
+	z-index: 1;
+}
+#sidemenu {
+    text-align: left;
+    background: #808080;
+    transform: rotate(180deg);
+    width: 21px;
+}
+#sidemenu span {
+    font-size: 14pt;
+    color: #fff;
+    font-weight: lighter;
+    font-family: "Franklin Gothic Book";
+    writing-mode: vertical-rl;
+    user-select: none;
+}
+#windowstext {
+    font-family: "Franklin Gothic Medium" !important;
+    color: #c0c0c0 !important;
+    font-weight: bold !important;
+    margin-top: 20px;
+}
+#startoptions {
+    display: flex;
+    flex-direction: column;
+}
+#startoptions div {
+    display: flex;
+    flex-direction: column;
+    padding-right: 26px;
+}
+#startoptions div > button {
+    width: calc(100% + 26px);
+}
+#startoptions div > button.dropdown::after {
+    content: "";
+    width: 4px;
+    height: 7px;
+    background-image: url(res/arrow.png);
+    position: absolute;
+    right: 7px;
+}
+#startoptions div > button.dropdown:hover::after {
+    filter: invert(100%);
+}
+#startoptions #sep {
+    border-top: #808080 1px solid;
+    border-bottom: #fff 1px solid;
+    margin-bottom: 5px;
+    margin-top: 2px;
+}
+#startmenu button {
+    height: auto;
+    border: none;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: auto;
+    padding: 0px 5px;
+}
+#startmenu button:hover {
+    background-color: #000080;
+    color: #fff;
+}
+#startmenu button img:nth-child(1) {
+    width: 32px;
+    height: 32px;
+}
+#clock {
+    width: 46px;
+}
+#start {
+    font-weight: bold;
+    margin-left: 2px;
+    min-width: 0px;
+    padding: 0 2px 0 2px;
+}
+#start.pressed {
+    border-image: url(res/buttonpressed.png) 2;
+}
+#startbar {
+    border-image: url(res/startbar.png) 2;
+    border-width: 0;
+    border-top-width: 2px;
+    border-style: solid;
+    background-color: #c0c0c0;
+    bottom: 0%;
+    width: 100%;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    justify-content: space-between;
+}
+#clock {
+    font-family: "Microsoft Sans Serif";
+    text-align: center;
+    margin-top: 1px;
+}
+#desktop {
+    width: 100vw;
+    height: 100vh;
+    background: #008080;
+    position: fixed;
+    z-index: -2;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    column-gap: 2px;
+    row-gap: 2px;
+    overflow: hidden;
+}
+#windows {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    flex: 0 0 auto;
+    overflow: hidden;
+}
+.window {
+    position: absolute;
+    border-image: url(res/button.png) 2;
+    border-width: 2px;
+    border-style: solid;
+    background-color: #c0c0c0;
+    padding: 1px;
+    pointer-events: auto;
+    min-width: 112px;
+    min-height: 27px;
+    flex-shrink: none;
+}
+.window > .header {
+    height: 18px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 3px;
+    z-index: -1;
+    background-color: #808080;
+    color: #c0c0c0;
+    user-select: none;
+}
+.window:focus > .header {
+    background: #000080;
+    color: #fff;
+}
+.window:focus {
+    outline: none;
+}
+.window > .buttons {
+    padding: 5px 11px 11px 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+.window.system > .buttons {
+    float: right;
+}
+.window > desc > img {
+    width: 32px;
+    height: 32px;
+}
+.window > .desc {
+    display: flex;
+    flex-direction: row;
+    align-items: self-start;
+    padding: 11px;
+    gap: 24px;
+    margin-top: 10px;
+    word-break: none;
+    user-select: none;
+}
+.windowbuttons div {
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
+}
+.windowbuttons button {
+    width: 16px;
+    height: 14px;
+    min-width: 0px;
+}
+.close {
+    background-image: url("res/x.png");
+}
+.maximize {
+    background-image: url("res/maximize.png");
+}
+.restore {
+    background-image: url("res/restore.png");
+}
+.minimize {
+    background-image: url("res/minimize.png");
+}
+body {
+    margin: 0;
+    image-rendering: pixelated;
+    overflow: hidden;
+}
+img {
+    pointer-events: none;
+}
+span {
+    font-family: "Microsoft Sans Serif";
+    font-size: 11px;
+    text-align: center;
+}
+.shortcut {
+    width: 96px;
+    height: 75px;
+    display: flex;
+    gap: 6px;
+    flex-direction: column;
+    align-items: center;
+}
+.shortcutpreview {
+    z-index: -1;
+}
+.shortcutpreview img {
+    opacity: 0.5;
+}
+.shortcutpreview span {
+    color: #000 !important;
+}
+.shortcut span {
+    color: #fff;
+    pointer-events: none;
+    text-align: center;
+    padding: 2px;
+    position: relative;
+    user-select: none;
+}
+.shortcut img {
+    width: 32px;
+    height: 32px;
+    margin-top: 2px;
+    user-select: none;
+}
+.shortcut.selected img {
+    filter: opacity(0.5) drop-shadow(0.1px 0 0 #000080)
+        drop-shadow(0.1px 0 0 #000080);
+}
+.shortcut.selected span {
+    background: #000080;
+}
+.shortcut.selected span::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: transparent;
+    outline: dotted 1px white;
+    mix-blend-mode: difference;
+    position: absolute;
+    outline-offset: -1px;
+}
+.header > div {
+    display: flex;
+    align-items: center;
+}
+.header > div > img {
+    margin-left: -1px;
+}
+.menu-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #c0c0c0;
+}
+.menu-bar li {
+    padding: 5px 12px 3px 6px;
+    font-family: "Microsoft Sans Serif";
+    float: left;
+    font-size: 11px;
+    cursor: default;
+    user-select: none;
+}
+.menu-bar li:focus {
+    background-color: #000080;
+    color: #fff;
+}
+.editor-content {
+    resize: none;
+    overflow: scroll;
+    height: calc(100% - 46px);
+    width: calc(100% - 8px);
+    border-image: url("res/textbox.png") 2;
+    border-width: 2px;
+    font-family: "Fixedsys 62";
+    line-height: 16px;
+}
+.editor-content:focus {
+    outline: none;
+}
+.window.program {
+    min-width: 180px;
+    min-height: 77px;
+    padding: 2px;
+    width: 75vw;
+    height: 75vh;
+    top: 7vw;
+    left: 7vw;
+}
+.window.program.maximized {
+    top: 0px !important;
+    left: 0px !important;
+    width: 100vw !important;
+    height: calc(100vh - 28px) !important;
+    padding: 0px;
+    border-width: 0px;
+}
+.window.program.maximized > .resizers {
+    display: none;
+}
+.resizer {
+    position: absolute;
+    min-width: 4px;
+    min-height: 4px;
+}
+.resizer.ne,
+.resizer.nw,
+.resizer.n {
+    top: -2px;
+}
+.resizer.ne,
+.resizer.se,
+.resizer.e {
+    right: -2px;
+}
+.resizer.se,
+.resizer.sw,
+.resizer.s {
+    bottom: -2px;
+}
+.resizer.nw,
+.resizer.sw,
+.resizer.w {
+    left: -2px;
+}
+.resizer.n,
+.resizer.s {
+    left: 1px;
+    width: calc(100% - 2px);
+    cursor: ns-resize;
+}
+.resizer.e,
+.resizer.w {
+    top: 1px;
+    height: calc(100% - 2px);
+    cursor: ew-resize;
+}
+.resizer.nw,
+.resizer.se {
+    cursor: nwse-resize;
+}
+.resizer.ne,
+.resizer.sw {
+    cursor: nesw-resize;
+}
+.windowpreview {
+    border-image: url("res/checkers.png") 4;
+    border-width: 4px;
+    border-style: solid;
+    border-image-repeat: repeat;
+    mix-blend-mode: difference;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+}
+button:focus {
+    outline: dotted 1px black;
+    outline-offset: -4px;
+}
+#startmenu button:focus {
+    outline: none;
+}
+.selection-box {
+    border-image: url("res/checkers.png") 1;
+    border-width: 1px;
+    border-style: solid;
+    border-image-repeat: repeat;
+    mix-blend-mode: difference;
+    position: absolute;
+}
+ul {
+    list-style-type: none;
+}
+#shutdown .desc .radiolist {
+    padding: 0px;
+}
+#shutdown .desc > div {
+    margin-left: -10px;
+    margin-top: -2px;
+}
+input[type="radio"] {
+    display: none;
+}
+input[type="radio"] + label {
+    position: relative;
+    padding-left: 21px;
+    font-family: 'Microsoft Sans Serif';
+    font-size: 11px;
+    user-select: none;
+}
+input[type="radio"] + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    background: url("res/radio.png");
+}
+input[type="radio"]:checked + label:before {
+    background: url("res/selectedradio.png");
+}
+.window.system .buttons {
+    padding: 5px 11px 13px 11px;
+    gap: 8px;
+}
+#properties .buttons {
+    padding: 0px 6px 7px 6px;
+}
+.tabMenu {
+    padding: 6px;
+    padding-top: 10px;
+}
+.tabs {
+    display: flex;
+    margin-left: 2px;
+}
+.tab {
+    font-family: "Microsoft Sans Serif";
+    font-size: 11px;
+    border-image: url(res/tab.png) 3;
+    border-width: 3px;
+    border-style: solid;
+    border-image-repeat: repeat;
+    min-width: 30px;
+    user-select: none;
+    background-color: #c0c0c0;
+    padding: 1px 3px;
+    position: relative;
+    z-index: 3;
+}
+.tab.selected {
+    margin-top: -2px;
+    margin-left: -2px;
+    margin-right: -2px;
+    padding: 1px 5px 3px 5px;
+    z-index: 5;
+}
+.tabcontent {
+    border-image: url(res/button.png) 2;
+    border-width: 2px;
+    border-style: solid;
+    margin-top: -2px;
+    position: relative;
+    z-index: 4;
+}
+#properties .tabcontent {
+    width: 382px;
+    height: 356px;
+}
+#shutdown .buttons > button {
+    min-width: 78px;
+    min-height: 23px;
+}
+#shutdowntext {
+    color: orange;
+    font-size: 36px;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    text-align: center;
+    font-family: "Arial Narrow";
+    font-weight: bold;
+    user-select: none;
+}
+.header.clone {
+    position: absolute;
+    transition: all 0.25s linear;
+    z-index: 2;
+    display: flex;
+    background: #000080;
+    color: #fff;
+    font-weight: bold;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 3px;
+}
+#left {
+    display: flex;
+    align-items: center;
+}
+.windowdisplay {
+    display: flex;
+    align-items: center;
+    width: 150px;
+}
+.windowdisplay.pressed {
+    border-image: url(res/buttonpressed.png) 2;
+    font-weight: bold;
+    background-image: url(res/selectedwindowdisplay.png);
+    background-repeat: repeat;
+}
+#windowdisplays {
+    margin-left: 6px;
+    display: flex;
+    align-items: center;
+}
+.window.minimized {
+    visibility: hidden;
+}
+button:hover .dropdown-content {
+    display: block;
+}
+.submenu {
+    border-image: url(res/button.png) 2;
+    border-width: 2px;
+    border-style: solid;
+    position: absolute;
+    padding: 2px 1px;
+    background: #c0c0c0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 3;
+}
+.submenu button {
+    height: 20px!important;
+    gap: 7px!important;
+    text-wrap: nowrap;
+}
+.submenu button img {
+    width: 16px!important;
+    height: 16px!important; 
+}
