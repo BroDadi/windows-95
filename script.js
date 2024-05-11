@@ -131,9 +131,7 @@ function sortSubMenu(subMenu) {
 function updateTime() {
     let date = new Date();
     let minutes = date.getMinutes();
-    if (minutes.toString().length == 1) {
-        minutes = "0" + minutes;
-    }
+    if (minutes.toString().length == 1) minutes = "0" + minutes;
 
     let time = date.getHours() + ":" + minutes;
     document.querySelector("#clock").innerHTML = time;
@@ -833,7 +831,9 @@ function highlightDisplay(display) {
         displays.children[i].classList.remove("pressed");
     }
     display.classList.add("pressed");
-    document.querySelector("#windows").children[indexOfChild(displays.children, display)].focus();
+    document
+        .querySelector("#windows")
+        .children[indexOfChild(displays.children, display)].focus();
     unminimize(
         document.querySelector("#windows").children[
             indexOfChild(displays.children, display)
@@ -851,9 +851,7 @@ function windowDisplays() {
         let img = "";
         img = windows[i].children[0].children[0].querySelector("img").outerHTML;
         console.log(img);
-        button.innerHTML = `${
-            img
-        }<span>${
+        button.innerHTML = `${img}<span>${
             windows[i].children[0].querySelector("span").innerHTML
         }</span>`;
         displays.append(button);
@@ -972,7 +970,7 @@ function shutdownButton(choice) {
 
 function makeATabSwitch(tabs) {
     tabs.forEach((tab) => {
-        tab.addEventListener("click", function() {
+        tab.addEventListener("click", function () {
             tabs.forEach((tab) => {
                 tab.classList.remove("selected");
             });
