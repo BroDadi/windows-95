@@ -41,6 +41,30 @@ let langs = {
         "Settings",
         "Browse",
         "Browse...",
+        "Pattern",
+        "Wallpaper",
+        "Black Thatch",
+        "Blue Rivets",
+        "Bubbles",
+        "Carved Stone",
+        "Circles",
+        "Clouds",
+        "Forest",
+        "Gold Weave",
+        "Houndstooth",
+        "Metal Links",
+        "Pinstripe",
+        "Red Blocks",
+        "Sandstone",
+        "Setup",
+        "Stitches",
+        "Straw Mat",
+        "Tiles",
+        "Triangles",
+        "Waves",
+        "Display:",
+        "Tile",
+        "Center",
     ],
     ru: [
         "Пуск",
@@ -84,6 +108,30 @@ let langs = {
         "Параметры",
         "Обзор",
         "Обзор...",
+        "Фоновый узор",
+        "Рисунок",
+        "Паркет",
+        "Заклёпки",
+        "Пузырьки",
+        "Орнамент",
+        "Колечки",
+        "Облака",
+        "Лес",
+        "Чешуя",
+        "Клыки",
+        "Кольчуга",
+        "Полоски",
+        "Красные блоки",
+        "Наждак",
+        "Установка",
+        "Стежки",
+        "Циновка",
+        "Плитка",
+        "Треугольники",
+        "Волны",
+        "Поместить:",
+        "Размножить",
+        "В центре",
     ],
 };
 
@@ -92,6 +140,9 @@ let currentLang = langs[
 ]
     ? langs[Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0]]
     : langs["en"];
+
+let pickedWallpaper = currentLang[32];
+let pickedRepeat = currentLang[63];
 
 function indexOfChild(obj, element) {
     for (let i = 0; i < obj.length; i++) {
@@ -125,6 +176,25 @@ function sortSubMenu(subMenu) {
 
     buttons.forEach((button) => {
         subMenu.appendChild(button);
+    });
+}
+
+function sortDropList(list) {
+    let options = Array.from(list.querySelectorAll("option"));
+
+    options.sort((a, b) => {
+        const aText = a.textContent.trim().toLowerCase();
+        const bText = b.textContent.trim().toLowerCase();
+
+        if (aText < bText) return -1;
+        if (aText > bText) return 1;
+        return 0;
+    });
+
+    list.innerHTML = "";
+
+    options.forEach((option) => {
+        list.appendChild(option);
     });
 }
 
@@ -197,46 +267,46 @@ function createSubMenu(elmnt) {
     });
     let subMenu = document.createElement("div");
     subMenu.classList.add("submenu");
-    if (elmnt.id == "prog") {
-        subMenu.innerHTML = `
-        <button class="dropdown" id="inex"><img src="res/folderprograms16.png"></img>Internet Explorer</button>
-        <button class="dropdown" id="accs"><img src="res/folderprograms16.png"></img>${currentLang[25]}</button>
-        <button class="dropdown" id="atrn"><img src="res/folderprograms16.png"></img>${currentLang[26]}</button>
-        <button><img src="res/mail16.png"></img>Microsoft Exchange</button>
-        <button><img src="res/netmeeting16.png"></img>Microsoft Netmeeting</button>
-        <button><img src="res/explorer16.png"></img>${currentLang[27]}</button>
-        <button><img src="res/msdos.png"></img>${currentLang[28]}</button>
-        `;
-    } else if (elmnt.id == "sets") {
-        subMenu.innerHTML = `
-        <button><img src="res/controlpanel16.png"></img>${currentLang[29]}</button>
-        <button><img src="res/printers16.png"></img>${currentLang[30]}</button>
-        <button><img src="res/taskbar.png"></img>${currentLang[31]}</button>
-        `;
-    } else if (elmnt.id == "inex") {
-        subMenu.innerHTML = `
-        `;
-    } else if (elmnt.id == "accs") {
-        subMenu.innerHTML = `
-        <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
-        <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
-        <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
-        <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
-        <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
-        <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
-        <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
-        <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
-        <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
-        <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
-        <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
-        <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
-        <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
-        <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
-        `;
-    } else {
-        subMenu.innerHTML = `
-        <button class="disabled">${currentLang[32]}</button>
-        `;
+    switch (elmnt.id) {
+        case "prog":
+            subMenu.innerHTML = `
+            <button class="dropdown" id="inex"><img src="res/folderprograms16.png"></img>Internet Explorer</button>
+            <button class="dropdown" id="accs"><img src="res/folderprograms16.png"></img>${currentLang[25]}</button>
+            <button class="dropdown" id="atrn"><img src="res/folderprograms16.png"></img>${currentLang[26]}</button>
+            <button><img src="res/mail16.png"></img>Microsoft Exchange</button>
+            <button><img src="res/netmeeting16.png"></img>Microsoft Netmeeting</button>
+            <button><img src="res/explorer16.png"></img>${currentLang[27]}</button>
+            <button><img src="res/msdos.png"></img>${currentLang[28]}</button>`;
+            break;
+        case "sets":
+            subMenu.innerHTML = `
+            <button><img src="res/controlpanel16.png"></img>${currentLang[29]}</button>
+            <button><img src="res/printers16.png"></img>${currentLang[30]}</button>
+            <button><img src="res/taskbar.png"></img>${currentLang[31]}</button>`;
+            break;
+        case "inex":
+            subMenu.innerHTML = ``;
+            break;
+        case "accs":
+            subMenu.innerHTML = `
+            <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
+            <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
+            <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
+            <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
+            <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
+            <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
+            <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
+            <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
+            <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
+            <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
+            <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
+            <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>
+            <button><img src="res/controlpanel16.png"></img>skibidi toilet</button>
+            <button><img src="res/printers16.png"></img>skibidi skibidi toilet</button>`;
+            break;
+        default:
+            subMenu.innerHTML = `<button class="disabled">${currentLang[32]}</button>`;
+            break;
     }
     elmnt.append(subMenu);
     if (subMenu != document.querySelector("#startoptions"))
@@ -911,22 +981,71 @@ function createProperties() {
 				<div class="header"><span>${currentLang[34]}</span><div class="windowbuttons"><button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button></div></div>
 				<div class="tabMenu">
 				    <div class="tabs">
-				        <div class="tab">${currentLang[35]}</div>
-				        <div class="tab">${currentLang[36]}</div>
-				        <div class="tab">${currentLang[37]}</div>
-				        <div class="tab">${currentLang[38]}</div>
+				        <div id="ppbg" class="tab selected">${currentLang[35]}</div>
+				        <div id="ppss" class="tab">${currentLang[36]}</div>
+				        <div id="ppap" class="tab">${currentLang[37]}</div>
+				        <div id="pppr" class="tab">${currentLang[38]}</div>
                     </div>
-				    <div class="tabcontent"></div>
+				    <div class="tabcontent">
+                        <div class="monitor"></div>
+                        <div class="boxcontain">
+                            <div class="groupBox" text="${currentLang[41]}">
+                                <select size="20">
+                                    <option>${currentLang[32]}</option>
+                                </select>
+                                <button disabled>penis</button>
+                            </div>
+                            <div class="groupBox" text="${currentLang[42]}">
+                                <select id="wppick" size="20">
+                                    <option>${currentLang[32]}</option>
+                                    <option>${currentLang[43]}</option>
+                                    <option>${currentLang[44]}</option>
+                                    <option>${currentLang[45]}</option>
+                                    <option>${currentLang[46]}</option>
+                                    <option>${currentLang[47]}</option>
+                                    <option>${currentLang[48]}</option>
+                                    <option>${currentLang[49]}</option>
+                                    <option>${currentLang[50]}</option>
+                                    <option>${currentLang[51]}</option>
+                                    <option>${currentLang[52]}</option>
+                                    <option>${currentLang[53]}</option>
+                                    <option>${currentLang[54]}</option>
+                                    <option>${currentLang[55]}</option>
+                                    <option>${currentLang[56]}</option>
+                                    <option>${currentLang[57]}</option>
+                                    <option>${currentLang[58]}</option>
+                                    <option>${currentLang[59]}</option>
+                                    <option>${currentLang[60]}</option>
+                                    <option>${currentLang[61]}</option>
+                                </select>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span>${currentLang[62]}</span>
+                                    <button>${currentLang[40]}</button>
+                                </div>
+                                <div>
+                                    <ul id="wptile" class="radiolistH">
+                                        <li><input type="radio" id="item1" name="items" value="item1" checked><label for="item1">${currentLang[63]}</label></li>
+                                        <li><input type="radio" id="item2" name="items" value="item2"><label for="item2">${currentLang[64]}</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 				</div>
 				<div class="buttons">
-				    <button>${currentLang[15]}</button>
-				    <button>${currentLang[16]}</button>
-				    <button disabled="true">${currentLang[33]}</button>
+				    <button onclick="setWallpaper(pickedWallpaper, pickedRepeat); this.parentNode.parentNode.remove();">${currentLang[15]}</button>
+				    <button onclick="this.parentNode.parentNode.remove();">${currentLang[16]}</button>
+				    <button disabled="true" onclick="setWallpaper(pickedWallpaper, pickedRepeat);">${currentLang[33]}</button>
 				</div>
 				`;
+    properties.querySelectorAll("* select").forEach((select) => sortDropList(select));
+    properties.querySelector("* #wppick").addEventListener("change", function() {
+        pickedWallpaper = this.value;
+        pickedRepeat = document.querySelector("#wptile input:checked + label").innerText;
+    });
     document.querySelector("#windows.nodisplay").append(properties);
     enableDraggable(properties);
-    makeATabSwitch(Array.from(properties.querySelector(".tabs").children));
+    makeATabSwitch(properties.querySelector(".tabs"));
 }
 
 window.addEventListener("load", function () {
@@ -968,15 +1087,100 @@ function shutdownButton(choice) {
     }
 }
 
-function makeATabSwitch(tabs) {
+function makeATabSwitch(elmnt) {
+    let tabs = Array.from(elmnt.children);
     tabs.forEach((tab) => {
         tab.addEventListener("click", function () {
             tabs.forEach((tab) => {
                 tab.classList.remove("selected");
             });
             tab.classList.add("selected");
+            switch(tab.id) {
+                case "ppbg":
+                    elmnt.parentNode.querySelector(".tabcontent").innerHTML = `
+                    <div class="monitor"></div>
+                    <div class="boxcontain">
+                        <div class="groupBox" text="${currentLang[41]}">
+                            <select size="20">
+                                <option>${currentLang[32]}</option>
+                            </select>
+                            <button disabled>penis</button>
+                        </div>
+                        <div class="groupBox" text="${currentLang[42]}">
+                            <select id="wppick" size="20">
+                                <option>${currentLang[32]}</option>
+                                <option>${currentLang[43]}</option>
+                                <option>${currentLang[44]}</option>
+                                <option>${currentLang[45]}</option>
+                                <option>${currentLang[46]}</option>
+                                <option>${currentLang[47]}</option>
+                                <option>${currentLang[48]}</option>
+                                <option>${currentLang[49]}</option>
+                                <option>${currentLang[50]}</option>
+                                <option>${currentLang[51]}</option>
+                                <option>${currentLang[52]}</option>
+                                <option>${currentLang[53]}</option>
+                                <option>${currentLang[54]}</option>
+                                <option>${currentLang[55]}</option>
+                                <option>${currentLang[56]}</option>
+                                <option>${currentLang[57]}</option>
+                                <option>${currentLang[58]}</option>
+                                <option>${currentLang[59]}</option>
+                                <option>${currentLang[60]}</option>
+                                <option>${currentLang[61]}</option>
+                            </select>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>${currentLang[62]}</span>
+                                <button>${currentLang[40]}</button>
+                            </div>
+                            <div>
+                                <ul id="wptile" class="radiolistH">
+                                    <li><input type="radio" id="item1" name="items" value="item1" checked><label for="item1">${currentLang[63]}</label></li>
+                                    <li><input type="radio" id="item2" name="items" value="item2"><label for="item2">${currentLang[64]}</label></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                    elmnt.parentNode.querySelectorAll("* select").forEach((select) => sortDropList(select));
+                    elmnt.parentNode.querySelector("* #wppick").addEventListener("change", function() {
+                        pickedWallpaper = this.value;
+                        pickedRepeat = document.querySelector("#wptile input:checked + label").innerText;
+                    });
+                    break;
+            }
         });
     });
+}
+
+function setWallpaper(name, way) {
+    let names = {};
+    names[currentLang[32]] = "";
+    names[currentLang[43]] = "url(res/wallpapers/10.bmp)";
+    names[currentLang[44]] = "url(res/wallpapers/1.bmp)";
+    names[currentLang[45]] = "url(res/wallpapers/13.bmp)";
+    names[currentLang[46]] = "url(res/wallpapers/9.bmp)";
+    names[currentLang[47]] = "url(res/wallpapers/3.bmp)";
+    names[currentLang[48]] = "url(res/wallpapers/8.bmp)";
+    names[currentLang[49]] = "url(res/wallpapers/6.bmp)";
+    names[currentLang[50]] = "url(res/wallpapers/18.bmp)";
+    names[currentLang[51]] = "url(res/wallpapers/2.bmp)";
+    names[currentLang[52]] = "url(res/wallpapers/4.bmp)";
+    names[currentLang[53]] = "url(res/wallpapers/12.bmp)";
+    names[currentLang[54]] = "url(res/wallpapers/5.bmp)";
+    names[currentLang[55]] = "url(res/wallpapers/7.bmp)";
+    names[currentLang[56]] = "url(res/wallpapers/16.bmp)";
+    names[currentLang[57]] = "url(res/wallpapers/14.bmp)";
+    names[currentLang[58]] = "url(res/wallpapers/17.bmp)";
+    names[currentLang[59]] = "url(res/wallpapers/11.bmp)";
+    names[currentLang[60]] = "url(res/wallpapers/15.bmp)";
+    names[currentLang[61]] = "url(res/wallpapers/0.bmp)";
+
+    let repeat = (way == currentLang[63]) ? "repeat" : "no-repeat";
+
+    document.querySelector("#desktop").style.background = names[name];
+    document.querySelector("#desktop").style.backgroundRepeat = repeat;
+    document.querySelector("#desktop").style.backgroundPosition = "center";
 }
 
 document.addEventListener("DOMContentLoaded", function () {
