@@ -4,17 +4,24 @@
 
 button {
     font-family: "Microsoft Sans Serif";
-    border-image: url(res/button.png) 2;
-    border-width: 2px;
+    box-shadow: inset -1px -1px 0px 0px #000000, 
+                inset 1px 1px 0px 0px #FFFFFF, 
+                inset -2px -2px 0px 0px #808080, 
+                inset 2px 2px 0px 0px #DFDFDF;
+    border: none;
     background-color: #c0c0c0;
     min-width: 90px;
     height: 23px;
     font-size: 11px;
     width: auto;
     user-select: none;
+    background-position: center;
 }
 button:active {
-    border-image: url(res/buttonpressed.png) 2;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                inset 1px 1px 0px 0px #000000, 
+                inset -2px -2px 0px 0px #DFDFDF, 
+                inset 2px 2px 0px 0px #808080;
 }
 button:focus {
     outline: none;
@@ -32,28 +39,31 @@ button[disabled] {
     color: #808080;
 }
 button[disabled]:active {
-    border-image: url(res/button.png) 2;
+    box-shadow: inset -1px -1px 0px 0px #000000, 
+                inset 1px 1px 0px 0px #FFFFFF, 
+                inset -2px -2px 0px 0px #808080, 
+                inset 2px 2px 0px 0px #DFDFDF;
 }
 #tray {
     display: flex;
     align-items: center;
     height: 18px;
-    border-image: url(res/tray.png) 1;
-    border-width: 1px;
-    border-style: solid;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                inset 1px 1px 0px 0px #808080;
     margin-right: 2px;
     padding: 1px;
 }
 #startmenu {
-    border-image: url(res/button.png) 2;
-    border-width: 2px;
-    border-style: solid;
+    box-shadow: inset -1px -1px 0px 0px #000000, 
+                inset 1px 1px 0px 0px #FFFFFF, 
+                inset -2px -2px 0px 0px #808080, 
+                inset 2px 2px 0px 0px #DFDFDF;
     background-color: #c0c0c0;
     position: absolute;
     bottom: 24px;
     left: 2px;
     display: flex;
-    padding: 1px;
+    padding: 3px;
     z-index: 1;
 }
 #sidemenu {
@@ -85,7 +95,7 @@ span {
 #startoptions div {
     display: flex;
     flex-direction: column;
-    padding-right: 26px;
+    padding-right: 28px;
 }
 #startoptions div > button {
     width: calc(100% + 26px);
@@ -109,7 +119,7 @@ span {
 }
 #startmenu button {
     height: auto;
-    border: none;
+    box-shadow: none;
     text-align: left;
     display: flex;
     align-items: center;
@@ -132,16 +142,20 @@ span {
     font-weight: bold;
     margin-left: 2px;
     min-width: 0px;
-    padding: 0 2px 0 2px;
+    padding: 0 4px 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
 }
 #start.pressed {
-    border-image: url(res/buttonpressed.png) 2;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                inset 1px 1px 0px 0px #000000, 
+                inset -2px -2px 0px 0px #DFDFDF, 
+                inset 2px 2px 0px 0px #808080;
 }
 #startbar {
-    border-image: url(res/startbar.png) 2;
-    border-width: 0;
-    border-top-width: 2px;
-    border-style: solid;
+    box-shadow: inset 0px 1px 0px 0px #DFDFDF, 
+                inset 0px 2px 0px 0px #FFFFFF;
     background-color: #c0c0c0;
     bottom: 0%;
     width: 100%;
@@ -150,6 +164,7 @@ span {
     align-items: center;
     position: fixed;
     justify-content: space-between;
+    padding-top: 2px;
 }
 #clock {
     font-family: "Microsoft Sans Serif";
@@ -167,14 +182,6 @@ span {
     background: url(res/monitor.png);
     width: 184px;
     height: 169px;
-}
-.monitor:after {
-    position: absolute;
-    width: 7px;
-    height: 8px;
-    background-color: #000;
-    top: 7px;
-    left: 7px;
 }
 #desktop {
     width: 100vw;
@@ -201,11 +208,12 @@ span {
 }
 .window {
     position: absolute;
-    border-image: url(res/button.png) 2;
-    border-width: 2px;
-    border-style: solid;
+    box-shadow: inset -1px -1px 0px 0px #000000, 
+                inset 1px 1px 0px 0px #FFFFFF, 
+                inset -2px -2px 0px 0px #808080, 
+                inset 2px 2px 0px 0px #DFDFDF;
     background-color: #c0c0c0;
-    padding: 1px;
+    padding: 4px;
     pointer-events: auto;
     min-width: 112px;
     min-height: 27px;
@@ -527,13 +535,15 @@ input[type="radio"]:checked + label:before {
     flex-direction: column;
     align-items: center;
     padding: 9px;
-    border-image: url(res/button.png) 2;
-    border-width: 2px;
-    border-style: solid;
+    box-shadow: inset -1px -1px 0px 0px #000000, 
+                inset 1px 1px 0px 0px #FFFFFF, 
+                inset -2px -2px 0px 0px #808080, 
+                inset 2px 2px 0px 0px #DFDFDF;
     margin-top: -2px;
     position: relative;
     z-index: 4;
     gap: 10px;
+    box-sizing: border-box;
 }
 #properties .buttons {
     padding: 0px 6px 7px 6px;
@@ -543,15 +553,19 @@ input[type="radio"]:checked + label:before {
     min-width: 75px;
 }
 #properties select[size] {
-    width: 158px;
+    width: 155px;
     height: 68px;
 }
 select[size] {
-    border-image: url(res/buttonpressed.png) 2;
-    border-width: 2px;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                inset 1px 1px 0px 0px #000000, 
+                inset -2px -2px 0px 0px #DFDFDF, 
+                inset 2px 2px 0px 0px #808080;
+    border: none;
     font-family: "Microsoft Sans Serif";
     font-size: 11px;
-    padding: 0px;
+    padding: 2px;
+    scroll-behavior: smooth;
 }
 select[size] option {
     padding: 1px;
@@ -562,11 +576,12 @@ select[size] option:checked {
     color: #fff;
 }
 .groupBox {
-    border-image: url(res/groupbox.png) 2;
-    border-width: 2px;
-    border-style: solid;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                inset 1px 1px 0px 0px #808080, 
+                inset -2px -2px 0px 0px #808080, 
+                inset 2px 2px 0px 0px #FFFFFF;
     margin-top: 8px;
-    padding: 10px 5px 10px 6px;
+    padding: 12px 9px 12px 9px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -578,7 +593,7 @@ select[size] option:checked {
     font-size: 11px;
     position: absolute;
     top: -7px;
-    left: 1px;
+    left: 5px;
     background: #c0c0c0;
     padding: 0 5px;
 }
@@ -616,9 +631,8 @@ select[size] option:checked {
     z-index: 5;
 }
 #properties .tabcontent {
-    width: 382px;
-    height: 356px;
-    box-sizing: border-box;
+    width: 387px;
+    height: 357px;
 }
 #shutdown .buttons > button {
     min-width: 78px;
@@ -658,7 +672,10 @@ select[size] option:checked {
     width: 150px;
 }
 .windowdisplay.pressed {
-    border-image: url(res/buttonpressed.png) 2;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                inset 1px 1px 0px 0px #000000, 
+                inset -2px -2px 0px 0px #DFDFDF, 
+                inset 2px 2px 0px 0px #808080;
     font-weight: bold;
     background-image: url(res/selectedwindowdisplay.png);
     background-repeat: repeat;
@@ -675,11 +692,12 @@ button:hover .dropdown-content {
     display: block;
 }
 .submenu {
-    border-image: url(res/button.png) 2;
-    border-width: 2px;
-    border-style: solid;
+    box-shadow: inset -1px -1px 0px 0px #000000, 
+                inset 1px 1px 0px 0px #FFFFFF, 
+                inset -2px -2px 0px 0px #808080, 
+                inset 2px 2px 0px 0px #DFDFDF;
     position: absolute;
-    padding: 2px 1px;
+    padding: 3px 2px;
     background: #c0c0c0;
     display: flex;
     flex-direction: column;
@@ -694,4 +712,16 @@ button:hover .dropdown-content {
 .submenu button img {
     width: 16px !important;
     height: 16px !important;
+}
+.monitorbg, .monitorimg {
+    position: absolute;
+    top: -218px;
+    left: -206px;
+    width: 800px;
+    height: 600px;
+    transform: scale(0.19);
+    z-index: -1;
+}
+.monitorbg {
+    background: #008080;
 }
