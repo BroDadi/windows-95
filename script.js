@@ -885,10 +885,10 @@ function shutdownOverlay() {
             <div>
                 <span>${currentLang[20]}</span>
                 <ul class="radiolist">
-                    <li><input type="radio" id="item1" name="items" value="item1"><label for="item1">${currentLang[21]}</label></li>
-                    <li><input type="radio" id="item2" name="items" value="item2"><label for="item2">${currentLang[22]}</label></li>
-                    <li><input type="radio" id="item3" name="items" value="item3"><label for="item3">${currentLang[23]}</label></li>
-                    <li><input type="radio" id="item1" name="items" value="item4"><label for="item4">${currentLang[24]}</label></li>
+                    <li><input type="radio" id="sd1" name="items" value="sd1"><label for="sd1">${currentLang[21]}</label></li>
+                    <li><input type="radio" id="sd2" name="items" value="sd2"><label for="sd2">${currentLang[22]}</label></li>
+                    <li><input type="radio" id="sd3" name="items" value="sd3"><label for="sd3">${currentLang[23]}</label></li>
+                    <li><input type="radio" id="sd4" name="items" value="sd4"><label for="sd4">${currentLang[24]}</label></li>
                 </ul>
              </div>
         </div>
@@ -1006,7 +1006,8 @@ window.addEventListener("load", function () {
 });
 
 function shutdownButton(choice) {
-	if (choice == "item1") {
+	if (choice == "sd1") {
+		document.querySelector("#windows.nodisplay").remove();
 		document.querySelector("#windows").remove();
 		for (let i = 0; i < document.querySelector("#desktop").children.length; i++) {
 			document.querySelector("#desktop").children[i].remove();
@@ -1015,6 +1016,7 @@ function shutdownButton(choice) {
 		document.querySelector("#shutdown").remove();
 		setTimeout(function () {
 			document.querySelector("#desktop").remove();
+			document.querySelector("#bg").remove();
 			document.querySelector("body").style.backgroundColor = "#000";
 			let shutdownText = document.createElement("span");
 			shutdownText.id = "shutdowntext";
