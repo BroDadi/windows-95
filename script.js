@@ -174,10 +174,10 @@ function sortSubMenu(subMenu) {
 	});
 }
 
-function sortDropList(list) {
-	let options = Array.from(list.querySelectorAll("option"));
+function sortOther(elmnt) {
+	let children = Array.from(elmnt.children);
 
-	options.sort((a, b) => {
+	children.sort((a, b) => {
 		const aText = a.textContent.trim().toLowerCase();
 		const bText = b.textContent.trim().toLowerCase();
 
@@ -186,11 +186,18 @@ function sortDropList(list) {
 		return 0;
 	});
 
-	list.innerHTML = "";
+	elmnt.innerHTML = "";
 
-	options.forEach((option) => {
-		list.appendChild(option);
+	children.forEach((child) => {
+		elmnt.appendChild(child);
 	});
+}
+
+function sortShortcuts(elmnt) {
+	if (elmnt == null) {
+		elmnt = document.querySelector("#desktop");
+	}
+	let shortcuts = Array.from(elmnt.querySelectorAll(".shortcut"));
 }
 
 function updateTime() {
@@ -378,6 +385,7 @@ function enableDraggable(elmnt) {
 	elmnt.children[0].ontouchstart = dragTouchStart;
 
 	function dragMouseDown(e) {
+		elmnt.focus();
 		if (elmnt.classList.contains("maximized")) return;
 		elmnt.parentNode.appendChild(elmnt);
 		if (e.target.tagName === "BUTTON") {
@@ -400,6 +408,7 @@ function enableDraggable(elmnt) {
 		if (e.target.tagName === "BUTTON") {
 			return;
 		}
+		elmnt.focus();
 		e.preventDefault();
 		pos3 = e.touches[0].clientX;
 		pos4 = e.touches[0].clientY;
@@ -414,6 +423,7 @@ function enableDraggable(elmnt) {
 	}
 
 	function elementDrag(e) {
+		elmnt.focus();
 		e.preventDefault();
 		if (e.clientX && e.clientY) {
 			pos1 = pos3 - e.clientX;
@@ -437,6 +447,7 @@ function enableDraggable(elmnt) {
 	}
 
 	function closeDragElement(e) {
+		elmnt.focus();
 		if (e.touches && e.touches[0]) {
 			document.ontouchend = null;
 			document.ontouchmove = null;
@@ -474,6 +485,8 @@ function enableResizable(elmnt) {
 	group.classList.add("resizers");
 	let resizerarray = ["nw", "ne", "sw", "se", "n", "s", "w", "e"];
 	elmnt.append(group);
+	let minWidth = 180;
+	let minHeight = 77;
 	for (let i = 0; i < 8; i++) {
 		let resizer = document.createElement("div");
 		resizer.classList.add("resizer");
@@ -501,24 +514,36 @@ function enableResizable(elmnt) {
 			}
 
 			if (resizerarray[i].includes("s")) {
-				preview.style.height = e.clientY - elmnt.getBoundingClientRect().top + "px";
+				let newHeight = e.clientY - elmnt.getBoundingClientRect().top;
+				if (newHeight >= minHeight) {
+					preview.style.height = newHeight + "px";
+				}
 			} else if (resizerarray[i].includes("n")) {
-				preview.style.top = elmnt.clientTop - (elmnt.getBoundingClientRect().top - e.clientY) + "px";
-				preview.style.height = elmnt.getBoundingClientRect().top + elmnt.clientHeight - e.clientY - 8 + "px";
+				let newTop = elmnt.clientTop - (elmnt.getBoundingClientRect().top - e.clientY);
+				let newHeight = elmnt.getBoundingClientRect().top + elmnt.clientHeight - e.clientY;
+				if (newHeight > minHeight) {
+					preview.style.top = newTop + "px";
+					preview.style.height = newHeight + "px";
+				}
 			} else {
-				preview.style.height = elmnt.clientHeight - 4 + "px";
+				preview.style.height = elmnt.clientHeight + "px";
 			}
+			
 			if (resizerarray[i].includes("e")) {
-				preview.style.width = e.clientX - elmnt.getBoundingClientRect().left + "px";
+				let newWidth = e.clientX - elmnt.getBoundingClientRect().left;
+				if (newWidth >= minWidth) {
+					preview.style.width = newWidth + "px";
+				}
 			} else if (resizerarray[i].includes("w")) {
-				preview.style.left = elmnt.clientLeft - (elmnt.getBoundingClientRect().left - e.clientX) + "px";
-				preview.style.width = elmnt.getBoundingClientRect().left + elmnt.clientWidth - e.clientX - 8 + "px";
+				let newLeft = elmnt.clientLeft - (elmnt.getBoundingClientRect().left - e.clientX);
+				let newWidth = elmnt.getBoundingClientRect().left + elmnt.clientWidth - e.clientX;
+				if (newWidth > minWidth) {
+					preview.style.left = newLeft + "px";
+					preview.style.width = newWidth + "px";
+				}
 			} else {
-				preview.style.width = elmnt.clientWidth - 4 + "px";
+				preview.style.width = elmnt.clientWidth + "px";
 			}
-			highlightDisplay(
-				document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)],
-			);
 		}
 
 		function stopResize() {
@@ -538,7 +563,6 @@ function enableResizable(elmnt) {
 		}
 	}
 }
-
 function createShortcut(icon, text, action) {
 	let shortcut = document.createElement("div");
 	shortcut.classList.add("shortcut");
@@ -675,14 +699,6 @@ function createTextEditor() {
     </div>
     <textarea class="editor-content"></textarea>
     `;
-	editor.children[2].onfocus = function () {
-		editor.children[0].style.background = "#000080";
-		editor.children[0].style.color = "#ffffff";
-	};
-	editor.children[2].onblur = function () {
-		editor.children[0].style.background = "";
-		editor.children[0].style.color = "";
-	};
 	document.querySelector("#windows").appendChild(editor);
 	enableDraggable(editor);
 	enableResizable(editor);
@@ -825,10 +841,21 @@ function windowDisplays() {
 		button.classList.add("windowdisplay");
 		let img = "";
 		img = windows[i].children[0].children[0].querySelector("img").outerHTML;
-		console.log(img);
 		button.innerHTML = `${img}<span>${windows[i].children[0].querySelector("span").innerHTML}</span>`;
 		displays.append(button);
 		button.setAttribute("onclick", "highlightDisplay(this)");
+        Array.from(windows).concat(Array.from(document.querySelector("#windows.nodisplay"))).forEach((window) => {
+            Array.from(window.children).forEach((child) => {
+                child.onfocus = function() {
+                    window.querySelector(".header").style.background = "#000080";
+                    window.querySelector(".header span").style.textShadow = "0.5px 0px #fff, 1.5px 0px #fff";
+                }
+                child.onblur = function() {
+                    window.querySelector(".header").style.background = "";
+                    window.querySelector(".header span").style.textShadow = "";
+                }
+            });
+        });
 	}
 }
 
@@ -899,7 +926,7 @@ function createProperties() {
                     <select size="20">
                         <option>${currentLang[32]}</option>
                     </select>
-                    <button disabled>penis</button>
+                    <button disabled>deez nuts</button>
                 </div>
                 <div class="groupBox" text="${currentLang[42]}">
                     <select id="wppick" size="20">
@@ -941,11 +968,12 @@ function createProperties() {
     <div class="buttons">
         <button onclick="setWallpaper(document.querySelector('#wppick').value, document.querySelector('#wptile input:checked + label').innerText); this.parentNode.parentNode.remove();">${currentLang[15]}</button>
         <button onclick="this.parentNode.parentNode.remove();">${currentLang[16]}</button>
-        <button disabled onclick="setWallpaper(document.querySelector('#wppick').value, document.querySelector('#wptile input:checked + label').innerText);">${currentLang[33]}</button>
+        <button disabled onclick="setWallpaper(document.querySelector('#wppick').value, document.querySelector('#wptile input:checked + label').innerText); this.setAttribute('disabled','')">${currentLang[33]}</button>
     </div>
     `;
+    properties.tabIndex = 0;
 	properties.querySelectorAll("select").forEach((select) => {
-        sortDropList(select);
+        sortOther(select);
         select.addEventListener("change", function() {
             properties.querySelector(".buttons > button[disabled]")?.removeAttribute("disabled");
             setWallpaper(select.value, properties.querySelector("input:checked + label").innerText, true);
@@ -1016,7 +1044,7 @@ function makeATabSwitch(elmnt) {
                             <select size="20">
                                 <option>${currentLang[32]}</option>
                             </select>
-                            <button disabled>penis</button>
+                            <button disabled>deez nuts</button>
                         </div>
                         <div class="groupBox" text="${currentLang[42]}">
                             <select id="wppick" size="20">
@@ -1054,7 +1082,18 @@ function makeATabSwitch(elmnt) {
                         </div>
                     </div>
                     `;
-					elmnt.parentNode.querySelectorAll("* select").forEach((select) => sortDropList(select));
+					elmnt.parentNode.querySelectorAll("select").forEach((select) => {
+						sortOther(select);
+						select.addEventListener("change", function() {
+							elmnt.parentNode.parentNode.querySelector(".buttons > button[disabled]")?.removeAttribute("disabled");
+							setWallpaper(select.value, elmnt.parentNode.querySelector("input:checked + label").innerText, true);
+						})
+					});
+					elmnt.parentNode.querySelectorAll("input + label").forEach((input) => {
+						input.addEventListener("click", () => {
+							setWallpaper(elmnt.parentNode.querySelector("#wppick").value, input.innerText, true);
+						});
+					});
 					break;
 			}
 		});
@@ -1108,7 +1147,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			startY = event.clientY;
 			selectionBox = document.createElement("div");
 			selectionBox.className = "selection-box";
-			desktop.appendChild(selectionBox);
+			document.body.appendChild(selectionBox);
 			selectionBox.style.left = startX + "px";
 			selectionBox.style.top = startY + "px";
 			selectionBox.style.width = "0px";

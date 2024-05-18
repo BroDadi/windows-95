@@ -1,9 +1,12 @@
 @import url("https://fonts.cdnfonts.com/css/fixedsys-62");
 
-@import url("https://fonts.cdnfonts.com/css/microsoft-sans-serif");
+@font-face {
+    font-family: "MS Sans Serif";
+    src: url(res/MS\ Sans\ Serif\ 8pt.ttf);
+}
 
 button {
-    font-family: "Microsoft Sans Serif";
+    font-family: "MS Sans Serif";
     box-shadow: inset -1px -1px 0px 0px #000000, 
                 inset 1px 1px 0px 0px #FFFFFF, 
                 inset -2px -2px 0px 0px #808080, 
@@ -51,7 +54,7 @@ button[disabled]:active {
     box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
                 inset 1px 1px 0px 0px #808080;
     margin-right: 2px;
-    padding: 1px;
+    padding: 2px;
 }
 #startmenu {
     box-shadow: inset -1px -1px 0px 0px #000000, 
@@ -139,13 +142,17 @@ span {
     width: 46px;
 }
 #start {
-    font-weight: bold;
     margin-left: 2px;
     min-width: 0px;
     padding: 0 4px 0 4px;
     display: flex;
     align-items: center;
     gap: 1px;
+}
+#start span {
+    text-shadow: 0.5px 0px black, 1.5px 0px black;
+    color: transparent;
+    letter-spacing: 1px;
 }
 #start.pressed {
     box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
@@ -167,7 +174,7 @@ span {
     padding-top: 2px;
 }
 #clock {
-    font-family: "Microsoft Sans Serif";
+    font-family: "MS Sans Serif";
     text-align: center;
     margin-top: 1px;
 }
@@ -221,19 +228,24 @@ span {
 }
 .window > .header {
     height: 18px;
-    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0px 3px;
     z-index: -1;
     background-color: #808080;
-    color: #c0c0c0;
     user-select: none;
+}
+.window > .header span {
+    text-shadow: 0.5px 0px #c0c0c0, 1.5px 0px #c0c0c0;
+    color: transparent;
+    letter-spacing: 1px;
 }
 .window:focus > .header {
     background: #000080;
-    color: #fff;
+}
+.window:focus > .header span {
+    text-shadow: 0.5px 0px #fff, 1.5px 0px #fff;
 }
 .window:focus {
     outline: none;
@@ -288,13 +300,16 @@ body {
     margin: 0;
     image-rendering: pixelated;
     overflow: hidden;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: none;
+    font-smooth: none;
 }
 img {
     pointer-events: none;
     align-self: center;
 }
 span {
-    font-family: "Microsoft Sans Serif";
+    font-family: "MS Sans Serif";
     font-size: 11px;
     text-align: center;
 }
@@ -305,6 +320,7 @@ span {
     gap: 6px;
     flex-direction: column;
     align-items: center;
+    position: absolute;
 }
 .shortcutpreview {
     z-index: -1;
@@ -364,7 +380,7 @@ span {
 }
 .menu-bar li {
     padding: 5px 12px 3px 6px;
-    font-family: "Microsoft Sans Serif";
+    font-family: "MS Sans Serif";
     float: left;
     font-size: 11px;
     cursor: default;
@@ -377,12 +393,15 @@ span {
 .editor-content {
     resize: none;
     overflow: scroll;
-    height: calc(100% - 46px);
-    width: calc(100% - 8px);
-    border-image: url(res/textbox.png) 2;
-    border-width: 2px;
+    height: calc(100% - 40px);
+    width: calc(100% - 1px);
+    box-shadow: inset 1px 1px 0px 0px #808080, 
+                inset -1px -1px 0px 0px #DFDFDF, 
+                inset 2px 2px 0px 0px #000000;
+    border: none;
     font-family: "Fixedsys 62";
     line-height: 16px;
+    padding: 0;
 }
 .editor-content:focus {
     outline: none;
@@ -390,7 +409,7 @@ span {
 .window.program {
     min-width: 180px;
     min-height: 77px;
-    padding: 2px;
+    padding: 4px;
     width: 75vw;
     height: 75vh;
     top: 7vw;
@@ -457,10 +476,11 @@ span {
     border-width: 4px;
     border-style: solid;
     border-image-repeat: repeat;
+    box-sizing: border-box;
     mix-blend-mode: difference;
     position: absolute;
-    top: -2px;
-    left: -2px;
+    top: 0;
+    left: 0;
 }
 button:focus {
     outline: dotted 1px black;
@@ -476,6 +496,7 @@ button:focus {
     border-image-repeat: repeat;
     mix-blend-mode: difference;
     position: absolute;
+    z-index: 99;
 }
 ul {
     list-style-type: none;
@@ -505,7 +526,7 @@ input[type="radio"] {
 input[type="radio"] + label {
     position: relative;
     padding-left: 21px;
-    font-family: "Microsoft Sans Serif";
+    font-family: "MS Sans Serif";
     font-size: 11px;
     user-select: none;
 }
@@ -562,7 +583,7 @@ select[size] {
                 inset -2px -2px 0px 0px #DFDFDF, 
                 inset 2px 2px 0px 0px #808080;
     border: none;
-    font-family: "Microsoft Sans Serif";
+    font-family: "MS Sans Serif";
     font-size: 11px;
     padding: 2px;
     scroll-behavior: smooth;
@@ -589,7 +610,7 @@ select[size] option:checked {
 }
 .groupBox::before {
     content: attr(text);
-    font-family: "Microsoft Sans Serif";
+    font-family: "MS Sans Serif";
     font-size: 11px;
     position: absolute;
     top: -7px;
@@ -610,7 +631,7 @@ select[size] option:checked {
     margin-left: 2px;
 }
 .tab {
-    font-family: "Microsoft Sans Serif";
+    font-family: "MS Sans Serif";
     font-size: 11px;
     border-image: url(res/tab.png) 3;
     border-width: 3px;
