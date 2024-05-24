@@ -5,8 +5,12 @@
     src: url(res/MS\ Sans\ Serif\ 8pt.ttf);
 }
 
+:root {
+    --font: "Microsoft Sans Serif";
+}
+
 button {
-    font-family: "MS Sans Serif";
+    font-family: var(--font);
     box-shadow: inset -1px -1px 0px 0px #000000, 
                 inset 1px 1px 0px 0px #FFFFFF, 
                 inset -2px -2px 0px 0px #808080, 
@@ -38,7 +42,14 @@ button.tray {
     border-width: 0;
     border-image: 0;
 }
+[disabled] {
+    text-shadow: 1px 1px #fff;
+}
 button[disabled] {
+    color: #808080;
+}
+#contextmenu > button[disabled]:hover, #startoptions button[disabled]:hover {
+    text-shadow: none;
     color: #808080;
 }
 button[disabled]:active {
@@ -95,15 +106,35 @@ span {
     display: flex;
     flex-direction: column;
 }
-#startoptions div {
+#startoptions div, #contextmenu {
     display: flex;
     flex-direction: column;
-    padding-right: 28px;
+    padding-right: 29px!important;
+}
+#contextmenu button {
+    height: 17px!important;
+    padding-left: 22px!important;
+    width: calc(100% + 15px);
+    box-shadow: none;
+    text-align: left;
+}
+#contextmenu {
+    gap: 0!important;
+    box-sizing: border-box;
+    position: absolute;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+    padding-right: 18px!important;
+}
+#contextmenu .sep {
+    box-sizing: border-box;
+    width: calc(100% + 15px);
 }
 #startoptions div > button {
     width: calc(100% + 26px);
 }
-#startoptions div > button.dropdown::after {
+#startoptions div > button.dropdown::after, #contextmenu button.dropdown::after {
     content: "";
     width: 4px;
     height: 7px;
@@ -111,10 +142,10 @@ span {
     position: absolute;
     right: 7px;
 }
-#startoptions div > button.dropdown:hover::after {
+#startoptions div > button.dropdown:hover::after, #contextmenu button.dropdown:hover::after {
     filter: invert(100%);
 }
-#startoptions #sep {
+.sep {
     border-top: #808080 1px solid;
     border-bottom: #fff 1px solid;
     margin-bottom: 5px;
@@ -130,7 +161,7 @@ span {
     min-width: auto;
     padding: 0px 5px;
 }
-#startmenu button:hover {
+#startmenu button:hover, #contextmenu button:hover {
     background-color: #000080;
     color: #fff;
 }
@@ -174,7 +205,7 @@ span {
     padding-top: 2px;
 }
 #clock {
-    font-family: "MS Sans Serif";
+    font-family: var(--font);
     text-align: center;
     margin-top: 1px;
 }
@@ -309,12 +340,12 @@ img {
     align-self: center;
 }
 span {
-    font-family: "MS Sans Serif";
+    font-family: var(--font);
     font-size: 11px;
     text-align: center;
 }
 .shortcut {
-    width: 96px;
+    width: 99px;
     height: 75px;
     display: flex;
     gap: 6px;
@@ -380,7 +411,7 @@ span {
 }
 .menu-bar li {
     padding: 5px 12px 3px 6px;
-    font-family: "MS Sans Serif";
+    font-family: var(--font);
     float: left;
     font-size: 11px;
     cursor: default;
@@ -517,6 +548,17 @@ ul {
     align-items: center;
     white-space: nowrap;
 }
+input:not([type="radio"]) {
+    border: none;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                inset 1px 1px 0px 0px #000000, 
+                inset -2px -2px 0px 0px #DFDFDF, 
+                inset 2px 2px 0px 0px #808080;
+    font-family: var(--font);
+}
+input:not([type="radio"]):focus {
+    outline: none;
+}
 .radiolistH input[type="radio"] + label {
     padding-left: 18px;
 }
@@ -526,7 +568,7 @@ input[type="radio"] {
 input[type="radio"] + label {
     position: relative;
     padding-left: 21px;
-    font-family: "MS Sans Serif";
+    font-family: var(--font);
     font-size: 11px;
     user-select: none;
 }
@@ -583,9 +625,10 @@ select[size] {
                 inset -2px -2px 0px 0px #DFDFDF, 
                 inset 2px 2px 0px 0px #808080;
     border: none;
-    font-family: "MS Sans Serif";
+    font-family: var(--font);
     font-size: 11px;
     padding: 2px;
+    padding-left: 3px;
     scroll-behavior: smooth;
 }
 select[size] option {
@@ -610,7 +653,7 @@ select[size] option:checked {
 }
 .groupBox::before {
     content: attr(text);
-    font-family: "MS Sans Serif";
+    font-family: var(--font);
     font-size: 11px;
     position: absolute;
     top: -7px;
@@ -631,7 +674,7 @@ select[size] option:checked {
     margin-left: 2px;
 }
 .tab {
-    font-family: "MS Sans Serif";
+    font-family: var(--font);
     font-size: 11px;
     border-image: url(res/tab.png) 3;
     border-width: 3px;
@@ -712,7 +755,7 @@ select[size] option:checked {
 button:hover .dropdown-content {
     display: block;
 }
-.submenu {
+.submenu, #contextmenu {
     box-shadow: inset -1px -1px 0px 0px #000000, 
                 inset 1px 1px 0px 0px #FFFFFF, 
                 inset -2px -2px 0px 0px #808080, 
@@ -730,7 +773,7 @@ button:hover .dropdown-content {
     gap: 7px !important;
     text-wrap: nowrap;
 }
-.submenu button img {
+.submenu button img, #contextmenu button img {
     width: 16px !important;
     height: 16px !important;
 }

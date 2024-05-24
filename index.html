@@ -10,10 +10,10 @@
 </head>
 <body>
     <div id="bg"></div>
-    <div id="desktop" onclick="disableStart();"></div>
-    <nav id="startbar" onclick="deselectShortcuts();">
+    <div id="desktop" onmousedown="disableStart(); disableContextMenu();"></div>
+    <nav id="startbar" onmousedown="deselectShortcuts(); disableContextMenu();">
         <div id="left">
-            <button id="start" onclick="enableStart()">
+            <button id="start" onmousedown="enableStart(); disableContextMenu();">
                 <img src="res/start.png"></img><span>Пуск</span>
             </button>
             <div id="windowdisplays"></div>
@@ -22,7 +22,7 @@
             <span id="clock">13:37</span>
         </div>
     </nav>
-    <div id="windows" onclick="disableStart(); deselectShortcuts();"></div>
-    <div id="windows" class="nodisplay" onclick="disableStart(); deselectShortcuts();"></div>
+    <div id="windows" onmousedown="disableStart(); deselectShortcuts(); disableContextMenu();"></div>
+    <div id="windows" class="nodisplay" onmousedown="disableStart(); deselectShortcuts(); disableContextMenu();"></div>
 </body>
 </html>
