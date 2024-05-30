@@ -114,10 +114,11 @@ span {
 #contextmenu button {
     height: 17px!important;
     padding-left: 22px!important;
-    width: calc(100% + 15px);
     box-shadow: none;
     text-align: left;
+    width: calc(100% + 15px);
 }
+
 #contextmenu {
     gap: 0!important;
     box-sizing: border-box;
@@ -436,6 +437,30 @@ span {
 }
 .editor-content:focus {
     outline: none;
+}
+.expcontent {
+    resize: none;
+    overflow: scroll;
+    height: calc(100% - 58px);
+    width: calc(100% - 1px);
+    box-shadow: inset 1px 1px 0px 0px #808080, 
+                inset -1px -1px 0px 0px #DFDFDF, 
+                inset 2px 2px 0px 0px #000000;
+    border: none;
+    font-family: "Fixedsys 62";
+    line-height: 16px;
+    padding: 0;
+    background-color: #fff;
+}
+.statusbar {
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                inset 1px 1px 0px 0px #808080;
+    height: 18px;
+    margin-top: 2px;
+    display: flex;
+    padding-left: 3px;
+    padding-top: 3px;
+    box-sizing: border-box;
 }
 .window.program {
     min-width: 180px;
@@ -768,6 +793,9 @@ button:hover .dropdown-content {
     gap: 2px;
     z-index: 3;
 }
+#contextmenu .submenu button {
+    width: auto;
+}
 .submenu button {
     height: 20px !important;
     gap: 7px !important;
@@ -788,4 +816,35 @@ button:hover .dropdown-content {
 }
 .monitorbg {
     background: #008080;
+}
+#paint .sidebar {
+    width: 56px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+#paint .sidebar div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+#paint .sidebar .options {
+    width: 41px;
+    height: 66px;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                inset 1px 1px 0px 0px #808080;
+}
+#paint .sidebar button {
+    min-width: 0px;
+    width: 25px;
+    height: 25px;
+    padding: 0px;
+}
+#paint .sidebar button img {
+    padding: 0px;
 }

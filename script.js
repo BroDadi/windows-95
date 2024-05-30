@@ -77,6 +77,17 @@ let langs = {
         "System Tools",
         "Multimedia",
 		"Enter a URL-address:",
+        "My Computer",
+        "Paint",
+        "WordPad",
+        "Calculator",
+        "Character Map",
+        "Dial-Up Networking",
+        "Network Cable Connection",
+        "HyperTerminal",
+        "Imaging",
+        "Online Registration",
+        "Phone Dialer",
     ],
     ru: [
         "Пуск",
@@ -156,12 +167,39 @@ let langs = {
         "Служебные программы",
         "Мультимедиа",
 		"Введите URL-адрес:",
+        "Мой компьютер",
+        "Графический редактор Paint",
+        "Текстовый редактор WordPad",
+        "Калькулятор",
+        "Таблица символов",
+        "Удалённый доступ к сети",
+        "Прямое соединение",
+        "Программа связи",
+        "Просмотр рисунков",
+        "Интерактивная регистрация",
+        "Номеронабиратель",
     ],
 };
 
 let currentLang = langs[Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0]]
     ? langs[Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0]]
     : langs["en"];
+
+const fileSystem = {
+    root: {
+        type: 'folder',
+        name: 'C:',
+        children: [
+            {
+                type: 'folder',
+                name: 'Program Files',
+                children: [
+                    { type: 'file', name: 'notepad.exe' },
+                ]
+            },
+        ]
+    }
+};
 
 function indexOfChild(obj, element) {
     for (let i = 0; i < obj.length; i++) {
@@ -320,7 +358,7 @@ function enableStart() {
 
 function removeSubMenus(element) {
     for (let i = 0; i < element.querySelectorAll("* .submenu").length; i++) {
-        document.querySelector(".submenu").remove();
+        element.querySelector("* .submenu").remove();
     }
 }
 
@@ -358,7 +396,10 @@ function createSubMenu(elmnt) {
 			<button class="dropdown" id="games"><img src="res/folderprograms16.png"></img>${currentLang[72]}</button>
 			<button class="dropdown" id="tools"><img src="res/folderprograms16.png"></img>${currentLang[73]}</button>
 			<button class="dropdown" id="systm"><img src="res/folderprograms16.png"></img>${currentLang[74]}</button>
-            <button class="dropdown" id="media"><img src="res/folderprograms16.png"></img>${currentLang[75]}</button>`;
+            <button class="dropdown" id="media"><img src="res/folderprograms16.png"></img>${currentLang[75]}</button>
+			<button onclick="createTextEditor(); disableStart();"><img src="res/notepadapp.png"></img>${currentLang[9]}</button>
+			<button onclick="createPaint(); disableStart();"><img src="res/paint16.png"></img>${currentLang[78]}</button>
+            `;
             break;
         case "scsort":
             subMenu.innerHTML = ``;
@@ -621,7 +662,7 @@ function enableResizable(elmnt) {
     }
 }
 
-function createShortcut(icon, text, action) {
+function createShortcut(icon, text, action, place) {
     let shortcut = document.createElement("div");
     shortcut.classList.add("shortcut");
     shortcut.innerHTML = `
@@ -639,7 +680,12 @@ function createShortcut(icon, text, action) {
     shortcut.ondblclick = function () {
         action();
     };
-    document.querySelector("#desktop").append(shortcut);
+    if (place) {
+        place.append(shortcut);
+    } 
+    else {
+        document.querySelector("#desktop").append(shortcut);
+    }
     makeShortcutDraggable(shortcut);
 }
 
@@ -743,6 +789,7 @@ function deselectShortcuts() {
 
 function createTextEditor() {
     let editor = document.createElement("div");
+    editor.id = "notepad";
     editor.classList.add("window");
     editor.classList.add("program");
     editor.tabIndex = 0;
@@ -777,6 +824,47 @@ function createTextEditor() {
     setTimeout(function () {
         highlightDisplay(
             document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, editor)]
+        );
+    }, 1);
+}
+
+function createExplorer(directory) {
+    let explorer = document.createElement("div");
+    explorer.classList.add("window");
+    explorer.classList.add("program");
+    explorer.tabIndex = 0;
+    explorer.innerHTML = `
+    <div class="header">
+        <div>
+            <img src=""></img>
+            <span>${currentLang[77]}</span>
+        </div>
+        <div class="windowbuttons">
+            <div>
+                <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
+                <button class="maximize" onclick="maximize(this, this.parentNode.parentNode.parentNode.parentNode)"></button>
+            </div>
+            <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
+        </div>
+    </div>
+    <div class="menu-bar">
+        <ul>
+            <li tabindex="0">${currentLang[10]}</li>
+            <li tabindex="0">${currentLang[11]}</li>
+            <li tabindex="0">${currentLang[12]}</li>
+            <li tabindex="0">${currentLang[13]}</li>
+        </ul>
+    </div>
+    <div class="expcontent"></div>
+    <div class="statusbar"><span>bebebe 123 123 test</span></div>
+    `;
+    document.querySelector("#windows").appendChild(explorer);
+    enableDraggable(explorer);
+    enableResizable(explorer);
+    windowDisplays();
+    setTimeout(function () {
+        highlightDisplay(
+            document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, explorer)]
         );
     }, 1);
 }
@@ -1094,7 +1182,6 @@ window.addEventListener("load", function () {
             disableStart();
         }
     });
-    createShortcut("res/notepad32.png", "Блокнот", createTextEditor);
     let mutationObserver = new MutationObserver(() => {
         windowDisplays();
     });
@@ -1158,6 +1245,61 @@ function bootUp() {
         let audio = new Audio("res/audio/The Microsoft Sound.wav");
         audio.play();
     }, 2000);
+}
+
+function createPaint() {
+    let paint = document.createElement("div");
+    paint.classList.add("window");
+    paint.classList.add("program");
+    paint.id = "paint";
+    paint.tabIndex = 0;
+    paint.innerHTML = `
+    <div class="header">
+        <div>
+            <img src="res/paint16.png"></img>
+            <span>Untitled - Paint</span>
+        </div>
+        <div class="windowbuttons">
+            <div>
+                <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
+                <button class="maximize" onclick="maximize(this, this.parentNode.parentNode.parentNode.parentNode)"></button>
+            </div>
+            <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
+        </div>
+    </div>
+    <div class="menu-bar">
+        <ul>
+            <li tabindex="0">${currentLang[10]}</li>
+            <li tabindex="0">${currentLang[11]}</li>
+            <li tabindex="0">${currentLang[12]}</li>
+            <li tabindex="0">${currentLang[13]}</li>
+        </ul>
+    </div>
+    <div class="sidebar">
+        <div>
+            <button><img src="res/paint/star.png"></img></button>
+            <button><img src="res/paint/select.png"></img></button>
+            <button><img src="res/paint/eraser.png"></img></button>
+            <button><img src="res/paint/bucket.png"></img></button>
+            <button><img src="res/paint/picker.png"></img></button>
+            <button><img src="res/paint/zoom.png"></img></button>
+            <button><img src="res/paint/pencil.png"></img></button>
+            <button><img src="res/paint/brush.png"></img></button>
+            <button><img src="res/paint/spray.png"></img></button>
+            <button><img src="res/paint/text.png"></img></button>
+            <button><img src="res/paint/line.png"></img></button>
+            <button><img src="res/paint/curvedline.png"></img></button>
+            <button><img src="res/paint/rectangle.png"></img></button>
+            <button><img src="res/paint/huina.png"></img></button>
+            <button><img src="res/paint/circle.png"></img></button>
+            <button><img src="res/paint/roundrect.png"></img></button>
+        </div>
+        <div class="options"></div>
+    </div>
+    `;
+    document.querySelector("#windows").append(paint);
+    enableDraggable(paint);
+    enableResizable(paint);
 }
 
 function makeATabSwitch(elmnt) {
