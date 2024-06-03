@@ -1386,7 +1386,7 @@ function initializeCanvas() {
 
     let painting = false;
     canvas.style.backgroundColor = col2;
-    ctx.filter = "url(#remove-alpha)";
+    //ctx.filter = "url(#remove-alpha)";
 
     function startPosition(e) {
         painting = true;
