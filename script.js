@@ -181,9 +181,13 @@ let langs = {
     ],
 };
 
+let col1, col2, col3, currentTool, palette;
+
 let currentLang = langs[Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0]]
     ? langs[Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0]]
     : langs["en"];
+
+let startedMinMax = false;
 
 const fileSystem = {
     root: {
@@ -485,7 +489,6 @@ function enableDraggable(elmnt) {
     function dragMouseDown(e) {
         elmnt.focus();
         if (elmnt.classList.contains("maximized")) return;
-        elmnt.parentNode.appendChild(elmnt);
         if (e.target.tagName === "BUTTON") {
             return;
         }
@@ -870,6 +873,9 @@ function createExplorer(directory) {
 }
 
 function maximize(button, elmnt) {
+    if (startedMinMax) return;
+    console.log(startedMinMax)
+    startedMinMax = true;
     let header = elmnt.querySelector(".header");
     let headerClone = header.cloneNode(true);
     headerClone.classList.add("clone");
@@ -894,10 +900,13 @@ function maximize(button, elmnt) {
             document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
         );
         headerClone.remove();
+        startedMinMax = false;
     }, 250);
 }
 
 function restore(button, elmnt) {
+    if (startedMinMax) return;
+    startedMinMax = true;
     let header = elmnt.querySelector(".header");
     let headerClone = header.cloneNode(true);
     headerClone.classList.add("clone");
@@ -927,10 +936,13 @@ function restore(button, elmnt) {
             document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
         );
         headerClone.remove();
+        startedMinMax = false;
     }, 250);
 }
 
 function minimize(elmnt) {
+    if (startedMinMax) return;
+    startedMinMax = true;
     let header = elmnt.querySelector(".header");
     let headerClone = header.cloneNode(true);
     headerClone.classList.add("clone");
@@ -950,6 +962,7 @@ function minimize(elmnt) {
     setTimeout(function () {
         elmnt.classList.add("minimized");
         headerClone.remove();
+        startedMinMax = false;
     }, 250);
 }
 
@@ -982,13 +995,12 @@ function unminimize(elmnt) {
 }
 
 function highlightDisplay(display) {
-    let displays = document.querySelector("#windowdisplays");
-    for (let i = 0; i < displays.children.length; i++) {
-        displays.children[i].classList.remove("pressed");
-    }
+    document.querySelectorAll(".windowdisplay").forEach((disp) => {
+        disp.classList.remove("pressed");
+    })
     display.classList.add("pressed");
-    document.querySelector("#windows").children[indexOfChild(displays.children, display)].focus();
-    unminimize(document.querySelector("#windows").children[indexOfChild(displays.children, display)]);
+    document.querySelector("#windows").children[indexOfChild(document.querySelectorAll(".windowdisplay"), display)].focus();
+    unminimize(document.querySelector("#windows").children[indexOfChild(document.querySelectorAll(".windowdisplay"), display)]);
 }
 
 function windowDisplays() {
@@ -1253,10 +1265,15 @@ function createPaint() {
     paint.classList.add("program");
     paint.id = "paint";
     paint.tabIndex = 0;
+    col1 = "#000000";
+    col2 = "#ffffff";
+    currentTool = "pencil";
+    palette = ["#000000", "#ffffff", "#808080", "#dfdfdf", "#800000", "#ff0000", "#808000", "#ffff00", "#008000", "#00ff00", "#008080", "#00ffff", "#000080", "#0000ff",
+    "#800080", "#ff00ff", "#808040", "#ffff80", "#004040", "#00ff80", "#0080ff", "#80ffff", "#004080", "#8080ff", "#4000ff", "#ff0080", "#804000", "#ff8040"];
     paint.innerHTML = `
     <div class="header">
         <div>
-            <img src="res/paint16.png"></img>
+            <img src="res/drawing16.png"></img>
             <span>Untitled - Paint</span>
         </div>
         <div class="windowbuttons">
@@ -1275,31 +1292,128 @@ function createPaint() {
             <li tabindex="0">${currentLang[13]}</li>
         </ul>
     </div>
-    <div class="sidebar">
-        <div>
-            <button><img src="res/paint/star.png"></img></button>
-            <button><img src="res/paint/select.png"></img></button>
-            <button><img src="res/paint/eraser.png"></img></button>
-            <button><img src="res/paint/bucket.png"></img></button>
-            <button><img src="res/paint/picker.png"></img></button>
-            <button><img src="res/paint/zoom.png"></img></button>
-            <button><img src="res/paint/pencil.png"></img></button>
-            <button><img src="res/paint/brush.png"></img></button>
-            <button><img src="res/paint/spray.png"></img></button>
-            <button><img src="res/paint/text.png"></img></button>
-            <button><img src="res/paint/line.png"></img></button>
-            <button><img src="res/paint/curvedline.png"></img></button>
-            <button><img src="res/paint/rectangle.png"></img></button>
-            <button><img src="res/paint/huina.png"></img></button>
-            <button><img src="res/paint/circle.png"></img></button>
-            <button><img src="res/paint/roundrect.png"></img></button>
+    <div class="content">
+        <div class="sidebar">
+            <div class="tools">
+                <div>
+                    <button id="select2"><img src="res/paint/star.png"></img></button>
+                    <button id="select"><img src="res/paint/select.png"></img></button>
+                    <button id="eraser"><img src="res/paint/eraser.png"></img></button>
+                    <button id="bucket"><img src="res/paint/bucket.png"></img></button>
+                    <button id="picker"><img src="res/paint/picker.png"></img></button>
+                    <button id="zoom"><img src="res/paint/zoom.png"></img></button>
+                    <button id="pencil" class="pressed"><img src="res/paint/pencil.png"></img></button>
+                    <button id="brush"><img src="res/paint/brush.png"></img></button>
+                    <button id="spray"><img src="res/paint/spray.png"></img></button>
+                    <button id="text"><img src="res/paint/text.png"></img></button>
+                    <button id="line"><img src="res/paint/line.png"></img></button>
+                    <button id="curvedline"><img src="res/paint/curvedline.png"></img></button>
+                    <button id="rectangle"><img src="res/paint/rectangle.png"></img></button>
+                    <button id="customshape"><img src="res/paint/huina.png"></img></button>
+                    <button id="circle"><img src="res/paint/circle.png"></img></button>
+                    <button id="roundrect"><img src="res/paint/roundrect.png"></img></button>
+                </div>
+                <div class="options"></div>
+            </div>
         </div>
-        <div class="options"></div>
+        <div class="draw">
+            <svg width="0" height="0" style="position:absolute;z-index:-1;">
+                <defs>
+                    <filter id="remove-alpha" x="0" y="0" width="100%" height="100%">
+                        <feComponentTransfer>
+                        <feFuncA type="discrete" tableValues="0 1"></feFuncA>
+                        </feComponentTransfer>
+                    </filter>
+                </defs>
+            </svg>
+            <canvas id="paintCanvas" oncontextmenu="return false;"></canvas>
+        </div>
+        <div class="footer">
+            <div class="colormenu">
+                <div class="colordisplay">
+                    <div class="color1"></div>
+                    <div class="color2"></div>
+                </div>
+                <div class="colors">
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                    <div class="color"></div><div class="color"></div>
+                </div>
+            </div>
+        </div>
+        <div class="statusbar"></div>
     </div>
     `;
     document.querySelector("#windows").append(paint);
     enableDraggable(paint);
     enableResizable(paint);
+    initializeCanvas();
+    paint.querySelectorAll(".tools button").forEach(btn => btn.onclick = function() {selectTool(btn.id)});
+    paint.querySelectorAll(".color").forEach(color => color.style.background = palette[indexOfChild(color.parentNode.children, color)]);
+    paint.querySelectorAll(".color").forEach(color => color.onmousedown = function(e) {
+        console.log(e.buttons)
+        if (e.buttons == 1) {
+            col1 = palette[indexOfChild(color.parentNode.children, color)];
+            paint.querySelector(".color1").style.background = col1;
+        }
+        else if (e.buttons == 2) {
+            col2 = palette[indexOfChild(color.parentNode.children, color)];
+            paint.querySelector(".color2").style.background = col2;
+        }
+    });
+}
+
+function selectTool(tool) {
+    document.querySelectorAll('.tools button').forEach(btn => btn.classList.remove('pressed'));
+    document.getElementById(tool).classList.add('pressed');
+    currentTool = tool;
+}
+
+function initializeCanvas() {
+    const canvas = document.getElementById('paintCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let painting = false;
+    canvas.style.backgroundColor = col2;
+    ctx.filter = "url(#remove-alpha)";
+
+    function startPosition(e) {
+        painting = true;
+        draw(e);
+    }
+
+    function endPosition() {
+        painting = false;
+        ctx.beginPath();
+    }
+
+    function draw(e) {
+        if (!painting) return;
+        if (currentTool == "pencil") {
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = e.buttons == 1 ? col1 : 2 ? col2 : "";
+
+            ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+        }
+    }
+
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', endPosition);
+    canvas.addEventListener('mousemove', draw);
 }
 
 function makeATabSwitch(elmnt) {
@@ -1420,9 +1534,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let startX, startY, endX, endY;
     let selectionBox;
 
-    document.querySelector("#desktop").oncontextmenu = function (e) {
+    document.oncontextmenu = function (e) {
         e.preventDefault();
         document.querySelector("#contextmenu")?.remove();
+        if (e.target != document.querySelector("#desktop")) return;
         let contextMenu = document.createElement("div");
         contextMenu.id = "contextmenu";
         contextMenu.style.left = e.clientX + "px";

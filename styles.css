@@ -461,6 +461,7 @@ span {
     padding-left: 3px;
     padding-top: 3px;
     box-sizing: border-box;
+    width: 100%;
 }
 .window.program {
     min-width: 180px;
@@ -754,25 +755,28 @@ select[size] option:checked {
 #left {
     display: flex;
     align-items: center;
+    gap: 4px;
 }
 .windowdisplay {
     display: flex;
     align-items: center;
     width: 150px;
 }
-.windowdisplay.pressed {
+button.pressed:not(#start) {
     box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
                 inset 1px 1px 0px 0px #000000, 
                 inset -2px -2px 0px 0px #DFDFDF, 
                 inset 2px 2px 0px 0px #808080;
-    font-weight: bold;
     background-image: url(res/selectedwindowdisplay.png);
     background-repeat: repeat;
+    text-shadow: 0.5px 0px black, 1.5px 0px black;
+    color: transparent;
+    letter-spacing: 1px;
 }
 #windowdisplays {
-    margin-left: 6px;
     display: flex;
     align-items: center;
+    gap: 3px;
 }
 .window.minimized {
     visibility: hidden;
@@ -817,34 +821,114 @@ button:hover .dropdown-content {
 .monitorbg {
     background: #008080;
 }
-#paint .sidebar {
-    width: 56px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-}
-#paint .sidebar div {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-#paint .sidebar .options {
-    width: 41px;
-    height: 66px;
-    display: flex;
-    flex-wrap: wrap;
-    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                inset 1px 1px 0px 0px #808080;
-}
-#paint .sidebar button {
-    min-width: 0px;
-    width: 25px;
-    height: 25px;
-    padding: 0px;
-}
-#paint .sidebar button img {
-    padding: 0px;
+#paint {
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: calc(100% - 38px);
+        box-sizing: border-box;
+    }
+    .sidebar {
+        box-shadow: inset 0px 1px 0px 0px #808080, 
+                    inset 0px 2px 0px 0px #FFFFFF,
+                    inset 0px -1px 0px 0px #FFFFFF,
+                    inset 0px -2px 0px 0px #808080;
+        div {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .tools {
+            width: 56px;
+            gap: 3px;
+        }
+        .options {
+            width: 41px;
+            height: 66px;
+            display: flex;
+            flex-wrap: wrap;
+            box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                        inset 1px 1px 0px 0px #808080;
+        }
+        button {
+            min-width: 0px;
+            width: 25px;
+            height: 25px;
+            padding: 0px;
+            img {
+                padding: 0px;
+            }
+        }
+    }
+    .draw {
+        width: calc(100% - 56px);
+        height: calc(100% - 76px);
+        background: #808080;
+        overflow: scroll;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+    .footer {
+        width: 100%;
+        height: 47px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        .colormenu {
+            display: flex;
+            height: 32px;
+            gap: 1px;
+            .colordisplay {
+                width: 31px;
+                height: 32px;
+                box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                            inset 1px 1px 0px 0px #808080, 
+                            inset -2px -2px 0px 0px #DFDFDF, 
+                            inset 2px 2px 0px 0px #000000;
+                background: #dfdfdf;
+                position: relative;
+                .color1 {
+                    width: 15px;
+                    height: 15px;
+                    box-shadow: inset 1px 1px 0px 0px #FFFFFF, 
+                                inset -1px -1px 0px 0px #808080,
+                                inset 0px 0px 0px 2px #DFDFDF;
+                    left: 4px;
+                    top: 5px;
+                    position: absolute;
+                    background: #000;
+                    z-index: 6;
+                }
+                .color2 {
+                    width: 15px;
+                    height: 15px;
+                    box-shadow: inset 1px 1px 0px 0px #FFFFFF, 
+                                inset -1px -1px 0px 0px #808080, 
+                                inset 0px 0px 0px 2px #DFDFDF;
+                    position: absolute;
+                    left: 11px;
+                    top: 12px;
+                    background: #fff;
+                    z-index: 5;
+                }
+            }
+            .colors {
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: column;
+                width: calc(16px * 14);
+                box-shadow: 1px 1px 0px 0px #808080;
+                .color {
+                    width: 16px;
+                    height: 16px;
+                    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
+                                inset 1px 1px 0px 0px #808080, 
+                                inset -2px -2px 0px 0px #DFDFDF, 
+                                inset 2px 2px 0px 0px #000000;
+                }
+            }
+        }
+    }
 }
