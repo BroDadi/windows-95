@@ -181,7 +181,7 @@ let langs = {
     ],
 };
 
-let col1, col2, col3, currentTool, palette;
+let col1, col2, col3, currentTool, palette, brush, brushsize, zoom;
 
 let currentLang = langs[Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0]]
     ? langs[Intl.DateTimeFormat().resolvedOptions().locale.split("-")[0]]
@@ -384,7 +384,7 @@ function createSubMenu(elmnt) {
             <button><img src="res/mail16.png"></img>Microsoft Exchange</button>
             <button><img src="res/netmeeting16.png"></img>Microsoft Netmeeting</button>
             <button><img src="res/explorer16.png"></img>${currentLang[27]}</button>
-            <button><img src="res/msdos.png"></img>${currentLang[28]}</button>`;
+            <button onclick="createMsDos(); disableStart();"><img src="res/msdos.png"></img>${currentLang[28]}</button>`;
             break;
         case "sets":
             subMenu.innerHTML = `
@@ -403,6 +403,7 @@ function createSubMenu(elmnt) {
             <button class="dropdown" id="media"><img src="res/folderprograms16.png"></img>${currentLang[75]}</button>
 			<button onclick="createTextEditor(); disableStart();"><img src="res/notepadapp.png"></img>${currentLang[9]}</button>
 			<button onclick="createPaint(); disableStart();"><img src="res/paint16.png"></img>${currentLang[78]}</button>
+			<button onclick="createCalc(); disableStart();"><img src="res/calc16.png"></img>${currentLang[80]}</button>
             `;
             break;
         case "scsort":
@@ -1270,6 +1271,7 @@ function createPaint() {
     currentTool = "pencil";
     palette = ["#000000", "#ffffff", "#808080", "#dfdfdf", "#800000", "#ff0000", "#808000", "#ffff00", "#008000", "#00ff00", "#008080", "#00ffff", "#000080", "#0000ff",
     "#800080", "#ff00ff", "#808040", "#ffff80", "#004040", "#00ff80", "#0080ff", "#80ffff", "#004080", "#8080ff", "#4000ff", "#ff0080", "#804000", "#ff8040"];
+    zoom = 1;
     paint.innerHTML = `
     <div class="header">
         <div>
@@ -1331,9 +1333,9 @@ function createPaint() {
         <div class="footer">
             <div class="colormenu">
                 <div class="colordisplay">
-                    <div class="color1"></div>
                     <div class="color2"></div>
-                </div>
+                    <div class="color1"></div>
+                    </div>
                 <div class="colors">
                     <div class="color"></div><div class="color"></div>
                     <div class="color"></div><div class="color"></div>
@@ -1383,10 +1385,13 @@ function selectTool(tool) {
 function initializeCanvas() {
     const canvas = document.getElementById('paintCanvas');
     const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     let painting = false;
     canvas.style.backgroundColor = col2;
-    //ctx.filter = "url(#remove-alpha)";
+    ctx.imageSmoothingEnabled = false;
+    let lastx, lasty;
 
     function startPosition(e) {
         painting = true;
@@ -1396,24 +1401,298 @@ function initializeCanvas() {
     function endPosition() {
         painting = false;
         ctx.beginPath();
+        lastx = 0;
+        lasty = 0;
+    }
+
+    function drawLine(x0, y0, x1, y1, color) {
+        const dx = Math.abs(x1 - x0);
+        const dy = Math.abs(y1 - y0);
+        const sx = (x0 < x1) ? 1 : -1;
+        const sy = (y0 < y1) ? 1 : -1;
+        let err = dx - dy;
+
+        while (true) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x0, y0, brushsize, brushsize);
+            if (x0 === x1 && y0 === y1) break;
+            const e2 = 2 * err;
+            if (e2 > -dy) { err -= dy; x0 += sx; }
+            if (e2 < dx) { err += dx; y0 += sy; }
+        }
     }
 
     function draw(e) {
         if (!painting) return;
+        let posx = e.clientX - canvas.getBoundingClientRect().left;
+        let posy = e.clientY - canvas.getBoundingClientRect().top;
+        let col = e.buttons == 1 ? col1 : 2 ? col2 : "";
         if (currentTool == "pencil") {
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = e.buttons == 1 ? col1 : 2 ? col2 : "";
-
-            ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+            ctx.fillStyle = col;
+            brushsize = 1;
+            ctx.fillRect(posx, posy, brushsize, brushsize);
+            if (lastx && lasty) {
+                drawLine(lastx, lasty, posx, posy, col);
+            }
+            lastx = posx;
+            lasty = posy;
         }
     }
 
     canvas.addEventListener('mousedown', startPosition);
     canvas.addEventListener('mouseup', endPosition);
-    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mousemove', draw, {passive: true, capture: true});
+    canvas.addEventListener('mouseleave', function() { lastx = 0; lasty = 0; });
+}
+
+function createCalc() {
+    let calc = document.createElement("div");
+    calc.classList.add("window", "program");
+    calc.id = "calc";
+    calc.tabIndex = 0;
+    calc.innerHTML = `
+        <div class="header">
+            <div>
+                <img src="res/calc16.png"></img>
+                <span>${currentLang[80]}</span>
+            </div>
+            <div class="windowbuttons">
+                <div>
+                    <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
+                    <button class="maximize" disabled></button>
+                </div>
+                <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
+            </div>
+        </div>
+        <div class="menu-bar">
+            <ul>
+                <li tabindex="0">${currentLang[11]}</li>
+                <li tabindex="0">${currentLang[12]}</li>
+                <li tabindex="0">${currentLang[13]}</li>
+            </ul>
+        </div>
+        <div class="sep"></div>
+        <div class="content">
+            <input readonly value="0," class="result"></input>
+            <div class="toprow">
+                <input readonly class="mem"></input>
+                <div>
+                    <button class="big dkrd">Back</button>
+                    <button class="big dkrd">CE</button>
+                    <button class="big dkrd">C</button>            
+                </div>
+            </div>
+            <div class="leftcolumn">
+                <button class="red">MC</button>
+                <button class="red">MR</button>
+                <button class="red">MS</button>
+                <button class="red">M+</button>
+            </div>
+            <div class="btns">
+                <button class="blue">7</button><button class="blue">8</button><button class="blue">9</button><button class="red">/</button><button class="dkbl">sqrt</button>
+                <button class="blue">4</button><button class="blue">5</button><button class="blue">6</button><button class="red">*</button><button class="dkbl">%</button>
+                <button class="blue">1</button><button class="blue">2</button><button class="blue">3</button><button class="red">-</button><button class="dkbl">1/x</button>
+                <button class="blue">0</button><button class="blue">+/-</button><button class="blue">,</button><button class="red">+</button><button class="red">=</button>
+            </div>
+        </div>
+    `;
+    document.querySelector("#windows").append(calc);
+
+    let num1 = "", num2 = "", oper = "", memory = 0, currentNum = 1, gotResult = false;
+
+    function updateDisplay(value) {
+        calc.querySelector(".result").value = value.toString().replace(".", ",");
+        if (!calc.querySelector(".result").value.includes(",")) calc.querySelector(".result").value += ",";
+    }
+
+    calc.querySelectorAll(".content button").forEach((button) => {
+        button.onclick = function () {
+            let text = button.innerText;
+
+            if ("1234567890".includes(text) || text === ",") {
+                if (gotResult) {
+                    gotResult = false;
+                    currentNum = 1;
+                    num1 = "";
+                    num2 = "";
+                    oper = "";
+                    updateDisplay(0);
+                }
+
+                if (currentNum === 1) {
+                    if (text === "," && num1.includes(",")) return;
+                    num1 = (num1 + text).replace(/^0+/, '') || "0";
+                    if (num1[0] == ",") num1 = 0 + num1;
+                    updateDisplay(num1);
+                } else {
+                    if (text === "," && num2.includes(".")) return;
+                    num2 = (num2 + text).replace(/^0+/, '') || "0";
+                    if (num2[0] == ",") num2 = 0 + num2;
+                    updateDisplay(num2);
+                }
+            } else if ("+-/*".includes(text) && num1) {
+                if (gotResult) {
+                    num1 = calc.querySelector(".result").value;
+                    num2 = "";
+                    gotResult = false;
+                }
+                currentNum = 2;
+                oper = text;
+            } else if (text === "=" && num1 && num2 && oper) {
+                let result;
+                let x = parseFloat(num1.replace(",", "."));
+                let y = parseFloat(num2.replace(",", "."));
+                switch (oper) {
+                    case "+":
+                        result = x + y;
+                        break;
+                    case "-":
+                        result = x - y;
+                        break;
+                    case "*":
+                        result = x * y;
+                        break;
+                    case "/":
+                        result = x / y;
+                        break;
+                }
+                updateDisplay(result);
+                num1 = result.toString();
+                gotResult = true;
+            } else if (text === "Back" && !gotResult) {
+                if (currentNum === 1 && num1) {
+                    num1 = num1.slice(0, -1);
+                    updateDisplay(num1 || 0);
+                } else if (currentNum === 2 && num2) {
+                    num2 = num2.slice(0, -1);
+                    updateDisplay(num2 || 0);
+                }
+            } else if (text === "CE") {
+                if (gotResult) {
+                    updateDisplay(0);
+                } else if (currentNum === 1) {
+                    num1 = "";
+                    updateDisplay(0);
+                } else if (currentNum === 2) {
+                    num2 = "";
+                    updateDisplay(0);
+                }
+            } else if (text === "C") {
+                gotResult = false;
+                currentNum = 1;
+                num1 = "";
+                num2 = "";
+                oper = "";
+                updateDisplay(0);
+            } else if (text === "MS") {
+                memory = parseFloat(calc.querySelector(".result").value.replace(",", "."));
+                calc.querySelector(".mem").value = memory === 0 ? "" : "M";
+            } else if (text === "M+") {
+                memory += parseFloat(calc.querySelector(".result").value.replace(",", "."));
+                calc.querySelector(".mem").value = memory === 0 ? "" : "M";
+            } else if (text === "MC") {
+                memory = 0;
+                calc.querySelector(".mem").value = "";
+            } else if (text === "MR") {
+                if (gotResult || currentNum === 1) {
+                    num1 = memory.toString();
+                    updateDisplay(num1);
+                } else if (currentNum === 2) {
+                    num2 = memory.toString();
+                    updateDisplay(num2);
+                }
+                gotResult = true;
+            } else if (text === "sqrt") {
+                if (currentNum === 1) {
+                    num1 = Math.sqrt(parseFloat(num1.replace(",", "."))).toString();
+                    updateDisplay(num1);
+                } else if (currentNum === 2) {
+                    num2 = Math.sqrt(parseFloat(num2.replace(",", "."))).toString();
+                    updateDisplay(num2);
+                }
+            } else if (text === "1/x") {
+                if (currentNum === 1) {
+                    num1 = (1 / parseFloat(num1.replace(",", "."))).toString();
+                    updateDisplay(num1);
+                } else if (currentNum === 2) {
+                    num2 = (1 / parseFloat(num2.replace(",", "."))).toString();
+                    updateDisplay(num2);
+                }
+            } else if (text === "%") {
+                if (num1 && num2 && oper) {
+                    let x = parseFloat(num1.replace(",", "."));
+                    let y = parseFloat(num2.replace(",", "."));
+                    let result = (x * y) / 100;
+                    updateDisplay(result);
+                    num1 = result.toString();
+                    gotResult = true;
+                }
+            }
+        }
+    });
+
+    enableDraggable(calc);
+}
+
+function createMsDos() {
+    let dos = document.createElement("div");
+    dos.classList.add("window", "program");
+    dos.id = "msdos";
+    dos.tabIndex = 0;
+    dos.innerHTML = `
+        <div class="header">
+            <div>
+                <img src="res/msdos.png"></img>
+                <span>${currentLang[28]}</span>
+            </div>
+            <div class="windowbuttons">
+                <div>
+                    <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
+                    <button class="maximize" onclick="maximize(this, this.parentNode.parentNode.parentNode.parentNode)"></button>
+                </div>
+                <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
+            </div>
+        </div>
+        <div class="console">
+            <pre class="output"></pre>
+            <textarea class="prompt"></textarea>
+        </div>
+    `;
+    document.querySelector("#windows").append(dos);
+    enableDraggable(dos);
+    enableResizable(dos);
+
+    const textarea = dos.querySelector(".prompt");
+    const output = dos.querySelector(".output");
+
+    textarea.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            const command = textarea.value.trim();
+            executeCommand(command, output);
+            textarea.value = '';
+        }
+    });
+}
+
+function executeCommand(command, output) {
+    let result;
+    switch (command) {
+        case "help":
+            result = "Available commands:\nhelp - Show this help message\nclear - Clear the screen\necho [text] - Display text";
+            break;
+        case "clear":
+            output.textContent = '';
+            return;
+        default:
+            if (command.startsWith("echo ")) {
+                result = command.substring(5);
+            } else {
+                result = `Unknown command: ${command}`;
+            }
+    }
+    output.textContent += `> ${command}\n${result}\n`;
+    output.scrollTop = output.scrollHeight;
 }
 
 function makeATabSwitch(elmnt) {

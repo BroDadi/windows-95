@@ -5,6 +5,11 @@
     src: url(res/MS\ Sans\ Serif\ 8pt.ttf);
 }
 
+@font-face {
+    font-family: "IBM VGA 8x14";
+    src: url(res/PxPlus_IBM_EGA_8x14.ttf);
+}
+
 :root {
     --font: "Microsoft Sans Serif";
 }
@@ -268,6 +273,10 @@ span {
     background-color: #808080;
     user-select: none;
 }
+.header img, .windowdisplay img {
+    width: 16px;
+    height: 16px;
+}
 .window > .header span {
     text-shadow: 0.5px 0px #c0c0c0, 1.5px 0px #c0c0c0;
     color: transparent;
@@ -467,8 +476,8 @@ span {
     min-width: 180px;
     min-height: 77px;
     padding: 4px;
-    width: 75vw;
-    height: 75vh;
+    width: calc(75vw);
+    height: calc(75vh);
     top: 7vw;
     left: 7vw;
 }
@@ -869,6 +878,9 @@ button:hover .dropdown-content {
         overflow: scroll;
         padding: 3px;
         box-sizing: border-box;
+        #paintCanvas {
+            transform-origin: top left;
+        }
     }
     .footer {
         width: 100%;
@@ -899,7 +911,6 @@ button:hover .dropdown-content {
                     top: 5px;
                     position: absolute;
                     background: #000;
-                    z-index: 6;
                 }
                 .color2 {
                     width: 15px;
@@ -911,7 +922,6 @@ button:hover .dropdown-content {
                     left: 11px;
                     top: 12px;
                     background: #fff;
-                    z-index: 5;
                 }
             }
             .colors {
@@ -929,6 +939,111 @@ button:hover .dropdown-content {
                                 inset 2px 2px 0px 0px #000000;
                 }
             }
+        }
+    }
+}
+#calc {
+    width: 276px;
+    height: 272px;
+    * {
+        font-family: var(--font);
+        font-size: 11px;
+    }
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 6px;
+        justify-content: space-between;
+        button:not(.windowbuttons button) {
+            min-width: 36px;
+            height: 28px;
+            color: transparent;
+            letter-spacing: 1px;
+            font-size: 11px;
+        }
+        button.big {
+            width: 49px;
+        }
+        button.red {
+            text-shadow: 0.5px 0px #f00, 1.5px 0px #f00;
+        }
+        button.dkrd {
+            text-shadow: 0.5px 0px #800000, 1.5px 0px #800000;
+        }
+        button.blue {
+            text-shadow: 0.5px 0px #00f, 1.5px 0px #00f;
+        }
+        button.dkbl {
+            text-shadow: 0.5px 0px #000080, 1.5px 0px #000080;
+        }
+        input {
+            pointer-events: none;
+        }
+        .result {
+            width: 100%;
+            height: 26px;
+            text-align: right;
+        }
+        .toprow {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            .mem {
+                width: 36px;
+                height: 26px;
+                background: #c0c0c0;
+                box-sizing: border-box;
+                text-align: center;
+            }
+            div {
+                display: flex;
+                gap: 4px;
+            }
+        }
+        .leftcolumn {
+            display: flex;
+            flex-direction: column;
+            width: 36px;
+            gap: 6px;
+        }
+        .btns {
+            width: 196px;
+            height: 130px;
+            float: right;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 4px;
+        }
+    }
+}
+#msdos {
+    .console {
+        height: calc(100% - 23px);
+        top: 4px;
+        position: relative;
+        background: #000;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        .prompt, .output {
+            background-color: #000;
+            color: #c0c0c0;
+            font-family: "IBM VGA 8x14";
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+            padding: 0 2px;
+            margin: 0;
+            width: 100%;
+        }
+        .prompt {
+            resize: none;
+        }
+        .output {
+            flex-grow: 1;
+            overflow-y: auto;
+            white-space: pre-wrap;
         }
     }
 }
