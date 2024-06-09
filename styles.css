@@ -373,12 +373,15 @@ span {
     color: #000 !important;
 }
 .shortcut span {
-    color: #fff;
+    color: #000;
     pointer-events: none;
     text-align: center;
     padding: 2px;
     position: relative;
+}
+#desktop .shortcut span {
     background: #008080;
+    color: #fff;
 }
 .shortcut img {
     width: 32px;
@@ -392,6 +395,7 @@ span {
 }
 .shortcut.selected span {
     background: #000080;
+    color: #fff;
 }
 .shortcut.selected span::before {
     content: "";
@@ -455,10 +459,6 @@ span {
     box-shadow: inset 1px 1px 0px 0px #808080, 
                 inset -1px -1px 0px 0px #DFDFDF, 
                 inset 2px 2px 0px 0px #000000;
-    border: none;
-    font-family: "Fixedsys 62";
-    line-height: 16px;
-    padding: 0;
     background-color: #fff;
 }
 .statusbar {

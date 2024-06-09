@@ -189,20 +189,61 @@ let currentLang = langs[Intl.DateTimeFormat().resolvedOptions().locale.split("-"
 
 let startedMinMax = false;
 
-const fileSystem = {
-    root: {
-        type: 'folder',
-        name: 'C:',
-        children: [
-            {
-                type: 'folder',
-                name: 'Program Files',
-                children: [
-                    { type: 'file', name: 'notepad.exe' },
-                ]
-            },
-        ]
-    }
+let files = {
+    type: "rootfolder",
+    name: currentLang[77],
+    icon: "res/mycomputer",
+    children: [
+        {
+            type: "file",
+            name: "A:",
+            icon: "res/A",
+            action: "",
+        },
+        {
+            type: "folder",
+            name: "C:",
+            icon: "res/C",
+            children: [
+                {
+                    type: "folder",
+                    name: "WINDOWS",
+                    children: [
+                        {
+                            type: "folder",
+                            name: "System",
+                            children: [
+                                {
+                                    type: "file",
+                                    name: "notepad",
+                                    icon: "res/notepad",
+                                    action: function() { createTextEditor(); },
+                                },
+                                {
+                                    type: "file",
+                                    name: "calc",
+                                    icon: "res/calc",
+                                    action: function() { createCalc(); },
+                                },
+                                {
+                                    type: "file",
+                                    name: "paint",
+                                    icon: "res/paint",
+                                    action: function() { createPaint(); },
+                                },
+                            ]
+                        }
+                    ]
+                },
+            ],
+        },
+        {
+            type: "file",
+            name: "D:",
+            icon: "res/D",
+            action: "",
+        },
+    ],
 };
 
 function indexOfChild(obj, element) {
@@ -286,18 +327,30 @@ function sortShortcuts(elmnt) {
     });
 
     let left = 0;
-    let top = 0;
+    let top = elmnt.classList.contains("expcontent") ? 48 : 0;
     let incrementLeft = 99;
     let incrementTop = 75;
     for (let i = 0; i < elmnt.children.length; i++) {
         let shrtct = elmnt.children[i];
-        if (top > window.innerHeight - incrementTop) {
-            left += incrementLeft;
-            top = 0;
+        if (elmnt == document.querySelector("#desktop")) {
+            if (top > elmnt.clientHeight - incrementTop) {
+                left += incrementLeft;
+                top = 0;
+            }
+        }
+        else {
+            if (left > elmnt.clientHeight - incrementLeft) {
+                top += incrementTop;
+                left = 0;
+            }
         }
         shrtct.style.left = left + "px";
         shrtct.style.top = top + "px";
-        top += incrementTop;
+        if (elmnt == document.querySelector("#desktop")) {
+            top += incrementTop;
+        } else {
+            left += incrementLeft;
+        }
     }
 }
 
@@ -685,12 +738,14 @@ function createShortcut(icon, text, action, place) {
         action();
     };
     if (place) {
-        place.append(shortcut);
+        place.querySelector(".expcontent").append(shortcut);
     } 
     else {
         document.querySelector("#desktop").append(shortcut);
     }
-    makeShortcutDraggable(shortcut);
+    if (shortcut.parentNode == document.querySelector("#desktop")) {
+        makeShortcutDraggable(shortcut);
+    }
 }
 
 function makeShortcutDraggable(shortcut) {
@@ -711,8 +766,8 @@ function makeShortcutDraggable(shortcut) {
             selectedshortcuts = [shortcut];
         }
         selectedshortcuts.forEach((selectedshortcut) => {
-            selectedshortcut.style.top = selectedshortcut.getBoundingClientRect().top + "px";
-            selectedshortcut.style.left = selectedshortcut.getBoundingClientRect().left + "px";
+            selectedshortcut.style.top = selectedshortcut.getBoundingClientRect().top - selectedshortcut.parentNode.getBoundingClientRect().top + "px";
+            selectedshortcut.style.left = selectedshortcut.getBoundingClientRect().left - selectedshortcut.parentNode.getBoundingClientRect().left; + "px";
             selectedshortcut.style.position = "absolute";
             selectedshortcut.classList.add("selected");
             let preview = createPreviewElement(selectedshortcut);
@@ -836,12 +891,15 @@ function createExplorer(directory) {
     let explorer = document.createElement("div");
     explorer.classList.add("window");
     explorer.classList.add("program");
+    explorer.id = "explorer";
     explorer.tabIndex = 0;
+    if (!directory) directory = files;
+    let icon = directory.icon || "res/folder";
     explorer.innerHTML = `
     <div class="header">
         <div>
-            <img src=""></img>
-            <span>${currentLang[77]}</span>
+            <img src="${icon + "16.png"}"></img>
+            <span>${directory.name}</span>
         </div>
         <div class="windowbuttons">
             <div>
@@ -865,6 +923,22 @@ function createExplorer(directory) {
     document.querySelector("#windows").appendChild(explorer);
     enableDraggable(explorer);
     enableResizable(explorer);
+    directory.children.forEach((child) => {
+        let type = child.type;
+        let action = child.action;
+        let icon = child.icon;
+        let name = child.name;
+        let content = child.content;
+        if (type == "folder") {
+            action = function(){createExplorer(child)};
+            icon = icon ? icon + "32.png" : "res/folder32.png";
+        }
+        if (type == "file") {
+            icon = icon ? icon + "32.png" : "https://static.wikia.nocookie.net/22e3163e-d576-4aa2-b0d6-684aac39d677/scale-to-width/755";
+        }
+        createShortcut(icon, name, action, explorer);
+    });
+    sortShortcuts(explorer.querySelector(".expcontent"));
     windowDisplays();
     setTimeout(function () {
         highlightDisplay(
