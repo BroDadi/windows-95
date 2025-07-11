@@ -1,183 +1,37 @@
 let langs = {
     en: [
-        "Start",
-        "Programs",
-        "Documents",
-        "Settings",
-        "Search",
-        "Help",
-        "Run...",
-        "Suspend",
-        "Shut Down...",
-        "Notepad",
-        "File",
-        "Edit",
-        "Search",
-        "Help",
-        "Shut Down Windows",
-        "OK",
-        "Cancel",
-        "It is now safe to turn off your computer",
-        "Yes",
-        "No",
-        "Are you sure you want to:",
-        "Shut down the computer?",
-        "Restart the computer?",
-        "Restart the computer in MS-DOS mode?",
-        "Close all programs and log on as a different user?",
-        "Accessories",
-        "Autorun",
-        "Explorer",
-        "MS-DOS Prompt",
-        "Control panel",
-        "Printers",
-        "Taskbar",
-        "(None)",
-        "Apply",
-        "Display Properties",
-        "Background",
-        "Screen Saver",
-        "Appearance",
-        "Settings",
-        "Browse",
-        "Browse...",
-        "Pattern",
-        "Wallpaper",
-        "Black Thatch",
-        "Blue Rivets",
-        "Bubbles",
-        "Carved Stone",
-        "Circles",
-        "Clouds",
-        "Forest",
-        "Gold Weave",
-        "Houndstooth",
-        "Metal Links",
-        "Pinstripe",
-        "Red Blocks",
-        "Sandstone",
-        "Setup",
-        "Stitches",
-        "Straw Mat",
-        "Tiles",
-        "Triangles",
-        "Waves",
-        "Display:",
-        "Tile",
-        "Center",
-        "Arrange Icons",
-        "Line up Icons",
-        "Paste",
-        "Paste Shortcut",
-        "New",
-        "Properties",
-        "Please wait while your computer shuts down.",
-        "Games",
-        "Internet Tools",
-        "System Tools",
-        "Multimedia",
-		"Enter a URL-address:",
-        "My Computer",
-        "Paint",
-        "WordPad",
-        "Calculator",
-        "Character Map",
-        "Dial-Up Networking",
-        "Network Cable Connection",
-        "HyperTerminal",
-        "Imaging",
-        "Online Registration",
-        "Phone Dialer",
+        "Start", "Programs", "Documents", "Settings", "Search", "Help", "Run...", "Suspend", "Shut Down...",
+        "Notepad", "File", "Edit", "Search", "Help",
+        "Shut Down Windows", "OK", "Cancel", "It is now safe to turn off your computer",
+        "Yes", "No",
+        "Are you sure you want to:", "Shut down the computer?", "Restart the computer?", "Restart the computer in MS-DOS mode?", "Close all programs and log on as a different user?",
+        "Accessories", "Autorun", "Explorer", "MS-DOS Prompt", "Control panel", "Printers", "Taskbar", "(None)",
+        "Apply", "Display Properties", "Background",
+        "Screen Saver", "Appearance", "Settings", "Browse", "Browse...",
+        "Pattern", "Wallpaper", "Black Thatch", "Blue Rivets", "Bubbles", "Carved Stone", "Circles", "Clouds", "Forest", "Gold Weave", "Houndstooth", "Metal Links", "Pinstripe", "Red Blocks", "Sandstone", "Setup", "Stitches", "Straw Mat", "Tiles", "Triangles", "Waves",
+        "Display:", "Tile", "Center",
+        "Arrange Icons", "Line up Icons", "Paste", "Paste Shortcut", "New", "Properties", "Please wait while your computer shuts down.",
+        "Games", "Internet Tools", "System Tools", "Multimedia",
+        "Enter a URL-address:",
+        "My Computer", "Paint", "WordPad", "Calculator", "Character Map", "Dial-Up Networking", "Network Cable Connection", "HyperTerminal", "Imaging", "Online Registration", "Phone Dialer",
+        "[?] is not accessible.\n\nThe device is not ready.", "Retry",
     ],
     ru: [
-        "Пуск",
-        "Программы",
-        "Документы",
-        "Настройка",
-        "Поиск",
-        "Справка",
-        "Выполнить",
-        "Остановка",
-        "Завершение работы...",
-        "Блокнот",
-        "Файл",
-        "Правка",
-        "Поиск",
-        "?",
-        "Завершение работы с Windows",
-        "ОК",
-        "Отмена",
-        "Теперь питание компьютера можно отключить",
-        "Да",
-        "Нет",
-        "Сейчас следует:",
-        "Выключить компьютер",
-        "Перезагрузить компьютер",
-        "Перезагрузить компьютер в режиме эмуляции MS-DOS",
-        "Войти в систему под другим именем",
-        "Стандартные",
-        "Автозагрузка",
-        "Проводник",
-        "Сеанс MS-DOS",
-        "Панель управления",
-        "Принтеры",
-        "Панель задач",
-        "(Нет)",
-        "Применить",
-        "Свойства: Display",
-        "Фон",
-        "Заставка",
-        "Оформление",
-        "Параметры",
-        "Обзор",
-        "Обзор...",
-        "Фоновый узор",
-        "Рисунок",
-        "Паркет",
-        "Заклёпки",
-        "Пузырьки",
-        "Орнамент",
-        "Колечки",
-        "Облака",
-        "Лес",
-        "Чешуя",
-        "Клыки",
-        "Кольчуга",
-        "Полоски",
-        "Красные блоки",
-        "Наждак",
-        "Установка",
-        "Стежки",
-        "Циновка",
-        "Плитка",
-        "Треугольники",
-        "Волны",
-        "Поместить:",
-        "Размножить",
-        "В центре",
-        "Упорядочить значки",
-        "Выстроить значки",
-        "Вставить",
-        "Вставить ярлык",
-        "Создать",
-        "Свойства",
+        "Пуск", "Программы", "Документы", "Настройка", "Поиск", "Справка", "Выполнить", "Остановка", "Завершение работы...",
+        "Блокнот", "Файл", "Правка", "Поиск", "?",
+        "Завершение работы с Windows", "ОК", "Отмена", "Теперь питание компьютера можно отключить",
+        "Да", "Нет",
+        "Сейчас следует:", "Выключить компьютер", "Перезагрузить компьютер", "Перезагрузить компьютер в режиме эмуляции MS-DOS",
+        "Войти в систему под другим именем", "Стандартные", "Автозагрузка", "Проводник", "Сеанс MS-DOS", "Панель управления", "Принтеры", "Панель задач", "(Нет)",
+        "Применить", "Свойства: Display", "Фон", "Заставка", "Оформление", "Параметры", "Обзор", "Обзор...",
+        "Фоновый узор", "Рисунок", "Паркет", "Заклёпки", "Пузырьки", "Орнамент", "Колечки", "Облака", "Лес", "Чешуя", "Клыки", "Кольчуга", "Полоски", "Красные блоки", "Наждак", "Установка", "Стежки", "Циновка", "Плитка", "Треугольники", "Волны",
+        "Поместить:", "Размножить", "В центре",
+        "Упорядочить значки", "Выстроить значки", "Вставить", "Вставить ярлык", "Создать", "Свойства",
         "Подождите, идёт подготовка к выключению компьютера.",
-        "Игры",
-        "Средства Internet",
-        "Служебные программы",
-        "Мультимедиа",
+        "Игры", "Средства Internet", "Служебные программы", "Мультимедиа",
 		"Введите URL-адрес:",
-        "Мой компьютер",
-        "Графический редактор Paint",
-        "Текстовый редактор WordPad",
-        "Калькулятор",
-        "Таблица символов",
-        "Удалённый доступ к сети",
-        "Прямое соединение",
-        "Программа связи",
-        "Просмотр рисунков",
-        "Интерактивная регистрация",
-        "Номеронабиратель",
+        "Мой компьютер", "Графический редактор Paint", "Текстовый редактор WordPad", "Калькулятор", "Таблица символов", "Удалённый доступ к сети", "Прямое соединение", "Программа связи", "Просмотр рисунков", "Интерактивная регистрация", "Номеронабиратель",
+        "Нет доступа к '[?]'.\n\nУстройство не готово.", "Повтор",
     ],
 };
 
@@ -232,6 +86,11 @@ let files = {
                                     action: function() { createPaint(); },
                                 },
                             ]
+                        },
+                        {
+                            type: "folder",
+                            name: "Desktop",
+                            children: [],
                         }
                     ]
                 },
@@ -245,6 +104,53 @@ let files = {
         },
     ],
 };
+
+function syncDesktopWithFolder() {
+    let desktopElement = document.querySelector("#desktop");
+    let desktopFolder = findFolderByPath(files, ["C:", "WINDOWS", "Desktop"]);
+
+    desktopElement.innerHTML = "";
+
+    desktopFolder.children.forEach(child => {
+        createShortcut(child.icon + "32.png", child.name, child.action, null);
+    });
+}
+
+function syncFolderWithDesktop() {
+    let desktopElement = document.querySelector("#desktop");
+    let desktopFolder = findFolderByPath(files, ["C:", "WINDOWS", "Desktop"]);
+
+    desktopFolder.children = [];
+
+    Array.from(desktopElement.children).forEach(shortcut => {
+        let name = shortcut.querySelector("span").textContent;
+        let icon = shortcut.querySelector("img").src;
+        let action = shortcut.ondblclick;
+
+        desktopFolder.children.push({
+            type: "file",
+            name: name,
+            icon: icon.replace("32.png", ""),
+            action: action,
+        });
+    });
+}
+
+function findFolderByPath(root, path) {
+    let current = root;
+    for (let part of path) {
+        if (current.type !== "folder" && current.type !== "rootfolder") {
+            console.error(`Expected folder but found ${current.type} at ${part}`);
+            return null;
+        }
+        current = current.children.find(child => child.name === part);
+        if (!current) {
+            console.error(`Folder not found: ${part}`);
+            return null;
+        }
+    }
+    return current;
+}
 
 function indexOfChild(obj, element) {
     for (let i = 0; i < obj.length; i++) {
@@ -507,7 +413,59 @@ function disableContextMenu() {
     document.querySelector("#contextmenu")?.remove();
 }
 
-function createMessageBox(title, desc, buttonarray, icon) {
+function createWindow(title, icon, html, draggable, resizable, additionalClasses, menu, id, minimizable, maximizable)
+{
+    let window = document.createElement("div");
+    window.classList.add("window");
+    if (additionalClasses) window.classList.add(...additionalClasses);
+    if (id) window.id = id;
+    window.tabIndex = 0;
+    let buttons;
+    if (minimizable) buttons += '<button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>';
+    if (maximizable) buttons += '<button class="maximize" onclick="maximize(this.parentNode.parentNode.parentNode.parentNode)"></button>';
+    
+    window.innerHTML = `
+        <div class="header">
+            <div>
+                <img src="${icon}"></img>
+                <span>${title}</span>
+            </div>
+            <div class="windowbuttons">
+                <div>
+                    ${buttons}
+                </div>
+                <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
+            </div>
+        </div>
+    `;
+
+    if (menu)
+    {
+        let menuBar = document.createElement("div");
+        menuBar.classList.add("menu-bar");
+        menuBar.innerHTML = "<ul></ul>";
+        window.appendChild(menuBar);
+        for (let i = 0; i < menu.length; i++)
+        {
+            let menuItem = document.createElement("li");
+            menuItem.innerText = menu[i];
+            window.querySelector(".menu-bar > ul").appendChild(menuItem);
+        }
+    }
+
+    let contents = document.createElement("div");
+    window.appendChild(contents);
+    contents.outerHTML = html;
+
+    document.querySelector("#windows").append(window);
+    if (draggable) enableDraggable(window);
+    if (resizable) enableResizable(window);
+    bringToTop(window);
+    window.onfocus = function() { bringToTop(window); };
+    return window;
+}
+
+function createMessageBox(title, desc, buttonarray, onclickarray, icon) {
     let msgbox = document.createElement("div");
     msgbox.innerHTML = `
     <div class="header"><span>${title}</span><div class="windowbuttons"><button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button></div></div>
@@ -520,14 +478,15 @@ function createMessageBox(title, desc, buttonarray, icon) {
     for (let i = 0; i < buttonarray.length; i++) {
         let button = document.createElement("button");
         button.innerHTML = buttonarray[i];
+        button.onclick = onclickarray[i] || function() {msgbox.remove()};
         msgbox.children[2].appendChild(button);
     }
     if (icon == null) {
         msgbox.children[1].children[0].remove();
     }
     enableDraggable(msgbox);
-    msgbox.style.left = "calc(50wv - 0.5em)";
-    msgbox.style.top = "calc(50wv - 0.5em)";
+    msgbox.style.left = "calc(50vw - 0.5em)";
+    msgbox.style.top = "calc(50vw - 0.5em)";
     msgbox.style.minWidth = msgbox.clientWidth + "px";
 }
 
@@ -554,9 +513,7 @@ function enableDraggable(elmnt) {
         var preview = createPreviewElement(elmnt);
         document.body.appendChild(preview);
         if (elmnt.parentNode.classList.contains("nodisplay")) return;
-        highlightDisplay(
-            document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
-        );
+        bringToTop(elmnt);
     }
 
     function dragTouchStart(e) {
@@ -572,9 +529,7 @@ function enableDraggable(elmnt) {
         var preview = createPreviewElement(elmnt);
         document.body.appendChild(preview);
         if (elmnt.parentNode.classList.contains("nodisplay")) return;
-        highlightDisplay(
-            document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
-        );
+        bringToTop(elmnt);
     }
 
     function elementDrag(e) {
@@ -650,12 +605,9 @@ function enableResizable(elmnt) {
 
         resizer.addEventListener("mousedown", function (e) {
             e.preventDefault();
-            elmnt.parentNode.appendChild(elmnt);
             window.addEventListener("mousemove", resize);
             window.addEventListener("mouseup", stopResize);
-            highlightDisplay(
-                document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
-            );
+            bringToTop(window);
         });
 
         function resize(e) {
@@ -711,9 +663,7 @@ function enableResizable(elmnt) {
                 elmnt.style.width = preview.clientWidth + "px";
                 elmnt.style.height = preview.clientHeight + "px";
                 preview.remove();
-                highlightDisplay(
-                    document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
-                );
+                highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]);
             }
         }
     }
@@ -737,11 +687,12 @@ function createShortcut(icon, text, action, place) {
     shortcut.ondblclick = function () {
         action();
     };
-    if (place) {
+    if (place && place !== document.querySelector("#desktop")) {
         place.querySelector(".expcontent").append(shortcut);
     } 
     else {
         document.querySelector("#desktop").append(shortcut);
+        syncFolderWithDesktop();
     }
     if (shortcut.parentNode == document.querySelector("#desktop")) {
         makeShortcutDraggable(shortcut);
@@ -773,6 +724,7 @@ function makeShortcutDraggable(shortcut) {
             let preview = createPreviewElement(selectedshortcut);
             document.querySelector("#desktop").appendChild(preview);
         });
+        if (e.buttons != 1) return;
         e.preventDefault();
         pos3 = e.clientX;
         pos4 = e.clientY;
@@ -847,82 +799,16 @@ function deselectShortcuts() {
 }
 
 function createTextEditor() {
-    let editor = document.createElement("div");
-    editor.id = "notepad";
-    editor.classList.add("window");
-    editor.classList.add("program");
-    editor.tabIndex = 0;
-    editor.innerHTML = `
-    <div class="header">
-        <div>
-            <img src="res/notepad16.png"></img>
-            <span>${currentLang[9]}</span>
-        </div>
-        <div class="windowbuttons">
-            <div>
-                <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
-                <button class="maximize" onclick="maximize(this, this.parentNode.parentNode.parentNode.parentNode)"></button>
-            </div>
-            <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
-        </div>
-    </div>
-    <div class="menu-bar">
-        <ul>
-            <li tabindex="0">${currentLang[10]}</li>
-            <li tabindex="0">${currentLang[11]}</li>
-            <li tabindex="0">${currentLang[12]}</li>
-            <li tabindex="0">${currentLang[13]}</li>
-        </ul>
-    </div>
-    <textarea class="editor-content"></textarea>
-    `;
-    document.querySelector("#windows").appendChild(editor);
-    enableDraggable(editor);
-    enableResizable(editor);
-    windowDisplays();
-    setTimeout(function () {
-        highlightDisplay(
-            document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, editor)]
-        );
-    }, 1);
+    html = `<textarea class="editor-content"></textarea>`;
+    let editor = createWindow(currentLang[9], "res/notepad16.png", html, true, true, ["program"], [currentLang[10], currentLang[11], currentLang[12], currentLang[13]], "notepad", true, true);
 }
 
 function createExplorer(directory) {
-    let explorer = document.createElement("div");
-    explorer.classList.add("window");
-    explorer.classList.add("program");
-    explorer.id = "explorer";
-    explorer.tabIndex = 0;
+    let html = `<div class="expcontent"></div>
+    <div class="statusbar"><span>bebebe 123 123 test</span></div>`;
     if (!directory) directory = files;
     let icon = directory.icon || "res/folder";
-    explorer.innerHTML = `
-    <div class="header">
-        <div>
-            <img src="${icon + "16.png"}"></img>
-            <span>${directory.name}</span>
-        </div>
-        <div class="windowbuttons">
-            <div>
-                <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
-                <button class="maximize" onclick="maximize(this, this.parentNode.parentNode.parentNode.parentNode)"></button>
-            </div>
-            <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
-        </div>
-    </div>
-    <div class="menu-bar">
-        <ul>
-            <li tabindex="0">${currentLang[10]}</li>
-            <li tabindex="0">${currentLang[11]}</li>
-            <li tabindex="0">${currentLang[12]}</li>
-            <li tabindex="0">${currentLang[13]}</li>
-        </ul>
-    </div>
-    <div class="expcontent"></div>
-    <div class="statusbar"><span>bebebe 123 123 test</span></div>
-    `;
-    document.querySelector("#windows").appendChild(explorer);
-    enableDraggable(explorer);
-    enableResizable(explorer);
+    let explorer = createWindow(directory.name, icon + "16.png", html, true, true, ["program"], [currentLang[10], currentLang[11], currentLang[12], currentLang[13]], "explorer", true, true);
     directory.children.forEach((child) => {
         let type = child.type;
         let action = child.action;
@@ -934,17 +820,11 @@ function createExplorer(directory) {
             icon = icon ? icon + "32.png" : "res/folder32.png";
         }
         if (type == "file") {
-            icon = icon ? icon + "32.png" : "https://static.wikia.nocookie.net/22e3163e-d576-4aa2-b0d6-684aac39d677/scale-to-width/755";
+            icon = icon ? icon + "32.png" : "https://pbs.twimg.com/media/E9gqeQeWYAUyceT.jpg";
         }
         createShortcut(icon, name, action, explorer);
     });
     sortShortcuts(explorer.querySelector(".expcontent"));
-    windowDisplays();
-    setTimeout(function () {
-        highlightDisplay(
-            document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, explorer)]
-        );
-    }, 1);
 }
 
 function maximize(button, elmnt) {
@@ -1090,20 +970,18 @@ function windowDisplays() {
         button.innerHTML = `${img}<span>${windows[i].children[0].querySelector("span").innerHTML}</span>`;
         displays.append(button);
         button.setAttribute("onclick", "highlightDisplay(this)");
-        Array.from(windows)
-            .concat(Array.from(document.querySelector("#windows.nodisplay")))
-            .forEach((window) => {
-                Array.from(window.children).forEach((child) => {
-                    child.onfocus = function () {
-                        window.querySelector(".header").style.background = "#000080";
-                        window.querySelector(".header span").style.textShadow = "0.5px 0px #fff, 1.5px 0px #fff";
-                    };
-                    child.onblur = function () {
-                        window.querySelector(".header").style.background = "";
-                        window.querySelector(".header span").style.textShadow = "";
-                    };
-                });
+        Array.from(windows).concat(Array.from(document.querySelector("#windows.nodisplay"))).forEach((window) => {
+            Array.from(window.children).forEach((child) => {
+                child.onfocus = function () {
+                    window.querySelector(".header").style.background = "#000080";
+                    window.querySelector(".header span").style.textShadow = "0.5px 0px #fff, 1.5px 0px #fff";
+                };
+                child.onblur = function () {
+                    window.querySelector(".header").style.background = "";
+                    window.querySelector(".header span").style.textShadow = "";
+                };
             });
+        });
     }
 }
 
@@ -1321,7 +1199,10 @@ function shutdown() {
 function bootUp() {
     let bootScreen = document.createElement("div");
     bootScreen.style.background = "url(res/startup.gif)";
-    bootScreen.style.backgroundSize = "100vw 100vh";
+    bootScreen.style.backgroundSize = "contain";
+    bootScreen.style.backgroundColor = "black";
+    bootScreen.style.backgroundRepeat = "no-repeat";
+    bootScreen.style.backgroundPosition = "center";
     bootScreen.style.width = "100vw";
     bootScreen.style.height = "100vh";
     bootScreen.style.zIndex = "999";
@@ -1335,39 +1216,7 @@ function bootUp() {
 }
 
 function createPaint() {
-    let paint = document.createElement("div");
-    paint.classList.add("window");
-    paint.classList.add("program");
-    paint.id = "paint";
-    paint.tabIndex = 0;
-    col1 = "#000000";
-    col2 = "#ffffff";
-    currentTool = "pencil";
-    palette = ["#000000", "#ffffff", "#808080", "#dfdfdf", "#800000", "#ff0000", "#808000", "#ffff00", "#008000", "#00ff00", "#008080", "#00ffff", "#000080", "#0000ff",
-    "#800080", "#ff00ff", "#808040", "#ffff80", "#004040", "#00ff80", "#0080ff", "#80ffff", "#004080", "#8080ff", "#4000ff", "#ff0080", "#804000", "#ff8040"];
-    zoom = 1;
-    paint.innerHTML = `
-    <div class="header">
-        <div>
-            <img src="res/drawing16.png"></img>
-            <span>Untitled - Paint</span>
-        </div>
-        <div class="windowbuttons">
-            <div>
-                <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
-                <button class="maximize" onclick="maximize(this, this.parentNode.parentNode.parentNode.parentNode)"></button>
-            </div>
-            <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
-        </div>
-    </div>
-    <div class="menu-bar">
-        <ul>
-            <li tabindex="0">${currentLang[10]}</li>
-            <li tabindex="0">${currentLang[11]}</li>
-            <li tabindex="0">${currentLang[12]}</li>
-            <li tabindex="0">${currentLang[13]}</li>
-        </ul>
-    </div>
+    let html = `
     <div class="content">
         <div class="sidebar">
             <div class="tools">
@@ -1409,7 +1258,7 @@ function createPaint() {
                 <div class="colordisplay">
                     <div class="color2"></div>
                     <div class="color1"></div>
-                    </div>
+                </div>
                 <div class="colors">
                     <div class="color"></div><div class="color"></div>
                     <div class="color"></div><div class="color"></div>
@@ -1429,12 +1278,15 @@ function createPaint() {
             </div>
         </div>
         <div class="statusbar"></div>
-    </div>
-    `;
-    document.querySelector("#windows").append(paint);
-    enableDraggable(paint);
-    enableResizable(paint);
-    initializeCanvas();
+    </div>`;
+    let paint = createWindow("Untitled - Paint", "res/drawing16.png", html, true, true, ["program"], [currentLang[10], currentLang[11], currentLang[12], currentLang[13]], "paint", true, true);
+    col1 = "#000000";
+    col2 = "#ffffff";
+    currentTool = "pencil";
+    palette = ["#000000", "#ffffff", "#808080", "#dfdfdf", "#800000", "#ff0000", "#808000", "#ffff00", "#008000", "#00ff00", "#008080", "#00ffff", "#000080", "#0000ff",
+    "#800080", "#ff00ff", "#808040", "#ffff80", "#004040", "#00ff80", "#0080ff", "#80ffff", "#004080", "#8080ff", "#4000ff", "#ff0080", "#804000", "#ff8040"];
+    zoom = 1;
+    initializeCanvas(paint.querySelector("#paintCanvas"));
     paint.querySelectorAll(".tools button").forEach(btn => btn.onclick = function() {selectTool(btn.id)});
     paint.querySelectorAll(".color").forEach(color => color.style.background = palette[indexOfChild(color.parentNode.children, color)]);
     paint.querySelectorAll(".color").forEach(color => color.onmousedown = function(e) {
@@ -1450,14 +1302,57 @@ function createPaint() {
     });
 }
 
+function bringToTop(window)
+{
+    let windows = document.querySelector("#windows").children;
+    let highestIndex = 0;
+    for (let i = 0; i < windows.length; i++)
+    {
+        if (windows[i].style.zIndex > highestIndex)
+        {
+            highestIndex = parseInt(windows[i].style.zIndex);
+        }
+    }
+
+    console.log(highestIndex);
+
+    if (highestIndex == 0) {
+        window.style.zIndex = 1;
+        return;
+    }
+
+    if (window.style.zIndex != highestIndex) window.style.zIndex = highestIndex + 1;
+    windowDisplays();
+    setTimeout(function () {highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, window)]);}, 1);
+    balanceZIndexes();
+}
+
+function balanceZIndexes() {
+    const windows = document.querySelector("#windows").children;
+    const zIndexes = [];
+
+    for (let i = 0; i < windows.length; i++) {
+        zIndexes.push(parseInt(windows[i].style.zIndex || 0));
+    }
+
+    const minZ = Math.min(...zIndexes);
+
+    if (minZ > 1) {
+        const offset = minZ - 1;
+        for (let i = 0; i < windows.length; i++) {
+            let currentZ = parseInt(windows[i].style.zIndex || 0);
+            windows[i].style.zIndex = (currentZ - offset).toString();
+        }
+    }
+}
+
 function selectTool(tool) {
     document.querySelectorAll('.tools button').forEach(btn => btn.classList.remove('pressed'));
     document.getElementById(tool).classList.add('pressed');
     currentTool = tool;
 }
 
-function initializeCanvas() {
-    const canvas = document.getElementById('paintCanvas');
+function initializeCanvas(canvas) {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -1519,58 +1414,56 @@ function initializeCanvas() {
     canvas.addEventListener('mouseleave', function() { lastx = 0; lasty = 0; });
 }
 
-function createCalc() {
-    let calc = document.createElement("div");
-    calc.classList.add("window", "program");
-    calc.id = "calc";
-    calc.tabIndex = 0;
-    calc.innerHTML = `
+function createIe() {
+    let ie = document.createElement("div");
+    ie.classList.add("window", "program");
+    ie.id = "ie";
+    ie.tabIndex = 0;
+    ie.innerHTML = `
+    <div>
         <div class="header">
+        <div>
+            <img src="res/ie16.png"></img>
+            <span>Untitled - Paint</span>
+        </div>
+        <div class="windowbuttons">
             <div>
-                <img src="res/calc16.png"></img>
-                <span>${currentLang[80]}</span>
+                <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
+                <button class="maximize" onclick="maximize(this, this.parentNode.parentNode.parentNode.parentNode)"></button>
             </div>
-            <div class="windowbuttons">
-                <div>
-                    <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
-                    <button class="maximize" disabled></button>
-                </div>
-                <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
+            <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
+        </div>
+    </div>
+    `
+}
+
+function createCalc() {
+    let html = `
+    <div class="sep"></div>
+    <div class="content">
+        <input readonly value="0," class="result"></input>
+        <div class="toprow">
+            <input readonly class="mem"></input>
+            <div>
+                <button class="big dkrd">Back</button>
+                <button class="big dkrd">CE</button>
+                <button class="big dkrd">C</button>            
             </div>
         </div>
-        <div class="menu-bar">
-            <ul>
-                <li tabindex="0">${currentLang[11]}</li>
-                <li tabindex="0">${currentLang[12]}</li>
-                <li tabindex="0">${currentLang[13]}</li>
-            </ul>
+        <div class="leftcolumn">
+            <button class="red">MC</button>
+            <button class="red">MR</button>
+            <button class="red">MS</button>
+            <button class="red">M+</button>
         </div>
-        <div class="sep"></div>
-        <div class="content">
-            <input readonly value="0," class="result"></input>
-            <div class="toprow">
-                <input readonly class="mem"></input>
-                <div>
-                    <button class="big dkrd">Back</button>
-                    <button class="big dkrd">CE</button>
-                    <button class="big dkrd">C</button>            
-                </div>
-            </div>
-            <div class="leftcolumn">
-                <button class="red">MC</button>
-                <button class="red">MR</button>
-                <button class="red">MS</button>
-                <button class="red">M+</button>
-            </div>
-            <div class="btns">
-                <button class="blue">7</button><button class="blue">8</button><button class="blue">9</button><button class="red">/</button><button class="dkbl">sqrt</button>
-                <button class="blue">4</button><button class="blue">5</button><button class="blue">6</button><button class="red">*</button><button class="dkbl">%</button>
-                <button class="blue">1</button><button class="blue">2</button><button class="blue">3</button><button class="red">-</button><button class="dkbl">1/x</button>
-                <button class="blue">0</button><button class="blue">+/-</button><button class="blue">,</button><button class="red">+</button><button class="red">=</button>
-            </div>
+        <div class="btns">
+            <button class="blue">7</button><button class="blue">8</button><button class="blue">9</button><button class="red">/</button><button class="dkbl">sqrt</button>
+            <button class="blue">4</button><button class="blue">5</button><button class="blue">6</button><button class="red">*</button><button class="dkbl">%</button>
+            <button class="blue">1</button><button class="blue">2</button><button class="blue">3</button><button class="red">-</button><button class="dkbl">1/x</button>
+            <button class="blue">0</button><button class="blue">+/-</button><button class="blue">,</button><button class="red">+</button><button class="red">=</button>
         </div>
-    `;
-    document.querySelector("#windows").append(calc);
+    </div>`;
+    let calc = createWindow(currentLang[80], "res/calc16.png", html, true, false, ["program"], [currentLang[11], currentLang[12], currentLang[13]], "calc", true, false);
 
     let num1 = "", num2 = "", oper = "", memory = 0, currentNum = 1, gotResult = false;
 
@@ -1704,15 +1597,11 @@ function createCalc() {
             }
         }
     });
-
-    enableDraggable(calc);
 }
 
 function createMsDos() {
-    let dos = document.createElement("div");
-    dos.classList.add("window", "program");
-    dos.id = "msdos";
-    dos.tabIndex = 0;
+    let html = `<div class="console"><textarea class="prompt"></textarea></div>`;
+    let dos = document.createWindow(currentLang[28], "res/msdos.png", html, true, true, ["program"], [], "msdos", true, true);
     dos.innerHTML = `
         <div class="header">
             <div>
@@ -1727,24 +1616,31 @@ function createMsDos() {
                 <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
             </div>
         </div>
-        <div class="console">
-            <pre class="output"></pre>
-            <textarea class="prompt"></textarea>
-        </div>
+        
     `;
-    document.querySelector("#windows").append(dos);
-    enableDraggable(dos);
-    enableResizable(dos);
 
     const textarea = dos.querySelector(".prompt");
-    const output = dos.querySelector(".output");
+    textarea.value = `
+Microsoft<R> Windows 95
+    <C>Microsoft Corporation 1981-1996.
 
-    textarea.addEventListener("keydown", function(event) {
+C:\WINDOWS>`;
+    let savedText = textarea.value;
+    let currentDir = files.children[1].children[0];
+    dos.addEventListener("focus", function() {
+        textarea.focus();
+        textarea.setSelectionRange(textarea.value.length,textarea.value.length);
+    });
+    dos.addEventListener("keydown", function(event) {
+        if (event.key == "Backspace") {
+            event.preventDefault();
+            return;
+        }
         if (event.key === "Enter") {
             event.preventDefault();
             const command = textarea.value.trim();
-            executeCommand(command, output);
-            textarea.value = '';
+            executeCommand(command, textarea);
+            textarea.value += '\nC:\\WINDOWS>';
         }
     });
 }
@@ -1896,16 +1792,16 @@ document.addEventListener("DOMContentLoaded", function () {
         contextMenu.style.left = e.clientX + "px";
         contextMenu.style.top = e.clientY + "px";
         contextMenu.innerHTML = `
-				<button id="scsort" class="dropdown">${currentLang[65]}</button>
-				<button>${currentLang[66]}</button>
-				<div class="sep"></div>
-				<button disabled>${currentLang[67]}</button>
-				<button disabled>${currentLang[68]}</button>
-				<div class="sep"></div>
-				<button id="create" class="dropdown">${currentLang[69]}</button>
-				<div class="sep"></div>
-				<button onclick="createProperties();">${currentLang[70]}</button>
-				`;
+            <button id="scsort" class="dropdown">${currentLang[65]}</button>
+            <button>${currentLang[66]}</button>
+            <div class="sep"></div>
+            <button disabled>${currentLang[67]}</button>
+            <button disabled>${currentLang[68]}</button>
+            <div class="sep"></div>
+            <button id="create" class="dropdown">${currentLang[69]}</button>
+            <div class="sep"></div>
+            <button onclick="createProperties();">${currentLang[70]}</button>
+        `;
         for (let i = 0; i < contextMenu.querySelectorAll("button").length; i++) {
             let element = contextMenu.querySelectorAll("button")[i];
             if (element.classList.contains("dropdown")) {
@@ -2005,4 +1901,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector("#start span").innerText = currentLang[0];
     bootUp();
+
+    createShortcut("res/mycomputer32.png", currentLang[77], createExplorer);
+
+    let desktopObserver = new MutationObserver(syncFolderWithDesktop);
+    desktopObserver.observe(document.querySelector("#desktop"), { childList: true });
+
+    let desktopFolderObserver = new MutationObserver(syncDesktopWithFolder);
+    desktopFolderObserver.observe(document.querySelector("#windows"), { childList: true, subtree: true });
 });

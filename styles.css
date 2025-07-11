@@ -394,8 +394,8 @@ span {
         drop-shadow(0.1px 0 0 #000080);
 }
 .shortcut.selected span {
-    background: #000080;
-    color: #fff;
+    background: #000080!important;
+    color: #fff!important;
 }
 .shortcut.selected span::before {
     content: "";
@@ -476,8 +476,6 @@ span {
     min-width: 180px;
     min-height: 77px;
     padding: 4px;
-    width: calc(75vw);
-    height: calc(75vh);
     top: 7vw;
     left: 7vw;
 }
@@ -590,6 +588,8 @@ input:not([type="radio"]) {
                 inset -2px -2px 0px 0px #DFDFDF, 
                 inset 2px 2px 0px 0px #808080;
     font-family: var(--font);
+    font-size: 11px;
+    height: 20px;
 }
 input:not([type="radio"]):focus {
     outline: none;
@@ -1026,7 +1026,7 @@ button:hover .dropdown-content {
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        .prompt, .output {
+        .prompt {
             background-color: #000;
             color: #c0c0c0;
             font-family: "IBM VGA 8x14";
@@ -1036,14 +1036,11 @@ button:hover .dropdown-content {
             padding: 0 2px;
             margin: 0;
             width: 100%;
-        }
-        .prompt {
             resize: none;
-        }
-        .output {
             flex-grow: 1;
             overflow-y: auto;
             white-space: pre-wrap;
+            pointer-events: none;
         }
     }
 }
