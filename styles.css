@@ -476,8 +476,8 @@ span {
     min-width: 180px;
     min-height: 77px;
     padding: 4px;
-    top: 7vw;
-    left: 7vw;
+    top: 50px;
+    left: 50px;
 }
 .window.program.maximized {
     top: 0px !important;

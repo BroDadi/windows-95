@@ -415,16 +415,16 @@ function disableContextMenu() {
 
 function createWindow(title, icon, html, draggable, resizable, additionalClasses, menu, id, minimizable, maximizable)
 {
-    let window = document.createElement("div");
-    window.classList.add("window");
-    if (additionalClasses) window.classList.add(...additionalClasses);
-    if (id) window.id = id;
-    window.tabIndex = 0;
-    let buttons;
+    let wndw = document.createElement("div");
+    wndw.classList.add("window");
+    if (additionalClasses) wndw.classList.add(...additionalClasses);
+    if (id) wndw.id = id;
+    wndw.tabIndex = 0;
+    let buttons = "";
     if (minimizable) buttons += '<button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>';
     if (maximizable) buttons += '<button class="maximize" onclick="maximize(this.parentNode.parentNode.parentNode.parentNode)"></button>';
     
-    window.innerHTML = `
+    wndw.innerHTML = `
         <div class="header">
             <div>
                 <img src="${icon}"></img>
@@ -444,25 +444,27 @@ function createWindow(title, icon, html, draggable, resizable, additionalClasses
         let menuBar = document.createElement("div");
         menuBar.classList.add("menu-bar");
         menuBar.innerHTML = "<ul></ul>";
-        window.appendChild(menuBar);
+        wndw.appendChild(menuBar);
         for (let i = 0; i < menu.length; i++)
         {
             let menuItem = document.createElement("li");
             menuItem.innerText = menu[i];
-            window.querySelector(".menu-bar > ul").appendChild(menuItem);
+            wndw.querySelector(".menu-bar > ul").appendChild(menuItem);
         }
     }
 
     let contents = document.createElement("div");
-    window.appendChild(contents);
+    wndw.appendChild(contents);
     contents.outerHTML = html;
 
-    document.querySelector("#windows").append(window);
-    if (draggable) enableDraggable(window);
-    if (resizable) enableResizable(window);
-    bringToTop(window);
-    window.onfocus = function() { bringToTop(window); };
-    return window;
+    document.querySelector("#windows").append(wndw);
+    if (draggable) enableDraggable(wndw);
+    if (resizable) enableResizable(wndw);
+    bringToTop(wndw);
+    wndw.onfocus = function() { bringToTop(wndw); };
+    wndw.style.width = window.innerWidth * 0.75 + "px";
+    wndw.style.height = window.innerHeight * 0.75 + "px";
+    return wndw;
 }
 
 function createMessageBox(title, desc, buttonarray, onclickarray, icon) {
