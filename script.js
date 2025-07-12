@@ -15,15 +15,17 @@ let langs = {
         "Enter a URL-address:",
         "My Computer", "Paint", "WordPad", "Calculator", "Character Map", "Dial-Up Networking", "Network Cable Connection", "HyperTerminal", "Imaging", "Online Registration", "Phone Dialer",
         "[?] is not accessible.\n\nThe device is not ready.", "Retry",
+        "Start Menu", "Desktop"
     ],
     ru: [
         "Пуск", "Программы", "Документы", "Настройка", "Поиск", "Справка", "Выполнить", "Остановка", "Завершение работы...",
         "Блокнот", "Файл", "Правка", "Поиск", "?",
         "Завершение работы с Windows", "ОК", "Отмена", "Теперь питание компьютера можно отключить",
         "Да", "Нет",
-        "Сейчас следует:", "Выключить компьютер", "Перезагрузить компьютер", "Перезагрузить компьютер в режиме эмуляции MS-DOS",
-        "Войти в систему под другим именем", "Стандартные", "Автозагрузка", "Проводник", "Сеанс MS-DOS", "Панель управления", "Принтеры", "Панель задач", "(Нет)",
-        "Применить", "Свойства: Display", "Фон", "Заставка", "Оформление", "Параметры", "Обзор", "Обзор...",
+        "Сейчас следует:", "Выключить компьютер", "Перезагрузить компьютер", "Перезагрузить компьютер в режиме эмуляции MS-DOS", "Войти в систему под другим именем",
+        "Стандартные", "Автозагрузка", "Проводник", "Сеанс MS-DOS", "Панель управления", "Принтеры", "Панель задач", "(Нет)",
+        "Применить", "Свойства: Display", "Фон",
+        "Заставка", "Оформление", "Параметры", "Обзор", "Обзор...",
         "Фоновый узор", "Рисунок", "Паркет", "Заклёпки", "Пузырьки", "Орнамент", "Колечки", "Облака", "Лес", "Чешуя", "Клыки", "Кольчуга", "Полоски", "Красные блоки", "Наждак", "Установка", "Стежки", "Циновка", "Плитка", "Треугольники", "Волны",
         "Поместить:", "Размножить", "В центре",
         "Упорядочить значки", "Выстроить значки", "Вставить", "Вставить ярлык", "Создать", "Свойства",
@@ -32,6 +34,7 @@ let langs = {
 		"Введите URL-адрес:",
         "Мой компьютер", "Графический редактор Paint", "Текстовый редактор WordPad", "Калькулятор", "Таблица символов", "Удалённый доступ к сети", "Прямое соединение", "Программа связи", "Просмотр рисунков", "Интерактивная регистрация", "Номеронабиратель",
         "Нет доступа к '[?]'.\n\nУстройство не готово.", "Повтор",
+        "Главное меню", "Рабочий стол"
     ],
 };
 
@@ -52,7 +55,6 @@ let files = {
             type: "file",
             name: "A:",
             icon: "res/A",
-            action: "",
         },
         {
             type: "folder",
@@ -66,33 +68,130 @@ let files = {
                         {
                             type: "folder",
                             name: "System",
-                            children: [
-                                {
-                                    type: "file",
-                                    name: "notepad",
-                                    icon: "res/notepad",
-                                    action: function() { createTextEditor(); },
-                                },
-                                {
-                                    type: "file",
-                                    name: "calc",
-                                    icon: "res/calc",
-                                    action: function() { createCalc(); },
-                                },
-                                {
-                                    type: "file",
-                                    name: "paint",
-                                    icon: "res/paint",
-                                    action: function() { createPaint(); },
-                                },
-                            ]
+                            children: []
                         },
                         {
                             type: "folder",
-                            name: "Desktop",
+                            name: currentLang[91],
                             children: [],
-                        }
+                        },
+                        {
+                            type: "folder",
+                            name: currentLang[90],
+                            children: 
+                            [
+                                {
+                                    type: "folder",
+                                    name: currentLang[1],
+                                    icon: "res/folderprograms",
+                                    children:
+                                    [
+                                        {
+                                            type: "folder",
+                                            name: "Internet Explorer",
+                                            icon: "res/folderprograms",
+                                            children: []
+                                        },
+                                        {
+                                            type: "folder",
+                                            name: currentLang[25],
+                                            icon: "res/folderprograms",
+                                            children:
+                                            [
+                                                {
+                                                    type: "folder",
+                                                    name: currentLang[72],
+                                                    icon: "res/folderprograms",
+                                                    children: []
+                                                },
+                                                {
+                                                    type: "folder",
+                                                    name: currentLang[73],
+                                                    icon: "res/folderprograms",
+                                                    children: []
+                                                },
+                                                {
+                                                    type: "folder",
+                                                    name: currentLang[74],
+                                                    icon: "res/folderprograms",
+                                                    children: []
+                                                },
+                                                {
+                                                    type: "folder",
+                                                    name: currentLang[75],
+                                                    icon: "res/folderprograms",
+                                                    children: []
+                                                },
+                                                {
+                                                    type: "shortcut",
+                                                    name: currentLang[78],
+                                                    icon: "res/paint",
+                                                    dest: "C:\\WINDOWS\\pbrush"
+                                                },
+                                                {
+                                                    type: "shortcut",
+                                                    name: currentLang[9],
+                                                    icon: "res/notepadapp",
+                                                    dest: "C:\\WINDOWS\\notepad"
+                                                },
+                                                {
+                                                    type: "shortcut",
+                                                    name: currentLang[80],
+                                                    icon: "res/calc",
+                                                    dest: "C:\\WINDOWS\\calc"
+                                                },
+                                            ]
+                                        },
+                                        {
+                                            type: "folder",
+                                            name: currentLang[26],
+                                            icon: "res/folderprograms",
+                                            children: 
+                                            []
+                                        },
+                                        {
+                                            type: "shortcut",
+                                            name: currentLang[28],
+                                            icon: "res/msdos",
+                                            dest: "C:\\WINDOWS\\command"
+                                        }
+                                    ]
+                                }
+                            ],
+                        },
+                        {
+                            type: "file",
+                            name: "command",
+                            ext: "com",
+                            action: function() { createMsDos(); }
+                        },
+                        {
+                            type: "file",
+                            name: "notepad",
+                            ext: "exe",
+                            icon: "res/notepad",
+                            action: function() { createTextEditor(); }
+                        },
+                        {
+                            type: "file",
+                            name: "calc",
+                            ext: "exe",
+                            icon: "res/calc",
+                            action: function() { createCalc(); }
+                        },
+                        {
+                            type: "file",
+                            name: "pbrush",
+                            ext: "exe",
+                            icon: "res/pbrush",
+                            action: function() { createPaint(); }
+                        },
                     ]
+                },
+                {
+                    type: "folder",
+                    name: "Program Files",
+                    children: []
                 },
             ],
         },
@@ -100,14 +199,15 @@ let files = {
             type: "file",
             name: "D:",
             icon: "res/D",
-            action: "",
         },
     ],
 };
 
+let newWindowTop = 50, newWindowLeft = 50;
+
 function syncDesktopWithFolder() {
     let desktopElement = document.querySelector("#desktop");
-    let desktopFolder = findFolderByPath(files, ["C:", "WINDOWS", "Desktop"]);
+    let desktopFolder = findByPath("C:\\WINDOWS\\" + currentLang[91]);
 
     desktopElement.innerHTML = "";
 
@@ -118,7 +218,7 @@ function syncDesktopWithFolder() {
 
 function syncFolderWithDesktop() {
     let desktopElement = document.querySelector("#desktop");
-    let desktopFolder = findFolderByPath(files, ["C:", "WINDOWS", "Desktop"]);
+    let desktopFolder = findByPath("C:\\WINDOWS\\" + currentLang[91]);
 
     desktopFolder.children = [];
 
@@ -136,16 +236,13 @@ function syncFolderWithDesktop() {
     });
 }
 
-function findFolderByPath(root, path) {
-    let current = root;
-    for (let part of path) {
-        if (current.type !== "folder" && current.type !== "rootfolder") {
-            console.error(`Expected folder but found ${current.type} at ${part}`);
-            return null;
-        }
+function findByPath(path) {
+    let current = files;
+    let pathparts = path.split("\\");
+    for (let part of pathparts) {
         current = current.children.find(child => child.name === part);
         if (!current) {
-            console.error(`Folder not found: ${part}`);
+            console.error(`${part} not found`);
             return null;
         }
     }
@@ -334,43 +431,50 @@ function createSubMenu(elmnt) {
     });
     let subMenu = document.createElement("div");
     subMenu.classList.add("submenu");
-    switch (elmnt.id) {
-        case "prog":
-            subMenu.innerHTML = `
-            <button class="dropdown" id="inex"><img src="res/folderprograms16.png"></img>Internet Explorer</button>
-            <button class="dropdown" id="accs"><img src="res/folderprograms16.png"></img>${currentLang[25]}</button>
-            <button class="dropdown" id="atrn"><img src="res/folderprograms16.png"></img>${currentLang[26]}</button>
-            <button><img src="res/mail16.png"></img>Microsoft Exchange</button>
-            <button><img src="res/netmeeting16.png"></img>Microsoft Netmeeting</button>
-            <button><img src="res/explorer16.png"></img>${currentLang[27]}</button>
-            <button onclick="createMsDos(); disableStart();"><img src="res/msdos.png"></img>${currentLang[28]}</button>`;
-            break;
-        case "sets":
-            subMenu.innerHTML = `
-            <button><img src="res/controlpanel16.png"></img>${currentLang[29]}</button>
-            <button><img src="res/printers16.png"></img>${currentLang[30]}</button>
-            <button><img src="res/taskbar.png"></img>${currentLang[31]}</button>`;
-            break;
-        case "inex":
-            subMenu.innerHTML = ``;
-            break;
-        case "accs":
-            subMenu.innerHTML = `
-			<button class="dropdown" id="games"><img src="res/folderprograms16.png"></img>${currentLang[72]}</button>
-			<button class="dropdown" id="tools"><img src="res/folderprograms16.png"></img>${currentLang[73]}</button>
-			<button class="dropdown" id="systm"><img src="res/folderprograms16.png"></img>${currentLang[74]}</button>
-            <button class="dropdown" id="media"><img src="res/folderprograms16.png"></img>${currentLang[75]}</button>
-			<button onclick="createTextEditor(); disableStart();"><img src="res/notepadapp.png"></img>${currentLang[9]}</button>
-			<button onclick="createPaint(); disableStart();"><img src="res/paint16.png"></img>${currentLang[78]}</button>
-			<button onclick="createCalc(); disableStart();"><img src="res/calc16.png"></img>${currentLang[80]}</button>
-            `;
-            break;
-        case "scsort":
-            subMenu.innerHTML = ``;
-            break;
-        default:
-            subMenu.innerHTML = `<button class="disabled">${currentLang[32]}</button>`;
-            break;
+    if (document.querySelector("#prog").contains(elmnt))
+    {
+        let path = "";
+        let current = elmnt;
+        while (document.querySelector("#prog").contains(current))
+        {
+            if (current.classList.contains("dropdown")) path = current.childNodes[1].textContent.trim() + "\\" + path;
+            current = current.parentNode;
+        }
+        path = `C:\\WINDOWS\\${currentLang[90]}\\${path}`.slice(0,-1);
+        let folderChildren = findByPath(path).children;
+        for (let i in folderChildren)
+        {
+            if (folderChildren[i].type == "folder")
+            {
+                let icon = folderChildren[i].icon ? folderChildren[i].icon + "16.png" : "res/folder16.png";
+                let button = document.createElement("button");
+                button.classList.add("dropdown");
+                button.innerHTML = `<img src=${icon}></img>${folderChildren[i].name}`;
+                subMenu.appendChild(button);
+            }
+            else if (folderChildren[i].type == "shortcut") {
+                let icon = folderChildren[i].icon ? folderChildren[i].icon + "16.png" : folderChildren[i].dest.icon + "16.png";
+                let button = document.createElement("button");
+                button.innerHTML = `<img src=${icon}></img>${folderChildren[i].name}`;
+                button.onclick = findByPath(folderChildren[i].dest).action;
+                subMenu.appendChild(button);
+            }
+        }
+        if (folderChildren.length == 0)
+        {
+            subMenu.innerHTML = `<button disabled>${currentLang[32]}</button>`;
+        }
+    }
+    else
+    {
+        switch (elmnt.id) {
+            case "scsort":
+                subMenu.innerHTML = ``;
+                break;
+            default:
+                subMenu.innerHTML = `<button disabled>${currentLang[32]}</button>`;
+                break;
+        }
     }
     elmnt.append(subMenu);
     if (subMenu != document.querySelector("#startoptions")) sortSubMenu(subMenu);
@@ -380,7 +484,8 @@ function createSubMenu(elmnt) {
             element.onmouseover = function () {
                 createSubMenu(element);
             };
-        } else {
+        }
+        else {
             element.onmouseover = function () {
                 removeSubMenus(subMenu);
             };
@@ -413,8 +518,20 @@ function disableContextMenu() {
     document.querySelector("#contextmenu")?.remove();
 }
 
-function createWindow(title, icon, html, draggable, resizable, additionalClasses, menu, id, minimizable, maximizable)
-{
+function createWindow({
+    title = untitled,
+    icon = "",
+    html,
+    draggable = true,
+    resizable = true,
+    additionalClasses = [],
+    menu = [],
+    id = "",
+    minimizable = true,
+    maximizable = true,
+    maximizeOnStart = false
+}) {
+    disableStart();
     let wndw = document.createElement("div");
     wndw.classList.add("window");
     if (additionalClasses) wndw.classList.add(...additionalClasses);
@@ -422,8 +539,21 @@ function createWindow(title, icon, html, draggable, resizable, additionalClasses
     wndw.tabIndex = 0;
     let buttons = "";
     if (minimizable) buttons += '<button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>';
-    if (maximizable) buttons += '<button class="maximize" onclick="maximize(this.parentNode.parentNode.parentNode.parentNode)"></button>';
-    
+    if (maximizable) {
+        buttons += '<button class="maximize" onclick="maximize(this.parentNode.parentNode.parentNode.parentNode)"></button>';
+        wndw.style.width = window.innerWidth * 0.75 + "px";
+        wndw.style.height = window.innerHeight * 0.75 + "px";
+    }
+    if (wndw.style.height + newWindowTop > window.innerHeight || wndw.style.width + newWindowTop > window.innerWidth)
+    {
+        newWindowLeft = 0;
+        newWindowTop = 0;
+    }
+    wndw.style.top = newWindowTop + "px";
+    wndw.style.left = newWindowLeft + "px";
+    newWindowTop += 22;
+    newWindowLeft += 22;
+
     wndw.innerHTML = `
         <div class="header">
             <div>
@@ -458,12 +588,10 @@ function createWindow(title, icon, html, draggable, resizable, additionalClasses
     contents.outerHTML = html;
 
     document.querySelector("#windows").append(wndw);
+    wndw.onfocus = function() { bringToTop(wndw); };
     if (draggable) enableDraggable(wndw);
     if (resizable) enableResizable(wndw);
     bringToTop(wndw);
-    wndw.onfocus = function() { bringToTop(wndw); };
-    wndw.style.width = window.innerWidth * 0.75 + "px";
-    wndw.style.height = window.innerHeight * 0.75 + "px";
     return wndw;
 }
 
@@ -802,7 +930,13 @@ function deselectShortcuts() {
 
 function createTextEditor() {
     html = `<textarea class="editor-content"></textarea>`;
-    let editor = createWindow(currentLang[9], "res/notepad16.png", html, true, true, ["program"], [currentLang[10], currentLang[11], currentLang[12], currentLang[13]], "notepad", true, true);
+    let editor = createWindow({
+        title: currentLang[9],
+        icon: "res/notepad16.png",
+        html: html,
+        additionalClasses: ["program"],
+        menu: [currentLang[10], currentLang[11], currentLang[12], currentLang[13]],
+        id: "notepad"});
 }
 
 function createExplorer(directory) {
@@ -810,19 +944,38 @@ function createExplorer(directory) {
     <div class="statusbar"><span>bebebe 123 123 test</span></div>`;
     if (!directory) directory = files;
     let icon = directory.icon || "res/folder";
-    let explorer = createWindow(directory.name, icon + "16.png", html, true, true, ["program"], [currentLang[10], currentLang[11], currentLang[12], currentLang[13]], "explorer", true, true);
+    let explorer = createWindow({
+        title: directory.name,
+        icon: icon + "16.png",
+        html: html,
+        additionalClasses: ["program"],
+        menu: [currentLang[10], currentLang[11], currentLang[12], currentLang[13]],
+        id: "explorer",});
     directory.children.forEach((child) => {
         let type = child.type;
         let action = child.action;
         let icon = child.icon;
         let name = child.name;
-        let content = child.content;
+        let cont = child.cont;
+        let dest = child.dest;
+        let ext = child.ext;
         if (type == "folder") {
             action = function(){createExplorer(child)};
             icon = icon ? icon + "32.png" : "res/folder32.png";
         }
-        if (type == "file") {
-            icon = icon ? icon + "32.png" : "https://pbs.twimg.com/media/E9gqeQeWYAUyceT.jpg";
+        else if (type == "file") {
+            if (icon) {
+                icon = icon + "32.png";
+            }
+            else {
+                if (ext == "exe") icon = "res/program32.png";
+                else if (ext == "txt") icon = "res/notepad32.png";
+                else icon = "unknown32.png";
+            }
+        }
+        else if (type == "shortcut") {
+            action = findByPath(dest).action;
+            icon = icon ? icon : dest.icon;
         }
         createShortcut(icon, name, action, explorer);
     });
@@ -909,8 +1062,7 @@ function minimize(elmnt) {
     headerClone.style.top = header.getBoundingClientRect().top + "px";
     document.querySelector("body").append(headerClone);
     elmnt.focus();
-    let windowDisplay =
-        document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)];
+    let windowDisplay = document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)];
     setTimeout(function () {
         headerClone.style.top = windowDisplay.getBoundingClientRect().top + "px";
         headerClone.style.left = windowDisplay.getBoundingClientRect().left + "px";
@@ -920,11 +1072,12 @@ function minimize(elmnt) {
         elmnt.classList.add("minimized");
         headerClone.remove();
         startedMinMax = false;
+        windowDisplay.classList.remove("pressed");
     }, 250);
 }
 
 function unminimize(elmnt) {
-    if (!elmnt.classList.contains("minimized")) {
+    if (!elmnt || !elmnt.classList.contains("minimized")) {
         return;
     }
     let header = elmnt.querySelector(".header");
@@ -1281,7 +1434,13 @@ function createPaint() {
         </div>
         <div class="statusbar"></div>
     </div>`;
-    let paint = createWindow("Untitled - Paint", "res/drawing16.png", html, true, true, ["program"], [currentLang[10], currentLang[11], currentLang[12], currentLang[13]], "paint", true, true);
+    let paint = createWindow({
+        title: "Untitled - Paint",
+        icon: "res/drawing16.png",
+        html: html,
+        additionalClasses: ["program"],
+        menu: [currentLang[10], currentLang[11], currentLang[12], currentLang[13]],
+        id: "paint"});
     col1 = "#000000";
     col2 = "#ffffff";
     currentTool = "pencil";
@@ -1416,29 +1575,6 @@ function initializeCanvas(canvas) {
     canvas.addEventListener('mouseleave', function() { lastx = 0; lasty = 0; });
 }
 
-function createIe() {
-    let ie = document.createElement("div");
-    ie.classList.add("window", "program");
-    ie.id = "ie";
-    ie.tabIndex = 0;
-    ie.innerHTML = `
-    <div>
-        <div class="header">
-        <div>
-            <img src="res/ie16.png"></img>
-            <span>Untitled - Paint</span>
-        </div>
-        <div class="windowbuttons">
-            <div>
-                <button class="minimize" onclick="minimize(this.parentNode.parentNode.parentNode.parentNode)"></button>
-                <button class="maximize" onclick="maximize(this, this.parentNode.parentNode.parentNode.parentNode)"></button>
-            </div>
-            <button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button>
-        </div>
-    </div>
-    `
-}
-
 function createCalc() {
     let html = `
     <div class="sep"></div>
@@ -1465,7 +1601,14 @@ function createCalc() {
             <button class="blue">0</button><button class="blue">+/-</button><button class="blue">,</button><button class="red">+</button><button class="red">=</button>
         </div>
     </div>`;
-    let calc = createWindow(currentLang[80], "res/calc16.png", html, true, false, ["program"], [currentLang[11], currentLang[12], currentLang[13]], "calc", true, false);
+    let calc = createWindow({
+        title: currentLang[80],
+        icon: "res/calc16.png",
+        html: html,
+        maximizable: false,
+        additionalClasses: ["program"],
+        menu: [currentLang[11], currentLang[12], currentLang[13]],
+        id: "calc"});
 
     let num1 = "", num2 = "", oper = "", memory = 0, currentNum = 1, gotResult = false;
 
@@ -1603,7 +1746,12 @@ function createCalc() {
 
 function createMsDos() {
     let html = `<div class="console"><textarea class="prompt"></textarea></div>`;
-    let dos = document.createWindow(currentLang[28], "res/msdos.png", html, true, true, ["program"], [], "msdos", true, true);
+    let dos = createWindow({
+        title: currentLang[28],
+        icon: "res/msdos.png", 
+        html: html, 
+        additionalClasses: ["program"],
+        id: "msdos"});
     dos.innerHTML = `
         <div class="header">
             <div>

@@ -476,8 +476,6 @@ span {
     min-width: 180px;
     min-height: 77px;
     padding: 4px;
-    top: 50px;
-    left: 50px;
 }
 .window.program.maximized {
     top: 0px !important;
@@ -770,6 +768,10 @@ select[size] option:checked {
     display: flex;
     align-items: center;
     width: 150px;
+    gap: 2px;
+}
+.windowdisplay.pressed {
+    padding-top: 1px;
 }
 button.pressed:not(#start) {
     box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
