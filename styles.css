@@ -435,7 +435,7 @@ span {
     background-color: #000080;
     color: #fff;
 }
-.editor-content {
+.notepadcontent {
     resize: none;
     overflow: scroll;
     height: calc(100% - 40px);
@@ -448,7 +448,7 @@ span {
     line-height: 16px;
     padding: 0;
 }
-.editor-content:focus {
+.notepadcontent:focus {
     outline: none;
 }
 .expcontent {
@@ -1022,27 +1022,37 @@ button:hover .dropdown-content {
 #msdos {
     .console {
         height: calc(100% - 23px);
-        top: 4px;
+        top: 2px;
+        max-width: 644px;
+        max-height: 304px;
         position: relative;
         background: #000;
-        overflow: hidden;
+        overflow: scroll;
         display: flex;
         flex-direction: column;
-        .prompt {
-            background-color: #000;
-            color: #c0c0c0;
-            font-family: "IBM VGA 8x14";
-            border: none;
-            outline: none;
-            box-sizing: border-box;
-            padding: 0 2px;
-            margin: 0;
-            width: 100%;
-            resize: none;
-            flex-grow: 1;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            pointer-events: none;
+        background-color: #000;
+        color: #c0c0c0;
+        font-family: "IBM VGA 8x14";
+        cursor: default;
+        padding: 1px;
+        .input {
+            display: flex;
+            flex-direction: row;
+            input {
+                background-color: #000;
+                color: #c0c0c0;
+                font-family: "IBM VGA 8x14";
+                font-size: 16px;
+                flex-grow: 1;
+                border: none;
+                outline: none;
+                padding: 0!important;
+                box-shadow: none;
+                resize: none;
+                box-sizing: border-box;
+                margin: 0;
+                overflow-y: auto;
+            }
         }
     }
 }
