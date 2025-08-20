@@ -1,4 +1,5 @@
-function shutdownOverlay() {
+function shutdownOverlay()
+{
     let bg = document.createElement("div");
     bg.id = "shutdown";
     bg.style.zIndex = 10;
@@ -41,8 +42,10 @@ function shutdownOverlay() {
     document.querySelector("body").append(bg);
 }
 
-function shutdownButton(choice) {
-    if (choice == "sd1") {
+function shutdownButton(choice)
+{
+    if (choice == "sd1")
+    {
         shutdown();
     }
 }

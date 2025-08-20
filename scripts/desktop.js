@@ -1,26 +1,31 @@
-function syncDesktopWithFolder() {
+function syncDesktopWithFolder()
+{
     let desktopElement = document.querySelector("#desktop");
     let desktopFolder = findByPath("C:\\WINDOWS\\" + currentLang[91]);
 
     desktopElement.innerHTML = "";
 
-    desktopFolder.children.forEach(child => {
+    desktopFolder.children.forEach(child =>
+    {
         createShortcut(child.icon + "32.png", child.name, child.action, null);
     });
 }
 
-function syncFolderWithDesktop() {
+function syncFolderWithDesktop()
+{
     let desktopElement = document.querySelector("#desktop");
     let desktopFolder = findByPath("C:\\WINDOWS\\" + currentLang[91]);
 
     desktopFolder.children = [];
 
-    Array.from(desktopElement.children).forEach(shortcut => {
+    Array.from(desktopElement.children).forEach(shortcut =>
+    {
         let name = shortcut.querySelector("span").textContent;
         let icon = shortcut.querySelector("img").src;
         let action = shortcut.ondblclick;
 
-        desktopFolder.children.push({
+        desktopFolder.children.push(
+        {
             type: "file",
             name: name,
             icon: icon.replace("32.png", ""),
@@ -29,13 +34,15 @@ function syncFolderWithDesktop() {
     });
 }
 
-function setCustomWall(elmnt) {
+function setCustomWall(elmnt)
+{
     setWallpaper(elmnt.parentNode.parentNode.children[2].value, document.querySelector('#properties input[type="radio"]:checked + label').innerText);
     document.querySelector('#properties').remove();
     elmnt.parentNode.parentNode.remove();
 }
 
-function setWallpaper(name, way, preview) {
+function setWallpaper(name, way, preview)
+{
     let names = {};
     names[currentLang[32]] = "";
     names[currentLang[43]] = "res/wallpapers/10.bmp";
@@ -57,15 +64,19 @@ function setWallpaper(name, way, preview) {
     names[currentLang[59]] = "res/wallpapers/11.bmp";
     names[currentLang[60]] = "res/wallpapers/15.bmp";
     names[currentLang[61]] = "res/wallpapers/0.bmp";
-	if (/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(name)) {
-		names[name] = name;
-	}
+    if (/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(name))
+    {
+        names[name] = name;
+    }
 
     let repeat = way == currentLang[63] ? "repeat" : "center no-repeat";
 
-    if (preview == true) {
+    if (preview == true)
+    {
         document.querySelector(".monitorimg").style.background = `url(${names[name]}) ${repeat}`;
-    } else {
+    }
+    else
+    {
         document.querySelector("#desktop").style.background = `url(${names[name]}) ${repeat}`;
     }
 }

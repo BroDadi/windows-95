@@ -1,4 +1,5 @@
-function createPaint() {
+function createPaint()
+{
     let html = `
     <div class="content">
         <div class="sidebar">
@@ -62,13 +63,15 @@ function createPaint() {
         </div>
         <div class="statusbar"></div>
     </div>`;
-    let paint = createWindow({
+    let paint = createWindow(
+    {
         title: "Untitled - Paint",
         icon: "res/drawing16.png",
         html: html,
         additionalClasses: ["program"],
         menu: [currentLang[10], currentLang[11], currentLang[12], currentLang[13]],
-        id: "paint"});
+        id: "paint"
+    });
     paint.col1 = "#000000";
     paint.col2 = "#ffffff";
     paint.col3 = "";
@@ -77,31 +80,39 @@ function createPaint() {
     paint.brushsize = 3;
     paint.zoom = 1;
     paint.palette = ["#000000", "#ffffff", "#808080", "#dfdfdf", "#800000", "#ff0000", "#808000", "#ffff00", "#008000", "#00ff00", "#008080", "#00ffff", "#000080", "#0000ff",
-    "#800080", "#ff00ff", "#808040", "#ffff80", "#004040", "#00ff80", "#0080ff", "#80ffff", "#004080", "#8080ff", "#4000ff", "#ff0080", "#804000", "#ff8040"];
+        "#800080", "#ff00ff", "#808040", "#ffff80", "#004040", "#00ff80", "#0080ff", "#80ffff", "#004080", "#8080ff", "#4000ff", "#ff0080", "#804000", "#ff8040"
+    ];
     zoom = 1;
     initializeCanvas(paint.querySelector("#paintCanvas"), paint);
-    paint.querySelectorAll(".tools button").forEach(btn => btn.onclick = function() {selectTool(btn.id, paint)});
+    paint.querySelectorAll(".tools button").forEach(btn => btn.onclick = function()
+    {
+        selectTool(btn.id, paint)
+    });
     paint.querySelectorAll(".color").forEach(color => color.style.background = paint.palette[indexOfChild(color.parentNode.children, color)]);
-    paint.querySelectorAll(".color").forEach(color => color.onmousedown = function(e) {
-        console.log(e.buttons)
-        if (e.buttons == 1) {
-            paint.col1 = palette[indexOfChild(color.parentNode.children, color)];
-            paint.querySelector(".color1").style.background = col1;
+    paint.querySelectorAll(".color").forEach(color => color.onmousedown = function(e)
+    {
+        if (e.buttons == 1)
+        {
+            paint.col1 = paint.palette[indexOfChild(color.parentNode.children, color)];
+            paint.querySelector(".color1").style.background = paint.col1;
         }
-        else if (e.buttons == 2) {
-            paint.col2 = palette[indexOfChild(color.parentNode.children, color)];
-            paint.querySelector(".color2").style.background = col2;
+        else if (e.buttons == 2)
+        {
+            paint.col2 = paint.palette[indexOfChild(color.parentNode.children, color)];
+            paint.querySelector(".color2").style.background = paint.col2;
         }
     });
 }
 
-function selectTool(tool, paint) {
+function selectTool(tool, paint)
+{
     paint.querySelectorAll('.tools button').forEach(btn => btn.classList.remove('pressed'));
-    paint.getElementById(tool).classList.add('pressed');
+    paint.querySelector("#" + tool).classList.add('pressed');
     paint.currentTool = tool;
 }
 
-function initializeCanvas(canvas, paint) {
+function initializeCanvas(canvas, paint)
+{
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -111,45 +122,60 @@ function initializeCanvas(canvas, paint) {
     ctx.imageSmoothingEnabled = false;
     let lastx, lasty;
 
-    function startPosition(e) {
+    function startPosition(e)
+    {
         painting = true;
         draw(e);
     }
 
-    function endPosition() {
+    function endPosition()
+    {
         painting = false;
         ctx.beginPath();
         lastx = 0;
         lasty = 0;
     }
 
-    function drawLine(x0, y0, x1, y1, color) {
+    function drawLine(x0, y0, x1, y1, color)
+    {
         const dx = Math.abs(x1 - x0);
         const dy = Math.abs(y1 - y0);
         const sx = (x0 < x1) ? 1 : -1;
         const sy = (y0 < y1) ? 1 : -1;
         let err = dx - dy;
 
-        while (true) {
+        while (true)
+        {
             ctx.fillStyle = color;
             ctx.fillRect(x0, y0, brushsize, brushsize);
             if (x0 === x1 && y0 === y1) break;
             const e2 = 2 * err;
-            if (e2 > -dy) { err -= dy; x0 += sx; }
-            if (e2 < dx) { err += dx; y0 += sy; }
+            if (e2 > -dy)
+            {
+                err -= dy;
+                x0 += sx;
+            }
+            if (e2 < dx)
+            {
+                err += dx;
+                y0 += sy;
+            }
         }
     }
 
-    function draw(e) {
+    function draw(e)
+    {
         if (!painting) return;
         let posx = e.clientX - canvas.getBoundingClientRect().left;
         let posy = e.clientY - canvas.getBoundingClientRect().top;
         let col = e.buttons == 1 ? paint.col1 : 2 ? paint.col2 : "";
-        if (paint.currentTool == "pencil") {
+        if (paint.currentTool == "pencil")
+        {
             ctx.fillStyle = col;
             brushsize = 1;
             ctx.fillRect(posx, posy, brushsize, brushsize);
-            if (lastx && lasty) {
+            if (lastx && lasty)
+            {
                 drawLine(lastx, lasty, posx, posy, col);
             }
             lastx = posx;
@@ -159,6 +185,14 @@ function initializeCanvas(canvas, paint) {
 
     canvas.addEventListener('mousedown', startPosition);
     canvas.addEventListener('mouseup', endPosition);
-    canvas.addEventListener('mousemove', draw, {passive: true, capture: true});
-    canvas.addEventListener('mouseleave', function() { lastx = 0; lasty = 0; });
+    canvas.addEventListener('mousemove', draw,
+    {
+        passive: true,
+        capture: true
+    });
+    canvas.addEventListener('mouseleave', function()
+    {
+        lastx = 0;
+        lasty = 0;
+    });
 }

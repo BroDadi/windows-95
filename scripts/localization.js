@@ -16,7 +16,7 @@ let langs = {
         "My Computer", "Paint", "WordPad", "Calculator", "Character Map", "Dial-Up Networking", "Network Cable Connection", "HyperTerminal", "Imaging", "Online Registration", "Phone Dialer",
         "[?] is not accessible.\n\nThe device is not ready.", "Retry",
         "Start Menu", "Desktop",
-        "Copyright Microsoft Corp", "Invalid directory",  "Bad command or file name", "Required parameter missing",
+        "Copyright Microsoft Corp", "Invalid directory", "Bad command or file name", "Required parameter missing",
     ],
     ru: [
         "Пуск", "Программы", "Документы", "Настройка", "Поиск", "Справка", "Выполнить", "Остановка", "Завершение работы...",
@@ -32,7 +32,7 @@ let langs = {
         "Упорядочить значки", "Выстроить значки", "Вставить", "Вставить ярлык", "Создать", "Свойства",
         "Подождите, идёт подготовка к выключению компьютера.",
         "Игры", "Средства Internet", "Служебные программы", "Мультимедиа",
-		"Введите URL-адрес:",
+        "Введите URL-адрес:",
         "Мой компьютер", "Графический редактор Paint", "Текстовый редактор WordPad", "Калькулятор", "Таблица символов", "Удалённый доступ к сети", "Прямое соединение", "Программа связи", "Просмотр рисунков", "Интерактивная регистрация", "Номеронабиратель",
         "Нет доступа к '[?]'.\n\nУстройство не готово.", "Повтор",
         "Главное меню", "Рабочий стол",

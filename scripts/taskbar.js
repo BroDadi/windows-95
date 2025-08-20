@@ -1,5 +1,7 @@
-function highlightDisplay(display) {
-    document.querySelectorAll(".windowdisplay").forEach((disp) => {
+function highlightDisplay(display)
+{
+    document.querySelectorAll(".windowdisplay").forEach((disp) =>
+    {
         disp.classList.remove("pressed");
     })
     display.classList.add("pressed");
@@ -7,11 +9,13 @@ function highlightDisplay(display) {
     unminimize(document.querySelector("#windows").children[indexOfChild(document.querySelectorAll(".windowdisplay"), display)]);
 }
 
-function windowDisplays() {
+function windowDisplays()
+{
     let windows = document.querySelector("#windows").children;
     let displays = document.querySelector("#windowdisplays");
     displays.replaceChildren();
-    for (let i = 0; i < windows.length; i++) {
+    for (let i = 0; i < windows.length; i++)
+    {
         let button = document.createElement("button");
         button.classList.add("windowdisplay");
         let img = "";
@@ -19,13 +23,17 @@ function windowDisplays() {
         button.innerHTML = `${img}<span>${windows[i].children[0].querySelector("span").innerHTML}</span>`;
         displays.append(button);
         button.setAttribute("onclick", "highlightDisplay(this)");
-        Array.from(windows).concat(Array.from(document.querySelector("#windows.nodisplay"))).forEach((window) => {
-            Array.from(window.children).forEach((child) => {
-                child.onfocus = function () {
+        Array.from(windows).concat(Array.from(document.querySelector("#windows.nodisplay"))).forEach((window) =>
+        {
+            Array.from(window.children).forEach((child) =>
+            {
+                child.onfocus = function()
+                {
                     window.querySelector(".header").style.background = "#000080";
                     window.querySelector(".header span").style.textShadow = "0.5px 0px #fff, 1.5px 0px #fff";
                 };
-                child.onblur = function () {
+                child.onblur = function()
+                {
                     window.querySelector(".header").style.background = "";
                     window.querySelector(".header span").style.textShadow = "";
                 };
@@ -34,13 +42,15 @@ function windowDisplays() {
     }
 }
 
-function updateTime() {
+function updateTime()
+{
     let date = new Date();
     let minutes = date.getMinutes();
     if (minutes.toString().length == 1) minutes = "0" + minutes;
 
     let time = date.getHours() + ":" + minutes;
-    if (currentLang == langs["en"]) {
+    if (currentLang == langs["en"])
+    {
         let ampm;
         let hours = date.getHours() > 12 ? date.getHours() - 12 : date.getHours();
         date.getHours() >= 12 ? (ampm = " PM") : (ampm = " AM");
@@ -49,8 +59,10 @@ function updateTime() {
     document.querySelector("#clock").innerHTML = time;
 }
 
-function enableStart() {
-    if (document.querySelector("#startmenu")) {
+function enableStart()
+{
+    if (document.querySelector("#startmenu"))
+    {
         disableStart();
         return;
     }
@@ -79,21 +91,28 @@ function enableStart() {
     </div>
     `;
     document.querySelector("#startbar").append(start);
-    for (let i = 0; i < start.querySelectorAll("button").length; i++) {
+    for (let i = 0; i < start.querySelectorAll("button").length; i++)
+    {
         let element = start.querySelectorAll("button")[i];
-        if (element.classList.contains("dropdown")) {
-            element.onmouseover = function () {
+        if (element.classList.contains("dropdown"))
+        {
+            element.onmouseover = function()
+            {
                 createSubMenu(element);
             };
-        } else {
-            element.onmouseover = function () {
+        }
+        else
+        {
+            element.onmouseover = function()
+            {
                 removeSubMenus(start);
             };
         }
     }
 }
 
-function disableStart() {
+function disableStart()
+{
     document.querySelector("#start").classList.remove("pressed");
     document.querySelector("#startmenu")?.remove();
 }

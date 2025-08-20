@@ -1,4 +1,5 @@
-function createCalc() {
+function createCalc()
+{
     let html = `
     <div class="sep"></div>
     <div class="content">
@@ -24,28 +25,43 @@ function createCalc() {
             <button class="blue">0</button><button class="blue">+/-</button><button class="blue">,</button><button class="red">+</button><button class="red">=</button>
         </div>
     </div>`;
-    let calc = createWindow({
+    let calc = createWindow(
+    {
         title: currentLang[80],
         icon: "res/calc16.png",
         html: html,
         maximizable: false,
+        resizable: false,
+        maxwidth: 276,
+        maxheight: 272,
         additionalClasses: ["program"],
         menu: [currentLang[11], currentLang[12], currentLang[13]],
-        id: "calc"});
+        id: "calc"
+    });
+    let num1 = "",
+        num2 = "",
+        oper = "",
+        memory = 0,
+        currentNum = 1,
+        gotResult = false;
 
-    let num1 = "", num2 = "", oper = "", memory = 0, currentNum = 1, gotResult = false;
-
-    function updateDisplay(value) {
+    function updateDisplay(value)
+    {
         calc.querySelector(".result").value = value.toString().replace(".", ",");
         if (!calc.querySelector(".result").value.includes(",")) calc.querySelector(".result").value += ",";
     }
 
-    calc.querySelectorAll(".content button").forEach((button) => {
-        button.onclick = function () {
-            let text = button.innerText;
+    calc.querySelectorAll(".content button").forEach((button) =>
+    {
+        let func = function() {};
+        let text = button.innerText;
 
-            if ("1234567890".includes(text) || text === ",") {
-                if (gotResult) {
+        if ("1234567890".includes(text) || text === ",")
+        {
+            func = function()
+            {
+                if (gotResult)
+                {
                     gotResult = false;
                     currentNum = 1;
                     num1 = "";
@@ -54,107 +70,199 @@ function createCalc() {
                     updateDisplay(0);
                 }
 
-                if (currentNum === 1) {
+                if (currentNum === 1)
+                {
                     if (text === "," && num1.includes(",")) return;
                     num1 = (num1 + text).replace(/^0+/, '') || "0";
                     if (num1[0] == ",") num1 = 0 + num1;
                     updateDisplay(num1);
-                } else {
+                }
+                else
+                {
                     if (text === "," && num2.includes(".")) return;
                     num2 = (num2 + text).replace(/^0+/, '') || "0";
                     if (num2[0] == ",") num2 = 0 + num2;
                     updateDisplay(num2);
                 }
-            } else if ("+-/*".includes(text) && num1) {
-                if (gotResult) {
-                    num1 = calc.querySelector(".result").value;
-                    num2 = "";
-                    gotResult = false;
+            }
+        }
+        else if ("+-/*".includes(text))
+        {
+            func = function()
+            {
+                if (num1)
+                {
+                    if (gotResult)
+                    {
+                        num1 = calc.querySelector(".result").value;
+                        num2 = "";
+                        gotResult = false;
+                    }
+                    currentNum = 2;
+                    oper = text;
                 }
-                currentNum = 2;
-                oper = text;
-            } else if (text === "=" && num1 && num2 && oper) {
-                let result;
-                let x = parseFloat(num1.replace(",", "."));
-                let y = parseFloat(num2.replace(",", "."));
-                switch (oper) {
-                    case "+":
-                        result = x + y;
-                        break;
-                    case "-":
-                        result = x - y;
-                        break;
-                    case "*":
-                        result = x * y;
-                        break;
-                    case "/":
-                        result = x / y;
-                        break;
+            }
+        }
+        else if (text === "=")
+        {
+            func = function()
+            {
+                if (num1 && num2 && oper)
+                {
+                    let result;
+                    let x = parseFloat(num1.replace(",", "."));
+                    let y = parseFloat(num2.replace(",", "."));
+                    switch (oper)
+                    {
+                        case "+":
+                            result = x + y;
+                            break;
+                        case "-":
+                            result = x - y;
+                            break;
+                        case "*":
+                            result = x * y;
+                            break;
+                        case "/":
+                            result = x / y;
+                            break;
+                    }
+                    updateDisplay(result);
+                    num1 = result.toString();
+                    gotResult = true;
                 }
-                updateDisplay(result);
-                num1 = result.toString();
-                gotResult = true;
-            } else if (text === "Back" && !gotResult) {
-                if (currentNum === 1 && num1) {
-                    num1 = num1.slice(0, -1);
-                    updateDisplay(num1 || 0);
-                } else if (currentNum === 2 && num2) {
-                    num2 = num2.slice(0, -1);
-                    updateDisplay(num2 || 0);
+            }
+        }
+        else if (text === "Back")
+        {
+            func = function()
+            {
+                if (!gotResult)
+                {
+                    if (currentNum === 1 && num1)
+                    {
+                        num1 = num1.slice(0, -1);
+                        updateDisplay(num1 || 0);
+                    }
+                    else if (currentNum === 2 && num2)
+                    {
+                        num2 = num2.slice(0, -1);
+                        updateDisplay(num2 || 0);
+                    }
                 }
-            } else if (text === "CE") {
-                if (gotResult) {
+            }
+        }
+        else if (text === "CE")
+        {
+            func = function()
+            {
+                if (gotResult)
+                {
                     updateDisplay(0);
-                } else if (currentNum === 1) {
+                }
+                else if (currentNum === 1)
+                {
                     num1 = "";
                     updateDisplay(0);
-                } else if (currentNum === 2) {
+                }
+                else if (currentNum === 2)
+                {
                     num2 = "";
                     updateDisplay(0);
                 }
-            } else if (text === "C") {
+            }
+        }
+        else if (text === "C")
+        {
+            func = function()
+            {
                 gotResult = false;
                 currentNum = 1;
                 num1 = "";
                 num2 = "";
                 oper = "";
                 updateDisplay(0);
-            } else if (text === "MS") {
+            }
+        }
+        else if (text === "MS")
+        {
+            func = function()
+            {
                 memory = parseFloat(calc.querySelector(".result").value.replace(",", "."));
                 calc.querySelector(".mem").value = memory === 0 ? "" : "M";
-            } else if (text === "M+") {
+            }
+        }
+        else if (text === "M+")
+        {
+            func = function()
+            {
                 memory += parseFloat(calc.querySelector(".result").value.replace(",", "."));
                 calc.querySelector(".mem").value = memory === 0 ? "" : "M";
-            } else if (text === "MC") {
+            }
+        }
+        else if (text === "MC")
+        {
+            func = function()
+            {
                 memory = 0;
                 calc.querySelector(".mem").value = "";
-            } else if (text === "MR") {
-                if (gotResult || currentNum === 1) {
+            }
+        }
+        else if (text === "MR")
+        {
+            func = function()
+            {
+                if (gotResult || currentNum === 1)
+                {
                     num1 = memory.toString();
                     updateDisplay(num1);
-                } else if (currentNum === 2) {
+                }
+                else if (currentNum === 2)
+                {
                     num2 = memory.toString();
                     updateDisplay(num2);
                 }
                 gotResult = true;
-            } else if (text === "sqrt") {
-                if (currentNum === 1) {
+            }
+        }
+        else if (text === "sqrt")
+        {
+            func = function()
+            {
+                if (currentNum === 1)
+                {
                     num1 = Math.sqrt(parseFloat(num1.replace(",", "."))).toString();
                     updateDisplay(num1);
-                } else if (currentNum === 2) {
+                }
+                else if (currentNum === 2)
+                {
                     num2 = Math.sqrt(parseFloat(num2.replace(",", "."))).toString();
                     updateDisplay(num2);
                 }
-            } else if (text === "1/x") {
-                if (currentNum === 1) {
+            }
+        }
+        else if (text === "1/x")
+        {
+            func = function()
+            {
+                if (currentNum === 1)
+                {
                     num1 = (1 / parseFloat(num1.replace(",", "."))).toString();
                     updateDisplay(num1);
-                } else if (currentNum === 2) {
+                }
+                else if (currentNum === 2)
+                {
                     num2 = (1 / parseFloat(num2.replace(",", "."))).toString();
                     updateDisplay(num2);
                 }
-            } else if (text === "%") {
-                if (num1 && num2 && oper) {
+            }
+        }
+        else if (text === "%")
+        {
+            func = function()
+            {
+                if (num1 && num2 && oper)
+                {
                     let x = parseFloat(num1.replace(",", "."));
                     let y = parseFloat(num2.replace(",", "."));
                     let result = (x * y) / 100;
@@ -164,5 +272,6 @@ function createCalc() {
                 }
             }
         }
+        button.onclick = func;
     });
 }

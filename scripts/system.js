@@ -1,4 +1,5 @@
-function bootUp() {
+function bootUp()
+{
     let bootScreen = document.createElement("div");
     bootScreen.style.background = "url(res/startup.gif)";
     bootScreen.style.backgroundSize = "contain";
@@ -10,29 +11,37 @@ function bootUp() {
     bootScreen.style.zIndex = "999";
     bootScreen.style.position = "absolute";
     document.querySelector("body").append(bootScreen);
-    setTimeout(function() {
+    setTimeout(function()
+    {
         bootScreen.remove();
         let audio = new Audio("res/audio/The Microsoft Sound.wav");
         audio.play();
     }, 2000);
 }
 
-function shutdown() {
+function shutdown()
+{
     document.querySelector("#windows.nodisplay").replaceChildren();
     document.querySelector("#windows").replaceChildren();
-    for (let i = 0; i < document.querySelector("#desktop").children.length; i++) {
+    for (let i = 0; i < document.querySelector("#desktop").children.length; i++)
+    {
         document.querySelector("#desktop").children[i].remove();
     }
     document.querySelector("#startbar").style.display = "none";
     document.querySelector("#shutdown")?.remove();
+
     let shutdownScreen = document.createElement("div");
     document.body.appendChild(shutdownScreen);
+
     let shutdownText = document.createElement("span");
     shutdownText.id = "shutdowntext";
     document.querySelector("body").append(shutdownText);
+
     let audio = new Audio("res/audio/TADA.wav");
     audio.play();
-    setTimeout(function () {
+
+    setTimeout(function()
+    {
         shutdownScreen.style.position = "absolute";
         shutdownScreen.style.background = "url(res/shutdownbg.png)";
         shutdownScreen.style.backgroundSize = "100vw 100vh";
@@ -42,7 +51,9 @@ function shutdown() {
         shutdownText.zIndex = "1000";
         shutdownText.innerHTML = currentLang[71];
     }, 2000);
-    setTimeout(function () {
+
+    setTimeout(function()
+    {
         shutdownScreen.remove();
         document.querySelector("#desktop").style.display = "none";
         document.querySelector("#bg").style.display = "none";
@@ -52,10 +63,12 @@ function shutdown() {
     }, 5000);
 }
 
-function sortOther(elmnt) {
+function sortOther(elmnt)
+{
     let children = Array.from(elmnt.children);
 
-    children.sort((a, b) => {
+    children.sort((a, b) =>
+    {
         const aText = a.textContent.trim().toLowerCase();
         const bText = b.textContent.trim().toLowerCase();
 
@@ -66,30 +79,38 @@ function sortOther(elmnt) {
 
     elmnt.innerHTML = "";
 
-    children.forEach((child) => {
+    children.forEach((child) =>
+    {
         elmnt.appendChild(child);
     });
 }
 
-function indexOfChild(obj, element) {
-    for (let i = 0; i < obj.length; i++) {
-        if (obj[i] === element) {
+function indexOfChild(obj, element)
+{
+    for (let i = 0; i < obj.length; i++)
+    {
+        if (obj[i] === element)
+        {
             return i;
         }
     }
     return -1;
 }
 
-// i think this needs improvement this is only used in properties and it's kind of a hardcode
-function makeATabSwitch(elmnt) {
+function makeATabSwitch(elmnt)
+{
     let tabs = Array.from(elmnt.children);
-    tabs.forEach((tab) => {
-        tab.addEventListener("click", function () {
-            tabs.forEach((tab) => {
+    tabs.forEach((tab) =>
+    {
+        tab.addEventListener("click", function()
+        {
+            tabs.forEach((tab) =>
+            {
                 tab.classList.remove("selected");
             });
             tab.classList.add("selected");
-            switch (tab.id) {
+            switch (tab.id)
+            {
                 case "ppbg":
                     elmnt.parentNode.querySelector(".tabcontent").innerHTML = `
                     <div class="monitor">
@@ -139,15 +160,19 @@ function makeATabSwitch(elmnt) {
                         </div>
                     </div>
                     `;
-                    elmnt.parentNode.querySelectorAll("select").forEach((select) => {
+                    elmnt.parentNode.querySelectorAll("select").forEach((select) =>
+                    {
                         sortOther(select);
-                        select.addEventListener("change", function () {
+                        select.addEventListener("change", function()
+                        {
                             elmnt.parentNode.parentNode.querySelector(".buttons > button[disabled]")?.removeAttribute("disabled");
                             setWallpaper(select.value, elmnt.parentNode.querySelector("input:checked + label").innerText, true);
                         });
                     });
-                    elmnt.parentNode.querySelectorAll("input + label").forEach((input) => {
-                        input.addEventListener("click", () => {
+                    elmnt.parentNode.querySelectorAll("input + label").forEach((input) =>
+                    {
+                        input.addEventListener("click", () =>
+                        {
                             elmnt.parentNode.parentNode.querySelector(".buttons > button[disabled]")?.removeAttribute("disabled");
                             setWallpaper(elmnt.parentNode.querySelector("#wppick").value, input.innerText, true);
                         });
@@ -158,38 +183,47 @@ function makeATabSwitch(elmnt) {
     });
 }
 
-// all this down below isn't even shortcuts since it's also used for files but i'm too lazy to change this everywhere okay
-function createShortcut(icon, text, action, place) {
+function createShortcut(icon, text, action, place)
+{
     let shortcut = document.createElement("div");
     shortcut.classList.add("shortcut");
     shortcut.innerHTML = `
         <img src="${icon}"></img>
         <span>${text}</span>
     `;
-    shortcut.onclick = function (e) {
-        if (e.ctrlKey || e.metaKey) {
+    shortcut.onclick = function(e)
+    {
+        if (e.ctrlKey || e.metaKey)
+        {
             shortcut.classList.toggle("selected");
-        } else {
+        }
+        else
+        {
             deselectShortcuts();
             shortcut.classList.add("selected");
         }
     };
-    shortcut.ondblclick = function () {
+    shortcut.ondblclick = function()
+    {
         action();
     };
-    if (place && place !== document.querySelector("#desktop")) {
+    if (place && place !== document.querySelector("#desktop"))
+    {
         place.querySelector(".expcontent").append(shortcut);
-    } 
-    else {
+    }
+    else
+    {
         document.querySelector("#desktop").append(shortcut);
         syncFolderWithDesktop();
     }
-    if (shortcut.parentNode == document.querySelector("#desktop")) {
+    if (shortcut.parentNode == document.querySelector("#desktop"))
+    {
         makeShortcutDraggable(shortcut);
     }
 }
 
-function makeShortcutDraggable(shortcut) {
+function makeShortcutDraggable(shortcut)
+{
     var pos1 = 0,
         pos2 = 0,
         pos3 = 0,
@@ -199,14 +233,17 @@ function makeShortcutDraggable(shortcut) {
     shortcut.ontouchstart = dragTouchStart;
     let selectedshortcuts;
 
-    function dragMouseDown(e) {
+    function dragMouseDown(e)
+    {
         selectedshortcuts = document.querySelectorAll(".shortcut.selected");
-        if (!shortcut.classList.contains("selected")) {
+        if (!shortcut.classList.contains("selected"))
+        {
             deselectShortcuts();
             shortcut.classList.add("selected");
             selectedshortcuts = [shortcut];
         }
-        selectedshortcuts.forEach((selectedshortcut) => {
+        selectedshortcuts.forEach((selectedshortcut) =>
+        {
             selectedshortcut.style.top = selectedshortcut.getBoundingClientRect().top - selectedshortcut.parentNode.getBoundingClientRect().top + "px";
             selectedshortcut.style.left = selectedshortcut.getBoundingClientRect().left - selectedshortcut.parentNode.getBoundingClientRect().left; + "px";
             selectedshortcut.style.position = "absolute";
@@ -222,7 +259,8 @@ function makeShortcutDraggable(shortcut) {
         document.onmousemove = elementDrag;
     }
 
-    function dragTouchStart(e) {
+    function dragTouchStart(e)
+    {
         e.preventDefault();
         pos3 = e.touches[0].clientX;
         pos4 = e.touches[0].clientY;
@@ -232,14 +270,18 @@ function makeShortcutDraggable(shortcut) {
         document.body.appendChild(preview);
     }
 
-    function elementDrag(e) {
+    function elementDrag(e)
+    {
         e.preventDefault();
-        if (e.clientX && e.clientY) {
+        if (e.clientX && e.clientY)
+        {
             pos1 = pos3 - e.clientX;
             pos2 = pos4 - e.clientY;
             pos3 = e.clientX;
             pos4 = e.clientY;
-        } else if (e.touches && e.touches[0]) {
+        }
+        else if (e.touches && e.touches[0])
+        {
             pos1 = pos3 - e.touches[0].clientX;
             pos2 = pos4 - e.touches[0].clientY;
             pos3 = e.touches[0].clientX;
@@ -247,25 +289,32 @@ function makeShortcutDraggable(shortcut) {
         }
 
         let previews = document.querySelectorAll(".shortcutpreview");
-        previews.forEach((preview) => {
+        previews.forEach((preview) =>
+        {
             preview.style.left = preview.offsetLeft - pos1 + "px";
             preview.style.top = preview.offsetTop - pos2 + "px";
         });
     }
 
-    function closeDragElement(e) {
-        if (e.touches && e.touches[0]) {
+    function closeDragElement(e)
+    {
+        if (e.touches && e.touches[0])
+        {
             document.ontouchend = null;
             document.ontouchmove = null;
-        } else {
+        }
+        else
+        {
             document.onmouseup = null;
             document.onmousemove = null;
         }
 
         let previews = document.querySelectorAll(".shortcutpreview");
 
-        for (let i = 0; i < previews.length; i++) {
-            if (previews[i]) {
+        for (let i = 0; i < previews.length; i++)
+        {
+            if (previews[i])
+            {
                 selectedshortcuts[i].style.left = previews[i].offsetLeft + "px";
                 selectedshortcuts[i].style.top = previews[i].offsetTop + "px";
                 previews[i].remove();
@@ -273,7 +322,8 @@ function makeShortcutDraggable(shortcut) {
         }
     }
 
-    function createPreviewElement(elmnt) {
+    function createPreviewElement(elmnt)
+    {
         var preview = elmnt.cloneNode(true);
         preview.classList.add("shortcutpreview");
         preview.style.position = "absolute";
@@ -284,20 +334,25 @@ function makeShortcutDraggable(shortcut) {
     }
 }
 
-function deselectShortcuts() {
+function deselectShortcuts()
+{
     document.querySelectorAll(".shortcut").forEach((shortcut) => shortcut.classList.remove("selected"));
 }
 
-function sortShortcuts(elmnt) {
-    if (elmnt == null) {
+function sortShortcuts(elmnt)
+{
+    if (elmnt == null)
+    {
         elmnt = document.querySelector("#desktop");
     }
     let shortcuts = Array.from(elmnt.querySelectorAll(".shortcut"));
-    shortcuts.sort((a, b) => {
+    shortcuts.sort((a, b) =>
+    {
         const aHasClass = a.classList.contains("dropdown");
         const bHasClass = b.classList.contains("dropdown");
 
-        if (aHasClass !== bHasClass) {
+        if (aHasClass !== bHasClass)
+        {
             return aHasClass ? -1 : 1;
         }
 
@@ -310,7 +365,8 @@ function sortShortcuts(elmnt) {
     });
 
     elmnt.innerHTML = "";
-    shortcuts.forEach((shortcut) => {
+    shortcuts.forEach((shortcut) =>
+    {
         elmnt.appendChild(shortcut);
     });
 
@@ -318,25 +374,33 @@ function sortShortcuts(elmnt) {
     let top = elmnt.classList.contains("expcontent") ? 48 : 0;
     let incrementLeft = 99;
     let incrementTop = 75;
-    for (let i = 0; i < elmnt.children.length; i++) {
+    for (let i = 0; i < elmnt.children.length; i++)
+    {
         let shrtct = elmnt.children[i];
-        if (elmnt == document.querySelector("#desktop")) {
-            if (top > elmnt.clientHeight - incrementTop) {
+        if (elmnt == document.querySelector("#desktop"))
+        {
+            if (top > elmnt.clientHeight - incrementTop)
+            {
                 left += incrementLeft;
                 top = 0;
             }
         }
-        else {
-            if (left > elmnt.clientHeight - incrementLeft) {
+        else
+        {
+            if (left > elmnt.clientHeight - incrementLeft)
+            {
                 top += incrementTop;
                 left = 0;
             }
         }
         shrtct.style.left = left + "px";
         shrtct.style.top = top + "px";
-        if (elmnt == document.querySelector("#desktop")) {
+        if (elmnt == document.querySelector("#desktop"))
+        {
             top += incrementTop;
-        } else {
+        }
+        else
+        {
             left += incrementLeft;
         }
     }

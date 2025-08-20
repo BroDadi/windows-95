@@ -2,7 +2,8 @@ let dosCmds = {
     cd: function(args) {}
 };
 
-function createMsDos() {
+function createMsDos()
+{
     let html = `
     <div class="console">
         <div class="output"></div>
@@ -11,16 +12,21 @@ function createMsDos() {
             <input type="text" autocomplete="off"></input>
         </div>
     </div>`;
-    let dos = createWindow({
+    let dos = createWindow(
+    {
         title: currentLang[28],
-        icon: "res/msdos16.png", 
-        html: html, 
+        icon: "res/msdos16.png",
+        html: html,
         additionalClasses: ["program"],
         id: "msdos",
         maxwidth: 652,
         maxheight: 359,
-        maximizable: false});
-    dos.querySelector(".console").onclick = function() {dos.querySelector("input").focus()};
+        maximizable: false
+    });
+    dos.querySelector(".console").onclick = function()
+    {
+        dos.querySelector("input").focus()
+    };
     dos.currentDir = "C:\\WINDOWS";
     let outputText = dos.querySelector(".output");
     outputText.innerText = "\nMicrosoft(R) Windows 95\n       (C) Microsoft Corporation 1981-1996.\n\n";

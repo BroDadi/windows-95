@@ -1,33 +1,10 @@
 let startedMinMax = false;
-let newWindowTop = 50, newWindowLeft = 50;
+let newWindowTop = 50,
+    newWindowLeft = 50;
 
-function createMessageBox(title, desc, buttonarray, onclickarray, icon) {
-    let msgbox = document.createElement("div");
-    msgbox.innerHTML = `
-    <div class="header"><span>${title}</span><div class="windowbuttons"><button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button></div></div>
-    <div class="desc"><img src="${icon}"></img><span>${desc}</span></div>
-    <div class="buttons"></div>
-    `;
-    msgbox.tabIndex = 0;
-    msgbox.classList.add("window");
-    document.querySelector("#windows.nodisplay").appendChild(msgbox);
-    for (let i = 0; i < buttonarray.length; i++) {
-        let button = document.createElement("button");
-        button.innerHTML = buttonarray[i];
-        button.onclick = onclickarray[i] || function() {msgbox.remove()};
-        msgbox.children[2].appendChild(button);
-    }
-    if (icon == null) {
-        msgbox.children[1].children[0].remove();
-    }
-    enableDraggable(msgbox);
-    msgbox.style.left = "calc(50vw - 0.5em)";
-    msgbox.style.top = "calc(50vw - 0.5em)";
-    msgbox.style.minWidth = msgbox.clientWidth + "px";
-}
-
-function enableDraggable(elmnt) {
-    var pos1 = 0,
+function enableDraggable(elmnt)
+{
+    let pos1 = 0,
         pos2 = 0,
         pos3 = 0,
         pos4 = 0;
@@ -35,10 +12,12 @@ function enableDraggable(elmnt) {
     elmnt.children[0].onmousedown = dragMouseDown;
     elmnt.children[0].ontouchstart = dragTouchStart;
 
-    function dragMouseDown(e) {
+    function dragMouseDown(e)
+    {
         elmnt.focus();
         if (elmnt.classList.contains("maximized")) return;
-        if (e.target.tagName === "BUTTON") {
+        if (e.target.tagName === "BUTTON")
+        {
             return;
         }
         e.preventDefault();
@@ -52,8 +31,10 @@ function enableDraggable(elmnt) {
         bringToTop(elmnt);
     }
 
-    function dragTouchStart(e) {
-        if (e.target.tagName === "BUTTON") {
+    function dragTouchStart(e)
+    {
+        if (e.target.tagName === "BUTTON")
+        {
             return;
         }
         elmnt.focus();
@@ -68,15 +49,19 @@ function enableDraggable(elmnt) {
         bringToTop(elmnt);
     }
 
-    function elementDrag(e) {
+    function elementDrag(e)
+    {
         elmnt.focus();
         e.preventDefault();
-        if (e.clientX && e.clientY) {
+        if (e.clientX && e.clientY)
+        {
             pos1 = pos3 - e.clientX;
             pos2 = pos4 - e.clientY;
             pos3 = e.clientX;
             pos4 = e.clientY;
-        } else if (e.touches && e.touches[0]) {
+        }
+        else if (e.touches && e.touches[0])
+        {
             pos1 = pos3 - e.touches[0].clientX;
             pos2 = pos4 - e.touches[0].clientY;
             pos3 = e.touches[0].clientX;
@@ -87,34 +72,36 @@ function enableDraggable(elmnt) {
         preview.style.left = preview.offsetLeft - pos1 + "px";
         preview.style.top = preview.offsetTop - pos2 + "px";
         if (elmnt.parentNode.classList.contains("nodisplay")) return;
-        highlightDisplay(
-            document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
-        );
+        highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]);
     }
 
-    function closeDragElement(e) {
+    function closeDragElement(e)
+    {
         elmnt.focus();
-        if (e.touches && e.touches[0]) {
+        if (e.touches && e.touches[0])
+        {
             document.ontouchend = null;
             document.ontouchmove = null;
-        } else {
+        }
+        else
+        {
             document.onmouseup = null;
             document.onmousemove = null;
         }
 
         var preview = document.querySelector(".windowpreview");
-        if (preview) {
+        if (preview)
+        {
             elmnt.style.left = preview.offsetLeft + "px";
             elmnt.style.top = preview.offsetTop + "px";
             preview.remove();
             if (elmnt.parentNode.classList.contains("nodisplay")) return;
-            highlightDisplay(
-                document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
-            );
+            highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]);
         }
     }
 
-    function createPreviewElement(elmnt) {
+    function createPreviewElement(elmnt)
+    {
         var preview = document.createElement("div");
         preview.classList.add("windowpreview");
         preview.style.width = elmnt.offsetWidth + "px";
@@ -126,7 +113,8 @@ function enableDraggable(elmnt) {
     }
 }
 
-function enableResizable(elmnt, minwidth, minheight, maxwidth, maxheight) {
+function enableResizable(elmnt, minwidth, minheight, maxwidth, maxheight)
+{
     let group = document.createElement("div");
     group.classList.add("resizers");
     let resizerarray = ["nw", "ne", "sw", "se", "n", "s", "w", "e"];
@@ -135,67 +123,89 @@ function enableResizable(elmnt, minwidth, minheight, maxwidth, maxheight) {
     let minHeight = minheight || 77;
     let maxWidth = maxwidth || Infinity;
     let maxHeight = maxheight || Infinity;
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 8; i++)
+    {
         let resizer = document.createElement("div");
         resizer.classList.add("resizer");
         resizer.classList.add(resizerarray[i]);
         group.append(resizer);
 
-        resizer.addEventListener("mousedown", function (e) {
+        resizer.addEventListener("mousedown", function(e)
+        {
             e.preventDefault();
             window.addEventListener("mousemove", resize);
             window.addEventListener("mouseup", stopResize);
             bringToTop(window);
         });
 
-        function resize(e) {
+        function resize(e)
+        {
             let preview;
-            if (!document.querySelector(".windowpreview")) {
+            if (!document.querySelector(".windowpreview"))
+            {
                 preview = document.createElement("div");
                 preview.classList.add("windowpreview");
                 elmnt.append(preview);
-            } else {
+            }
+            else
+            {
                 preview = document.querySelector(".windowpreview");
             }
 
-            if (resizerarray[i].includes("s")) {
+            if (resizerarray[i].includes("s"))
+            {
                 let newHeight = e.clientY - elmnt.getBoundingClientRect().top;
-                if (newHeight >= minHeight && newHeight <= maxHeight) {
+                if (newHeight >= minHeight && newHeight <= maxHeight)
+                {
                     preview.style.height = newHeight + "px";
                 }
-            } else if (resizerarray[i].includes("n")) {
+            }
+            else if (resizerarray[i].includes("n"))
+            {
                 let newTop = elmnt.clientTop - (elmnt.getBoundingClientRect().top - e.clientY);
                 let newHeight = elmnt.getBoundingClientRect().top + elmnt.clientHeight - e.clientY;
-                if (newHeight > minHeight && newHeight < maxHeight) {
+                if (newHeight > minHeight && newHeight < maxHeight)
+                {
                     preview.style.top = newTop + "px";
                     preview.style.height = newHeight + "px";
                 }
-            } else {
+            }
+            else
+            {
                 preview.style.height = elmnt.clientHeight + "px";
             }
 
-            if (resizerarray[i].includes("e")) {
+            if (resizerarray[i].includes("e"))
+            {
                 let newWidth = e.clientX - elmnt.getBoundingClientRect().left;
-                if (newWidth >= minWidth && newWidth <= maxWidth) {
+                if (newWidth >= minWidth && newWidth <= maxWidth)
+                {
                     preview.style.width = newWidth + "px";
                 }
-            } else if (resizerarray[i].includes("w")) {
+            }
+            else if (resizerarray[i].includes("w"))
+            {
                 let newLeft = elmnt.clientLeft - (elmnt.getBoundingClientRect().left - e.clientX);
                 let newWidth = elmnt.getBoundingClientRect().left + elmnt.clientWidth - e.clientX;
-                if (newWidth > minWidth && newWidth < maxWidth) {
+                if (newWidth > minWidth && newWidth < maxWidth)
+                {
                     preview.style.left = newLeft + "px";
                     preview.style.width = newWidth + "px";
                 }
-            } else {
+            }
+            else
+            {
                 preview.style.width = elmnt.clientWidth + "px";
             }
         }
 
-        function stopResize() {
+        function stopResize()
+        {
             window.removeEventListener("mousemove", resize);
             window.removeEventListener("mouseup", stopResize);
             let preview = document.querySelector(".windowpreview");
-            if (preview != null) {
+            if (preview != null)
+            {
                 elmnt.style.left = preview.getBoundingClientRect().left + "px";
                 elmnt.style.top = preview.getBoundingClientRect().top + "px";
                 elmnt.style.width = preview.clientWidth + "px";
@@ -207,7 +217,8 @@ function enableResizable(elmnt, minwidth, minheight, maxwidth, maxheight) {
     }
 }
 
-function maximize(button, elmnt) {
+function maximize(button, elmnt)
+{
     if (startedMinMax) return;
     console.log(startedMinMax)
     startedMinMax = true;
@@ -220,26 +231,27 @@ function maximize(button, elmnt) {
     headerClone.style.top = header.getBoundingClientRect().top + "px";
     document.querySelector("body").append(headerClone);
     highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]);
-    setTimeout(function () {
+    setTimeout(function()
+    {
         headerClone.style.top = "0px";
         headerClone.style.left = "0px";
         headerClone.style.width = "100%";
         headerClone.style.height = header.clientHeight + "px";
     }, 1);
-    setTimeout(function () {
+    setTimeout(function()
+    {
         elmnt.classList.add("maximized");
         button.classList.remove("maximize");
         button.classList.add("restore");
         button.setAttribute("onclick", "restore(this, this.parentNode.parentNode.parentNode.parentNode)");
-        highlightDisplay(
-            document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
-        );
+        highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]);
         headerClone.remove();
         startedMinMax = false;
     }, 250);
 }
 
-function restore(button, elmnt) {
+function restore(button, elmnt)
+{
     if (startedMinMax) return;
     startedMinMax = true;
     let header = elmnt.querySelector(".header");
@@ -256,26 +268,27 @@ function restore(button, elmnt) {
     let width = header.clientWidth + "px";
     elmnt.classList.add("maximized");
     highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]);
-    setTimeout(function () {
+    setTimeout(function()
+    {
         headerClone.style.top = top;
         headerClone.style.left = left;
         headerClone.style.width = width;
         headerClone.style.height = header.clientHeight + "px";
     }, 1);
-    setTimeout(function () {
+    setTimeout(function()
+    {
         elmnt.classList.remove("maximized");
         button.classList.remove("restore");
         button.classList.add("maximize");
         button.setAttribute("onclick", "maximize(this, this.parentNode.parentNode.parentNode.parentNode)");
-        highlightDisplay(
-            document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
-        );
+        highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]);
         headerClone.remove();
         startedMinMax = false;
     }, 250);
 }
 
-function minimize(elmnt) {
+function minimize(elmnt)
+{
     if (startedMinMax) return;
     startedMinMax = true;
     let header = elmnt.querySelector(".header");
@@ -288,12 +301,14 @@ function minimize(elmnt) {
     document.querySelector("body").append(headerClone);
     elmnt.focus();
     let windowDisplay = document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)];
-    setTimeout(function () {
+    setTimeout(function()
+    {
         headerClone.style.top = windowDisplay.getBoundingClientRect().top + "px";
         headerClone.style.left = windowDisplay.getBoundingClientRect().left + "px";
         headerClone.style.width = windowDisplay.clientWidth + "px";
     }, 1);
-    setTimeout(function () {
+    setTimeout(function()
+    {
         elmnt.classList.add("minimized");
         headerClone.remove();
         startedMinMax = false;
@@ -301,8 +316,10 @@ function minimize(elmnt) {
     }, 250);
 }
 
-function unminimize(elmnt) {
-    if (!elmnt || !elmnt.classList.contains("minimized")) {
+function unminimize(elmnt)
+{
+    if (!elmnt || !elmnt.classList.contains("minimized"))
+    {
         return;
     }
     let header = elmnt.querySelector(".header");
@@ -315,21 +332,22 @@ function unminimize(elmnt) {
     headerClone.style.top = windowDisplay.getBoundingClientRect().top + "px";
     headerClone.style.left = windowDisplay.getBoundingClientRect().left + "px";
     document.querySelector("body").append(headerClone);
-    setTimeout(function () {
+    setTimeout(function()
+    {
         headerClone.style.left = header.getBoundingClientRect().left + "px";
         headerClone.style.top = header.getBoundingClientRect().top + "px";
         headerClone.style.width = header.clientWidth + "px";
     }, 1);
-    setTimeout(function () {
+    setTimeout(function()
+    {
         elmnt.classList.remove("minimized");
         headerClone.remove();
-        highlightDisplay(
-            document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]
-        );
+        highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]);
     }, 250);
 }
 
-function createWindow({
+function createWindow(
+{
     title = "Untitled",
     icon = "",
     html,
@@ -346,7 +364,9 @@ function createWindow({
     minheight = null,
     maxwidth = null,
     maxheight = null,
-}) {
+    hasdisplay = true,
+})
+{
     disableStart();
     let wndw = document.createElement("div");
     wndw.classList.add("window");
@@ -355,22 +375,34 @@ function createWindow({
     wndw.tabIndex = 0;
     let buttons = document.createElement("div");
     let close;
-    if (minimizable) {
+    if (minimizable)
+    {
         let min = document.createElement("button");
         min.classList.add("minimize");
-        min.onclick = function() { minimize(wndw); };
+        min.onclick = function()
+        {
+            minimize(wndw);
+        };
         buttons.append(min);
     }
-    if (maximizable) {
+    if (maximizable)
+    {
         let max = document.createElement("button");
         max.classList.add("maximize");
-        max.onclick = function() { maximize(max, wndw); };
+        max.onclick = function()
+        {
+            maximize(max, wndw);
+        };
         buttons.append(max);
     }
-    if (closable) {
+    if (closable)
+    {
         close = document.createElement("button");
         close.classList.add("close");
-        close.onclick = function() { wndw.remove(); };
+        close.onclick = function()
+        {
+            wndw.remove();
+        };
     }
     wndw.style.width = Math.min(window.innerWidth * 0.75, maxwidth ?? Infinity) + "px";
     wndw.style.height = Math.min(window.innerHeight * 0.75, maxheight ?? Infinity) + "px";
@@ -414,8 +446,11 @@ function createWindow({
     wndw.appendChild(contents);
     contents.outerHTML = html;
 
-    document.querySelector("#windows").append(wndw);
-    wndw.onfocus = function() { bringToTop(wndw); };
+    hasdisplay ? document.querySelector("#windows").append(wndw) : document.querySelector("#windows.nodisplay").append(wndw);
+    wndw.onfocus = function()
+    {
+        bringToTop(wndw);
+    };
     if (draggable) enableDraggable(wndw);
     if (resizable) enableResizable(wndw, minwidth, minheight, maxwidth, maxheight);
     bringToTop(wndw);
@@ -435,32 +470,74 @@ function bringToTop(window)
         }
     }
 
-    if (highestIndex == 0) {
+    if (highestIndex == 0)
+    {
         window.style.zIndex = 1;
         return;
     }
 
     if (window.style.zIndex != highestIndex) window.style.zIndex = highestIndex + 1;
     windowDisplays();
-    setTimeout(function () {highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, window)]);}, 1);
+    setTimeout(function()
+    {
+        highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, window)]);
+    }, 1);
     balanceZIndexes();
 }
 
-function balanceZIndexes() {
+function balanceZIndexes()
+{
     const windows = document.querySelector("#windows").children;
     const zIndexes = [];
 
-    for (let i = 0; i < windows.length; i++) {
+    for (let i = 0; i < windows.length; i++)
+    {
         zIndexes.push(parseInt(windows[i].style.zIndex || 0));
     }
 
     const minZ = Math.min(...zIndexes);
 
-    if (minZ > 1) {
+    if (minZ > 1)
+    {
         const offset = minZ - 1;
-        for (let i = 0; i < windows.length; i++) {
+        for (let i = 0; i < windows.length; i++)
+        {
             let currentZ = parseInt(windows[i].style.zIndex || 0);
             windows[i].style.zIndex = (currentZ - offset).toString();
         }
     }
+}
+
+function createMessageBox(title, desc, buttonarray, onclickarray, icon)
+{
+    let html = `
+    <div class="desc"><img src="${icon}"></img><span>${desc}</span></div>
+    <div class="buttons"></div>
+    `;
+    let msgbox = createWindow(
+    {
+        title: title,
+        html: html,
+        hasdisplay: false,
+        minimizable: false,
+        maximizable: false,
+    });
+    for (let i = 0; i < buttonarray.length; i++)
+    {
+        let button = document.createElement("button");
+        button.innerHTML = buttonarray[i];
+        button.onclick = onclickarray[i] || function()
+        {
+            msgbox.remove()
+        };
+        msgbox.children[2].appendChild(button);
+    }
+    if (icon == null)
+    {
+        msgbox.children[1].children[0].remove();
+    }
+    enableDraggable(msgbox);
+    msgbox.style.left = window.clientWidth / 2 - msgbox.clientWidth / 2 + "px";
+    msgbox.style.top = window.clientHeight / 2 - msgbox.clientHeight / 2 + "px";
+    msgbox.style.minWidth = msgbox.clientWidth + "px";
 }

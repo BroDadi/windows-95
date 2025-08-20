@@ -1,4 +1,5 @@
-function createProperties() {
+function createProperties()
+{
     disableContextMenu();
     let properties = document.createElement("div");
     properties.classList.add("window");
@@ -69,15 +70,19 @@ function createProperties() {
     </div>
     `;
     properties.tabIndex = 0;
-    properties.querySelectorAll("select").forEach((select) => {
+    properties.querySelectorAll("select").forEach((select) =>
+    {
         sortOther(select);
-        select.addEventListener("change", function () {
+        select.addEventListener("change", function()
+        {
             properties.querySelector(".buttons > button[disabled]")?.removeAttribute("disabled");
             setWallpaper(select.value, properties.querySelector("input:checked + label").innerText, true);
         });
     });
-    properties.querySelectorAll("input + label").forEach((input) => {
-        input.addEventListener("click", () => {
+    properties.querySelectorAll("input + label").forEach((input) =>
+    {
+        input.addEventListener("click", () =>
+        {
             properties.querySelector(".buttons > button[disabled]")?.removeAttribute("disabled");
             setWallpaper(properties.querySelector("#wppick").value, input.innerText, true);
         });
@@ -87,7 +92,8 @@ function createProperties() {
     makeATabSwitch(properties.querySelector(".tabs"));
 }
 
-function openDialogPlaceholder() {
+function openDialogPlaceholder()
+{
     let dialog = document.createElement("div");
     dialog.innerHTML = `
     <div class="header"><span>${currentLang[40]}</span><div class="windowbuttons"><button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button></div></div>
