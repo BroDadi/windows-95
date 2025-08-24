@@ -102,6 +102,7 @@ function openDialogPlaceholder()
     <div class="buttons"><button onclick="setCustomWall(this);">${currentLang[15]}</button></div>
     `;
     dialog.tabIndex = 0;
+    dialog.style.zIndex = 100;
     dialog.classList.add("window");
     document.querySelector("#windows.nodisplay").appendChild(dialog);
     enableDraggable(dialog);

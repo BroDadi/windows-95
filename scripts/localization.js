@@ -1,3 +1,4 @@
+// such a mess to be honest, i should make something else instead of this garbage
 let langs = {
     en: [
         "Start", "Programs", "Documents", "Settings", "Search", "Help", "Run...", "Suspend", "Shut Down...",
@@ -17,6 +18,7 @@ let langs = {
         "[?] is not accessible.\n\nThe device is not ready.", "Retry",
         "Start Menu", "Desktop",
         "Copyright Microsoft Corp", "Invalid directory", "Bad command or file name", "Required parameter missing",
+        "Minesweeper", "Game", "New", "Beginner", "Intermediate", "Expert", "Custom...", "Custom Field", "Width:", "Height:", "Mines:", "Marks (?)", "Color", "Best Times...", "Exit"
     ],
     ru: [
         "Пуск", "Программы", "Документы", "Настройка", "Поиск", "Справка", "Выполнить", "Остановка", "Завершение работы...",
@@ -37,6 +39,7 @@ let langs = {
         "Нет доступа к '[?]'.\n\nУстройство не готово.", "Повтор",
         "Главное меню", "Рабочий стол",
         "Корпорация Microsoft", "Каталог задан неверно", "Имя команды или файла указано неверно", "Опущен обязательный параметр",
+        "Сапёр", "Игра", "Новая игра", "Новичок", "Любитель", "Профессионал", "Настройка...", "Размер игрового поля", "Ширина:", "Высота:", "Число мин:", "Метки (?)", "Чемпионы...", "Выход"
     ],
 };
 

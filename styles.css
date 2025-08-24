@@ -1,25 +1,29 @@
 @import url("https://fonts.cdnfonts.com/css/fixedsys-62");
 
-@font-face {
+@font-face
+{
     font-family: "MS Sans Serif";
     src: url(res/MS\ Sans\ Serif\ 8pt.ttf);
 }
 
-@font-face {
+@font-face
+{
     font-family: "IBM VGA 8x14";
     src: url(res/PxPlus_IBM_EGA_8x14.ttf);
 }
 
-:root {
+:root
+{
     --font: "Microsoft Sans Serif";
 }
 
-button {
+button
+{
     font-family: var(--font);
-    box-shadow: inset -1px -1px 0px 0px #000000, 
-                inset 1px 1px 0px 0px #FFFFFF, 
-                inset -2px -2px 0px 0px #808080, 
-                inset 2px 2px 0px 0px #DFDFDF;
+    box-shadow: inset -1px -1px 0px 0px #000000,
+        inset 1px 1px 0px 0px #FFFFFF,
+        inset -2px -2px 0px 0px #808080,
+        inset 2px 2px 0px 0px #DFDFDF;
     border: none;
     background-color: #c0c0c0;
     min-width: 90px;
@@ -29,54 +33,76 @@ button {
     user-select: none;
     background-position: center;
 }
-button:active {
-    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                inset 1px 1px 0px 0px #000000, 
-                inset -2px -2px 0px 0px #DFDFDF, 
-                inset 2px 2px 0px 0px #808080;
+
+button:active
+{
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+        inset 1px 1px 0px 0px #000000,
+        inset -2px -2px 0px 0px #DFDFDF,
+        inset 2px 2px 0px 0px #808080;
 }
-button:focus {
+
+button:focus
+{
     outline: none;
 }
-button * {
+
+button *
+{
     vertical-align: middle;
     padding-left: 0.5px;
     padding-right: 0.5px;
 }
-button.tray {
+
+button.tray
+{
     border-width: 0;
     border-image: 0;
 }
-[disabled] {
+
+[disabled]
+{
     text-shadow: 1px 1px #fff;
 }
-button[disabled] {
+
+button[disabled]
+{
     color: #808080;
 }
-#contextmenu > button[disabled]:hover, #startoptions button[disabled]:hover {
+
+#contextmenu>button[disabled]:hover,
+#startoptions button[disabled]:hover,
+.submenu>button[disabled]:hover
+{
     text-shadow: none;
     color: #808080;
 }
-button[disabled]:active {
-    box-shadow: inset -1px -1px 0px 0px #000000, 
-                inset 1px 1px 0px 0px #FFFFFF, 
-                inset -2px -2px 0px 0px #808080, 
-                inset 2px 2px 0px 0px #DFDFDF;
+
+button[disabled]:active
+{
+    box-shadow: inset -1px -1px 0px 0px #000000,
+        inset 1px 1px 0px 0px #FFFFFF,
+        inset -2px -2px 0px 0px #808080,
+        inset 2px 2px 0px 0px #DFDFDF;
 }
-#tray {
+
+#tray
+{
     display: flex;
     align-items: center;
     height: 18px;
-    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                inset 1px 1px 0px 0px #808080;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+        inset 1px 1px 0px 0px #808080;
     margin-right: 2px;
     padding: 2px;
 }
-#startmenu {
-    box-shadow: inset -1px -1px 0px 0px #000000, 
-                inset 1px 1px 0px 0px #FFFFFF, 
-                inset -2px -2px 0px 0px #808080, 
-                inset 2px 2px 0px 0px #DFDFDF;
+
+#startmenu
+{
+    box-shadow: inset -1px -1px 0px 0px #000000,
+        inset 1px 1px 0px 0px #FFFFFF,
+        inset -2px -2px 0px 0px #808080,
+        inset 2px 2px 0px 0px #DFDFDF;
     background-color: #c0c0c0;
     position: absolute;
     bottom: 24px;
@@ -85,62 +111,89 @@ button[disabled]:active {
     padding: 3px;
     z-index: 1;
 }
-#sidemenu {
+
+#sidemenu
+{
     text-align: left;
     background: #808080;
     transform: rotate(180deg);
     width: 21px;
 }
-#sidemenu span {
+
+#sidemenu span
+{
     font-size: 14pt;
     color: #fff;
     font-weight: lighter;
     font-family: "Franklin Gothic Book";
     writing-mode: vertical-rl;
 }
-span {
+
+span
+{
     user-select: none;
 }
-#windowstext {
+
+#windowstext
+{
     font-family: "Franklin Gothic Medium" !important;
     color: #c0c0c0 !important;
     font-weight: bold !important;
     margin-top: 20px;
 }
-#startoptions {
+
+#startoptions
+{
     display: flex;
     flex-direction: column;
 }
-#startoptions div, #contextmenu {
+
+#startoptions div,
+#contextmenu
+{
     display: flex;
     flex-direction: column;
-    padding-right: 29px!important;
+    padding-right: 29px !important;
 }
-#contextmenu button {
-    height: 17px!important;
-    padding-left: 22px!important;
+
+#contextmenu button,
+.menu-bar .submenu button
+{
+    height: 17px !important;
+    padding-left: 22px !important;
     box-shadow: none;
     text-align: left;
     width: calc(100% + 15px);
 }
 
-#contextmenu {
-    gap: 0!important;
+#contextmenu,
+.menu-bar .submenu
+{
+    gap: 0 !important;
     box-sizing: border-box;
     position: absolute;
     padding: 1px;
     display: flex;
     flex-direction: column;
-    padding-right: 18px!important;
+    padding-right: 18px !important;
 }
-#contextmenu .sep {
+
+#contextmenu .sep,
+.menu-bar .submenu .sep
+{
     box-sizing: border-box;
     width: calc(100% + 15px);
 }
-#startoptions div > button {
+
+#startoptions div>button
+{
     width: calc(100% + 26px);
 }
-#startoptions div > button.dropdown::after, #contextmenu button.dropdown::after {
+
+#startoptions div>button.dropdown::after,
+#contextmenu button.dropdown::after,
+.submenu button.dropdown::after
+{
     content: "";
     width: 4px;
     height: 7px;
@@ -148,16 +201,24 @@ span {
     position: absolute;
     right: 7px;
 }
-#startoptions div > button.dropdown:hover::after, #contextmenu button.dropdown:hover::after {
+
+#startoptions div>button.dropdown:hover::after,
+#contextmenu button.dropdown:hover::after,
+.submenu button.dropdown:hover::after
+{
     filter: invert(100%);
 }
-.sep {
+
+.sep
+{
     border-top: #808080 1px solid;
     border-bottom: #fff 1px solid;
     margin-bottom: 5px;
     margin-top: 2px;
 }
-#startmenu button {
+
+#startmenu button
+{
     height: auto;
     box-shadow: none;
     text-align: left;
@@ -167,18 +228,28 @@ span {
     min-width: auto;
     padding: 0px 5px;
 }
-#startmenu button:hover, #contextmenu button:hover {
+
+#startmenu button:hover,
+#contextmenu button:hover,
+.submenu button:hover
+{
     background-color: #000080;
     color: #fff;
 }
-#startmenu button img:nth-child(1) {
+
+#startmenu button img:nth-child(1)
+{
     width: 32px;
     height: 32px;
 }
-#clock {
+
+#clock
+{
     width: 46px;
 }
-#start {
+
+#start
+{
     margin-left: 2px;
     min-width: 0px;
     padding: 0 4px 0 4px;
@@ -186,20 +257,26 @@ span {
     align-items: center;
     gap: 1px;
 }
-#start span {
+
+#start span
+{
     text-shadow: 0.5px 0px black, 1.5px 0px black;
     color: transparent;
     letter-spacing: 1px;
 }
-#start.pressed {
-    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                inset 1px 1px 0px 0px #000000, 
-                inset -2px -2px 0px 0px #DFDFDF, 
-                inset 2px 2px 0px 0px #808080;
+
+#start.pressed
+{
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+        inset 1px 1px 0px 0px #000000,
+        inset -2px -2px 0px 0px #DFDFDF,
+        inset 2px 2px 0px 0px #808080;
 }
-#startbar {
-    box-shadow: inset 0px 1px 0px 0px #DFDFDF, 
-                inset 0px 2px 0px 0px #FFFFFF;
+
+#startbar
+{
+    box-shadow: inset 0px 1px 0px 0px #DFDFDF,
+        inset 0px 2px 0px 0px #FFFFFF;
     background-color: #c0c0c0;
     bottom: 0%;
     width: 100%;
@@ -210,24 +287,32 @@ span {
     justify-content: space-between;
     padding-top: 2px;
 }
-#clock {
+
+#clock
+{
     font-family: var(--font);
     text-align: center;
     margin-top: 1px;
 }
-#bg {
+
+#bg
+{
     width: 100vw;
     height: 100vh;
     position: fixed;
     z-index: -3;
     background: #008080;
 }
-.monitor {
+
+.monitor
+{
     background: url(res/monitor.png);
     width: 184px;
     height: 169px;
 }
-#desktop {
+
+#desktop
+{
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -239,7 +324,9 @@ span {
     row-gap: 2px;
     overflow: hidden;
 }
-#windows {
+
+#windows
+{
     position: absolute;
     top: 0px;
     left: 0px;
@@ -250,20 +337,25 @@ span {
     flex: 0 0 auto;
     overflow: hidden;
 }
-.window {
+
+.window
+{
     position: absolute;
-    box-shadow: inset -1px -1px 0px 0px #000000, 
-                inset 1px 1px 0px 0px #FFFFFF, 
-                inset -2px -2px 0px 0px #808080, 
-                inset 2px 2px 0px 0px #DFDFDF;
+    box-shadow: inset -1px -1px 0px 0px #000000,
+        inset 1px 1px 0px 0px #FFFFFF,
+        inset -2px -2px 0px 0px #808080,
+        inset 2px 2px 0px 0px #DFDFDF;
     background-color: #c0c0c0;
     padding: 4px;
     pointer-events: auto;
     min-width: 112px;
     min-height: 27px;
     flex-shrink: none;
+    box-sizing: border-box;
 }
-.window > .header {
+
+.window>.header
+{
     height: 18px;
     display: flex;
     align-items: center;
@@ -273,39 +365,58 @@ span {
     background-color: #808080;
     user-select: none;
 }
-.header img, .windowdisplay img {
+
+.header img,
+.windowdisplay img
+{
     width: 16px;
     height: 16px;
 }
-.window > .header span {
+
+.window>.header span
+{
     text-shadow: 0.5px 0px #c0c0c0, 1.5px 0px #c0c0c0;
     color: transparent;
     letter-spacing: 1px;
 }
-.window:focus > .header {
+
+.window:focus>.header
+{
     background: #000080;
 }
-.window:focus > .header span {
+
+.window:focus>.header span
+{
     text-shadow: 0.5px 0px #fff, 1.5px 0px #fff;
 }
-.window:focus {
+
+.window:focus
+{
     outline: none;
 }
-.window > .buttons {
+
+.window>.buttons
+{
     padding: 5px 11px 11px 11px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 6px;
 }
-.window.system > .buttons {
+
+.window.system>.buttons
+{
     float: right;
 }
-.window > desc > img {
+
+.window>desc>img
+{
     width: 32px;
     height: 32px;
 }
-.window > .desc {
+
+.window>.desc
+{
     display: flex;
     flex-direction: row;
     align-items: self-start;
@@ -315,29 +426,43 @@ span {
     word-break: none;
     user-select: none;
 }
-.windowbuttons div {
+
+.windowbuttons div
+{
     display: flex;
     align-items: center;
     margin-right: 2px;
 }
-.windowbuttons button {
+
+.windowbuttons button
+{
     width: 16px;
     height: 14px;
     min-width: 0px;
 }
-.close {
+
+.close
+{
     background-image: url("res/x.png");
 }
-.maximize {
+
+.maximize
+{
     background-image: url("res/maximize.png");
 }
-.restore {
+
+.restore
+{
     background-image: url("res/restore.png");
 }
-.minimize {
+
+.minimize
+{
     background-image: url("res/minimize.png");
 }
-body {
+
+body
+{
     margin: 0;
     image-rendering: pixelated;
     overflow: hidden;
@@ -345,16 +470,23 @@ body {
     -moz-osx-font-smoothing: none;
     font-smooth: none;
 }
-img {
+
+img
+{
     pointer-events: none;
     align-self: center;
+    user-select: none;
 }
-span {
+
+span
+{
     font-family: var(--font);
     font-size: 11px;
     text-align: center;
 }
-.shortcut {
+
+.shortcut
+{
     width: 99px;
     height: 75px;
     display: flex;
@@ -363,41 +495,58 @@ span {
     align-items: center;
     position: absolute;
 }
-.shortcutpreview {
+
+.shortcutpreview
+{
     z-index: -1;
 }
-.shortcutpreview img {
+
+.shortcutpreview img
+{
     opacity: 0.5;
 }
-.shortcutpreview span {
+
+.shortcutpreview span
+{
     color: #000 !important;
 }
-.shortcut span {
+
+.shortcut span
+{
     color: #000;
     pointer-events: none;
     text-align: center;
     padding: 2px;
     position: relative;
 }
-#desktop .shortcut span {
+
+#desktop .shortcut span
+{
     background: #008080;
     color: #fff;
 }
-.shortcut img {
+
+.shortcut img
+{
     width: 32px;
     height: 32px;
     margin-top: 2px;
     user-select: none;
 }
-.shortcut.selected img {
-    filter: opacity(0.5) drop-shadow(0.1px 0 0 #000080)
-        drop-shadow(0.1px 0 0 #000080);
+
+.shortcut.selected img
+{
+    filter: opacity(0.5) drop-shadow(0.1px 0 0 #000080) drop-shadow(0.1px 0 0 #000080);
 }
-.shortcut.selected span {
-    background: #000080!important;
-    color: #fff!important;
+
+.shortcut.selected span
+{
+    background: #000080 !important;
+    color: #fff !important;
 }
-.shortcut.selected span::before {
+
+.shortcut.selected span::before
+{
     content: "";
     width: 100%;
     height: 100%;
@@ -409,61 +558,81 @@ span {
     position: absolute;
     outline-offset: -1px;
 }
-.header > div {
+
+.header>div
+{
     display: flex;
     align-items: center;
 }
-.header > div > img {
+
+.header>div>img
+{
     margin-left: -1px;
 }
-.menu-bar ul {
+
+.menu-bar>div
+{
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #c0c0c0;
 }
-.menu-bar li {
+
+.menu-bar>div>button
+{
     padding: 5px 12px 3px 6px;
     font-family: var(--font);
     float: left;
     font-size: 11px;
     cursor: default;
     user-select: none;
+    box-shadow: none;
+    min-width: 0;
 }
-.menu-bar li:focus {
+
+.menu-bar button.selected
+{
     background-color: #000080;
     color: #fff;
 }
-.notepadcontent {
+
+.notepadcontent
+{
     resize: none;
     overflow: scroll;
     height: calc(100% - 40px);
     width: calc(100% - 1px);
-    box-shadow: inset 1px 1px 0px 0px #808080, 
-                inset -1px -1px 0px 0px #DFDFDF, 
-                inset 2px 2px 0px 0px #000000;
+    box-shadow: inset 1px 1px 0px 0px #808080,
+        inset -1px -1px 0px 0px #DFDFDF,
+        inset 2px 2px 0px 0px #000000;
     border: none;
     font-family: "Fixedsys 62";
     line-height: 16px;
     padding: 0;
 }
-.notepadcontent:focus {
+
+.notepadcontent:focus
+{
     outline: none;
 }
-.expcontent {
+
+.expcontent
+{
     resize: none;
     overflow: scroll;
     height: calc(100% - 58px);
     width: calc(100% - 1px);
-    box-shadow: inset 1px 1px 0px 0px #808080, 
-                inset -1px -1px 0px 0px #DFDFDF, 
-                inset 2px 2px 0px 0px #000000;
+    box-shadow: inset 1px 1px 0px 0px #808080,
+        inset -1px -1px 0px 0px #DFDFDF,
+        inset 2px 2px 0px 0px #000000;
     background-color: #fff;
 }
-.statusbar {
-    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                inset 1px 1px 0px 0px #808080;
+
+.statusbar
+{
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+        inset 1px 1px 0px 0px #808080;
     height: 18px;
     margin-top: 2px;
     display: flex;
@@ -472,12 +641,16 @@ span {
     box-sizing: border-box;
     width: 100%;
 }
-.window.program {
+
+.window.program
+{
     min-width: 180px;
     min-height: 77px;
     padding: 4px;
 }
-.window.program.maximized {
+
+.window.program.maximized
+{
     top: 0px !important;
     left: 0px !important;
     width: 100vw !important;
@@ -485,55 +658,77 @@ span {
     padding: 0px;
     border-width: 0px;
 }
-.window.program.maximized > .resizers {
+
+.window.program.maximized>.resizers
+{
     display: none;
 }
-.resizer {
+
+.resizer
+{
     position: absolute;
     min-width: 4px;
     min-height: 4px;
 }
+
 .resizer.ne,
 .resizer.nw,
-.resizer.n {
+.resizer.n
+{
     top: -2px;
 }
+
 .resizer.ne,
 .resizer.se,
-.resizer.e {
+.resizer.e
+{
     right: -2px;
 }
+
 .resizer.se,
 .resizer.sw,
-.resizer.s {
+.resizer.s
+{
     bottom: -2px;
 }
+
 .resizer.nw,
 .resizer.sw,
-.resizer.w {
+.resizer.w
+{
     left: -2px;
 }
+
 .resizer.n,
-.resizer.s {
+.resizer.s
+{
     left: 1px;
     width: calc(100% - 2px);
     cursor: ns-resize;
 }
+
 .resizer.e,
-.resizer.w {
+.resizer.w
+{
     top: 1px;
     height: calc(100% - 2px);
     cursor: ew-resize;
 }
+
 .resizer.nw,
-.resizer.se {
+.resizer.se
+{
     cursor: nwse-resize;
 }
+
 .resizer.ne,
-.resizer.sw {
+.resizer.sw
+{
     cursor: nesw-resize;
 }
-.windowpreview {
+
+.windowpreview
+{
     border-image: url(res/checkers.png) 4;
     border-width: 4px;
     border-style: solid;
@@ -543,15 +738,22 @@ span {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 900;
 }
-button:focus {
+
+button:focus
+{
     outline: dotted 1px black;
     outline-offset: -4px;
 }
-#startmenu button:focus {
+
+#startmenu button:focus
+{
     outline: none;
 }
-.selection-box {
+
+.selection-box
+{
     border-image: url(res/checkers.png) 1;
     border-width: 1px;
     border-style: solid;
@@ -560,17 +762,25 @@ button:focus {
     position: absolute;
     z-index: 99;
 }
-ul {
+
+ul
+{
     list-style-type: none;
 }
-#shutdown .desc .radiolist {
+
+#shutdown .desc .radiolist
+{
     padding: 0px;
 }
-#shutdown .desc > div {
+
+#shutdown .desc>div
+{
     margin-left: -10px;
     margin-top: -2px;
 }
-.radiolistH {
+
+.radiolistH
+{
     display: flex;
     flex-direction: row;
     margin: 0px;
@@ -579,33 +789,45 @@ ul {
     align-items: center;
     white-space: nowrap;
 }
-input:not([type="radio"]) {
+
+input:not([type="radio"])
+{
     border: none;
-    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                inset 1px 1px 0px 0px #000000, 
-                inset -2px -2px 0px 0px #DFDFDF, 
-                inset 2px 2px 0px 0px #808080;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+        inset 1px 1px 0px 0px #000000,
+        inset -2px -2px 0px 0px #DFDFDF,
+        inset 2px 2px 0px 0px #808080;
     font-family: var(--font);
     font-size: 11px;
     height: 20px;
 }
-input:not([type="radio"]):focus {
+
+input:not([type="radio"]):focus
+{
     outline: none;
 }
-.radiolistH input[type="radio"] + label {
+
+.radiolistH input[type="radio"]+label
+{
     padding-left: 18px;
 }
-input[type="radio"] {
+
+input[type="radio"]
+{
     display: none;
 }
-input[type="radio"] + label {
+
+input[type="radio"]+label
+{
     position: relative;
     padding-left: 21px;
     font-family: var(--font);
     font-size: 11px;
     user-select: none;
 }
-input[type="radio"] + label:before {
+
+input[type="radio"]+label:before
+{
     content: "";
     position: absolute;
     left: 0;
@@ -614,49 +836,65 @@ input[type="radio"] + label:before {
     height: 12px;
     background: url(res/radio.png);
 }
-input[type="radio"]:checked + label:before {
+
+input[type="radio"]:checked+label:before
+{
     background: url(res/selectedradio.png);
 }
-.window.system .buttons {
+
+.window.system .buttons
+{
     padding: 5px 11px 13px 11px;
     gap: 8px;
 }
-.boxcontain {
+
+.boxcontain
+{
     display: flex;
     justify-content: space-between;
     gap: 9px;
 }
-.tabcontent {
+
+.tabcontent
+{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 9px;
-    box-shadow: inset -1px -1px 0px 0px #000000, 
-                inset 1px 1px 0px 0px #FFFFFF, 
-                inset -2px -2px 0px 0px #808080, 
-                inset 2px 2px 0px 0px #DFDFDF;
+    box-shadow: inset -1px -1px 0px 0px #000000,
+        inset 1px 1px 0px 0px #FFFFFF,
+        inset -2px -2px 0px 0px #808080,
+        inset 2px 2px 0px 0px #DFDFDF;
     margin-top: -2px;
     position: relative;
     z-index: 4;
     gap: 10px;
     box-sizing: border-box;
 }
-#properties .buttons {
+
+#properties .buttons
+{
     padding: 0px 6px 7px 6px;
     gap: 7px;
 }
-#properties button:not(.close) {
+
+#properties button:not(.close)
+{
     min-width: 75px;
 }
-#properties select[size] {
+
+#properties select[size]
+{
     width: 155px;
     height: 68px;
 }
-select[size] {
-    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                inset 1px 1px 0px 0px #000000, 
-                inset -2px -2px 0px 0px #DFDFDF, 
-                inset 2px 2px 0px 0px #808080;
+
+select[size]
+{
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+        inset 1px 1px 0px 0px #000000,
+        inset -2px -2px 0px 0px #DFDFDF,
+        inset 2px 2px 0px 0px #808080;
     border: none;
     font-family: var(--font);
     font-size: 11px;
@@ -664,19 +902,25 @@ select[size] {
     padding-left: 3px;
     scroll-behavior: smooth;
 }
-select[size] option {
+
+select[size] option
+{
     padding: 1px;
     padding-left: 2px;
 }
-select[size] option:checked {
+
+select[size] option:checked
+{
     background-image: linear-gradient(#000080, #000080);
     color: #fff;
 }
-.groupBox {
-    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                inset 1px 1px 0px 0px #808080, 
-                inset -2px -2px 0px 0px #808080, 
-                inset 2px 2px 0px 0px #FFFFFF;
+
+.groupBox
+{
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+        inset 1px 1px 0px 0px #808080,
+        inset -2px -2px 0px 0px #808080,
+        inset 2px 2px 0px 0px #FFFFFF;
     margin-top: 8px;
     padding: 12px 9px 12px 9px;
     position: relative;
@@ -684,7 +928,9 @@ select[size] option:checked {
     flex-direction: column;
     gap: 5px;
 }
-.groupBox::before {
+
+.groupBox::before
+{
     content: attr(text);
     font-family: var(--font);
     font-size: 11px;
@@ -694,19 +940,27 @@ select[size] option:checked {
     background: #c0c0c0;
     padding: 0 5px;
 }
-.groupBox > button {
+
+.groupBox>button
+{
     float: right;
     min-width: 72px;
 }
-.tabMenu {
+
+.tabMenu
+{
     padding: 6px;
     padding-top: 10px;
 }
-.tabs {
+
+.tabs
+{
     display: flex;
     margin-left: 2px;
 }
-.tab {
+
+.tab
+{
     font-family: var(--font);
     font-size: 11px;
     border-image: url(res/tab.png) 3;
@@ -720,22 +974,30 @@ select[size] option:checked {
     position: relative;
     z-index: 3;
 }
-.tab.selected {
+
+.tab.selected
+{
     margin-top: -2px;
     margin-left: -2px;
     margin-right: -2px;
     padding: 1px 5px 3px 5px;
     z-index: 5;
 }
-#properties .tabcontent {
+
+#properties .tabcontent
+{
     width: 387px;
     height: 357px;
 }
-#shutdown .buttons > button {
+
+#shutdown .buttons>button
+{
     min-width: 78px;
     min-height: 23px;
 }
-#shutdowntext {
+
+#shutdowntext
+{
     color: orange;
     font-size: 36px;
     top: 50vh;
@@ -747,7 +1009,9 @@ select[size] option:checked {
     font-weight: bold;
     user-select: none;
 }
-.header.clone {
+
+.header.clone
+{
     position: absolute;
     transition: all 0.25s linear;
     z-index: 2;
@@ -759,47 +1023,64 @@ select[size] option:checked {
     justify-content: space-between;
     padding: 0px 3px;
 }
-#left {
+
+#left
+{
     display: flex;
     align-items: center;
     gap: 4px;
 }
-.windowdisplay {
+
+.windowdisplay
+{
     display: flex;
     align-items: center;
     width: 150px;
     gap: 2px;
 }
-.windowdisplay.pressed {
+
+.windowdisplay.pressed
+{
     padding-top: 1px;
 }
-button.pressed:not(#start) {
-    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                inset 1px 1px 0px 0px #000000, 
-                inset -2px -2px 0px 0px #DFDFDF, 
-                inset 2px 2px 0px 0px #808080;
+
+button.pressed:not(#start)
+{
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+        inset 1px 1px 0px 0px #000000,
+        inset -2px -2px 0px 0px #DFDFDF,
+        inset 2px 2px 0px 0px #808080;
     background-image: url(res/selectedwindowdisplay.png);
     background-repeat: repeat;
     text-shadow: 0.5px 0px black, 1.5px 0px black;
     color: transparent;
     letter-spacing: 1px;
 }
-#windowdisplays {
+
+#windowdisplays
+{
     display: flex;
     align-items: center;
     gap: 3px;
 }
-.window.minimized {
+
+.window.minimized
+{
     visibility: hidden;
 }
-button:hover .dropdown-content {
+
+button:hover .dropdown-content
+{
     display: block;
 }
-.submenu, #contextmenu {
-    box-shadow: inset -1px -1px 0px 0px #000000, 
-                inset 1px 1px 0px 0px #FFFFFF, 
-                inset -2px -2px 0px 0px #808080, 
-                inset 2px 2px 0px 0px #DFDFDF;
+
+.submenu,
+#contextmenu
+{
+    box-shadow: inset -1px -1px 0px 0px #000000,
+        inset 1px 1px 0px 0px #FFFFFF,
+        inset -2px -2px 0px 0px #808080,
+        inset 2px 2px 0px 0px #DFDFDF;
     position: absolute;
     padding: 3px 2px;
     background: #c0c0c0;
@@ -808,19 +1089,29 @@ button:hover .dropdown-content {
     gap: 2px;
     z-index: 3;
 }
-#contextmenu .submenu button {
+
+#contextmenu .submenu button
+{
     width: auto;
 }
-.submenu button {
+
+.submenu button
+{
     height: 20px !important;
     gap: 7px !important;
     text-wrap: nowrap;
 }
-.submenu button img, #contextmenu button img {
+
+.submenu button img,
+#contextmenu button img
+{
     width: 16px !important;
     height: 16px !important;
 }
-.monitorbg, .monitorimg {
+
+.monitorbg,
+.monitorimg
+{
     position: absolute;
     top: -218px;
     left: -206px;
@@ -829,187 +1120,260 @@ button:hover .dropdown-content {
     transform: scale(0.19);
     z-index: -1;
 }
-.monitorbg {
+
+.monitorbg
+{
     background: #008080;
 }
-#paint {
-    .content {
+
+#paint
+{
+    iframe
+    {
+        width: calc(100% - 4px);
+        height: calc(100% - 25px);
+    }
+
+    .content
+    {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
         height: calc(100% - 38px);
         box-sizing: border-box;
     }
-    .sidebar {
-        box-shadow: inset 0px 1px 0px 0px #808080, 
-                    inset 0px 2px 0px 0px #FFFFFF,
-                    inset 0px -1px 0px 0px #FFFFFF,
-                    inset 0px -2px 0px 0px #808080;
-        div {
+
+    .sidebar
+    {
+        box-shadow: inset 0px 1px 0px 0px #808080,
+            inset 0px 2px 0px 0px #FFFFFF,
+            inset 0px -1px 0px 0px #FFFFFF,
+            inset 0px -2px 0px 0px #808080;
+
+        div
+        {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
         }
-        .tools {
+
+        .tools
+        {
             width: 56px;
             gap: 3px;
         }
-        .options {
+
+        .options
+        {
             width: 41px;
             height: 66px;
             display: flex;
             flex-wrap: wrap;
-            box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                        inset 1px 1px 0px 0px #808080;
+            box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+                inset 1px 1px 0px 0px #808080;
         }
-        button {
+
+        button
+        {
             min-width: 0px;
             width: 25px;
             height: 25px;
             padding: 0px;
-            img {
+
+            img
+            {
                 padding: 0px;
             }
         }
     }
-    .draw {
+
+    .draw
+    {
         width: calc(100% - 56px);
         height: calc(100% - 76px);
         background: #808080;
         overflow: scroll;
         padding: 3px;
         box-sizing: border-box;
-        #paintCanvas {
+
+        #paintCanvas
+        {
             transform-origin: top left;
         }
     }
-    .footer {
+
+    .footer
+    {
         width: 100%;
         height: 47px;
         display: flex;
         align-items: center;
         justify-content: start;
-        .colormenu {
+
+        .colormenu
+        {
             display: flex;
             height: 32px;
             gap: 1px;
-            .colordisplay {
+
+            .colordisplay
+            {
                 width: 31px;
                 height: 32px;
-                box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                            inset 1px 1px 0px 0px #808080, 
-                            inset -2px -2px 0px 0px #DFDFDF, 
-                            inset 2px 2px 0px 0px #000000;
+                box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+                    inset 1px 1px 0px 0px #808080,
+                    inset -2px -2px 0px 0px #DFDFDF,
+                    inset 2px 2px 0px 0px #000000;
                 background: #dfdfdf;
                 position: relative;
-                .color1 {
+
+                .color1
+                {
                     width: 15px;
                     height: 15px;
-                    box-shadow: inset 1px 1px 0px 0px #FFFFFF, 
-                                inset -1px -1px 0px 0px #808080,
-                                inset 0px 0px 0px 2px #DFDFDF;
+                    box-shadow: inset 1px 1px 0px 0px #FFFFFF,
+                        inset -1px -1px 0px 0px #808080,
+                        inset 0px 0px 0px 2px #DFDFDF;
                     left: 4px;
                     top: 5px;
                     position: absolute;
                     background: #000;
                 }
-                .color2 {
+
+                .color2
+                {
                     width: 15px;
                     height: 15px;
-                    box-shadow: inset 1px 1px 0px 0px #FFFFFF, 
-                                inset -1px -1px 0px 0px #808080, 
-                                inset 0px 0px 0px 2px #DFDFDF;
+                    box-shadow: inset 1px 1px 0px 0px #FFFFFF,
+                        inset -1px -1px 0px 0px #808080,
+                        inset 0px 0px 0px 2px #DFDFDF;
                     position: absolute;
                     left: 11px;
                     top: 12px;
                     background: #fff;
                 }
             }
-            .colors {
+
+            .colors
+            {
                 display: flex;
                 flex-wrap: wrap;
                 flex-direction: column;
                 width: calc(16px * 14);
                 box-shadow: 1px 1px 0px 0px #808080;
-                .color {
+
+                .color
+                {
                     width: 16px;
                     height: 16px;
-                    box-shadow: inset -1px -1px 0px 0px #FFFFFF, 
-                                inset 1px 1px 0px 0px #808080, 
-                                inset -2px -2px 0px 0px #DFDFDF, 
-                                inset 2px 2px 0px 0px #000000;
+                    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+                        inset 1px 1px 0px 0px #808080,
+                        inset -2px -2px 0px 0px #DFDFDF,
+                        inset 2px 2px 0px 0px #000000;
                 }
             }
         }
     }
 }
-#calc {
+
+#calc
+{
     width: 276px;
     height: 272px;
-    * {
+
+    *
+    {
         font-family: var(--font);
         font-size: 11px;
     }
-    .content {
+
+    .content
+    {
         display: flex;
         flex-wrap: wrap;
         padding: 10px;
         gap: 6px;
         justify-content: space-between;
-        button:not(.windowbuttons button) {
+
+        button:not(.windowbuttons button)
+        {
             min-width: 36px;
             height: 28px;
             color: transparent;
             letter-spacing: 1px;
             font-size: 11px;
         }
-        button.big {
+
+        button.big
+        {
             width: 49px;
         }
-        button.red {
+
+        button.red
+        {
             text-shadow: 0.5px 0px #f00, 1.5px 0px #f00;
         }
-        button.dkrd {
+
+        button.dkrd
+        {
             text-shadow: 0.5px 0px #800000, 1.5px 0px #800000;
         }
-        button.blue {
+
+        button.blue
+        {
             text-shadow: 0.5px 0px #00f, 1.5px 0px #00f;
         }
-        button.dkbl {
+
+        button.dkbl
+        {
             text-shadow: 0.5px 0px #000080, 1.5px 0px #000080;
         }
-        input {
+
+        input
+        {
             pointer-events: none;
         }
-        .result {
+
+        .result
+        {
             width: 100%;
             height: 26px;
             text-align: right;
         }
-        .toprow {
+
+        .toprow
+        {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            .mem {
+
+            .mem
+            {
                 width: 36px;
                 height: 26px;
                 background: #c0c0c0;
                 box-sizing: border-box;
                 text-align: center;
             }
-            div {
+
+            div
+            {
                 display: flex;
                 gap: 4px;
             }
         }
-        .leftcolumn {
+
+        .leftcolumn
+        {
             display: flex;
             flex-direction: column;
             width: 36px;
             gap: 6px;
         }
-        .btns {
+
+        .btns
+        {
             width: 196px;
             height: 130px;
             float: right;
@@ -1019,8 +1383,11 @@ button:hover .dropdown-content {
         }
     }
 }
-#msdos {
-    .console {
+
+#msdos
+{
+    .console
+    {
         height: calc(100% - 23px);
         top: 2px;
         max-width: 644px;
@@ -1035,10 +1402,14 @@ button:hover .dropdown-content {
         font-family: "IBM VGA 8x14";
         cursor: default;
         padding: 1px;
-        .input {
+
+        .input
+        {
             display: flex;
             flex-direction: row;
-            input {
+
+            input
+            {
                 background-color: #000;
                 color: #c0c0c0;
                 font-family: "IBM VGA 8x14";
@@ -1046,12 +1417,211 @@ button:hover .dropdown-content {
                 flex-grow: 1;
                 border: none;
                 outline: none;
-                padding: 0!important;
+                padding: 0 !important;
                 box-shadow: none;
                 resize: none;
                 box-sizing: border-box;
                 margin: 0;
                 overflow-y: auto;
+            }
+        }
+    }
+}
+
+#winmine
+{
+    min-width: 0;
+
+    .content
+    {
+        padding: 9px;
+        box-shadow: inset 1px 1px 0px 0px #FFFFFF, inset -1px -1px 0px 0px #808080,
+            inset 2px 2px 0px 0px #FFFFFF, inset -2px -2px 0px 0px #808080,
+            inset 3px 3px 0px 0px #FFFFFF, inset -3px -3px 0px 0px #808080;
+
+        .top
+        {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 8px;
+            box-shadow: inset -1px -1px 0px 0px #FFFFFF, inset 1px 1px 0px 0px #808080,
+                inset -2px -2px 0px 0px #FFFFFF, inset 2px 2px 0px 0px #808080;
+
+            .counter
+            {
+                box-shadow: 1px 1px 0px 0px #FFFFFF, -1px -1px 0px 0px #808080;
+                height: 23px;
+            }
+
+            #newgame
+            {
+                box-shadow: 1px 1px 0px 0px #808080, -1px -1px 0px 0px #808080;
+                min-width: 0;
+                width: 24px;
+                height: 24px;
+                background: url("res/minesweeper/face/smile.png");
+            }
+
+            #newgame.dead
+            {
+                background: url("res/minesweeper/face/dead.png");
+            }
+
+            #newgame.surprised
+            {
+                background: url("res/minesweeper/face/surprise.png");
+            }
+
+            #newgame.cool
+            {
+                background: url("res/minesweeper/face/cool.png");
+            }
+
+            #newgame:hover:active
+            {
+                background: url("res/minesweeper/face/pressed.png");
+            }
+        }
+
+        .field
+        {
+            display: flex;
+            flex-direction: column;
+            padding: 3px;
+            margin-top: 6px;
+            box-shadow: inset -1px -1px 0px 0px #FFFFFF, inset 1px 1px 0px 0px #808080,
+                inset -2px -2px 0px 0px #FFFFFF, inset 2px 2px 0px 0px #808080,
+                inset -3px -3px 0px 0px #FFFFFF, inset 3px 3px 0px 0px #808080;
+
+            .column
+            {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .cell
+            {
+                width: 16px;
+                height: 16px;
+                background: url("res/minesweeper/cells/normal.png");
+            }
+
+            .cell.pressed,
+            .cell:hover:active:not(.pressed):not(.mine):not(.flag):not(.questionmark)
+            {
+                background: url("res/minesweeper/cells/0.png");
+            }
+
+            .cell.m1
+            {
+                background: url("res/minesweeper/cells/1.png");
+            }
+
+            .cell.m2
+            {
+                background: url("res/minesweeper/cells/2.png");
+            }
+
+            .cell.m3
+            {
+                background: url("res/minesweeper/cells/3.png");
+            }
+
+            .cell.m4
+            {
+                background: url("res/minesweeper/cells/4.png");
+            }
+
+            .cell.m5
+            {
+                background: url("res/minesweeper/cells/5.png");
+            }
+
+            .cell.m6
+            {
+                background: url("res/minesweeper/cells/6.png");
+            }
+
+            .cell.m7
+            {
+                background: url("res/minesweeper/cells/7.png");
+            }
+
+            .cell.m8
+            {
+                background: url("res/minesweeper/cells/8.png");
+            }
+
+            .cell.flag
+            {
+                background: url("res/minesweeper/cells/flag.png");
+            }
+
+            .cell.mine
+            {
+                background: url("res/minesweeper/cells/mine.png");
+            }
+
+            .cell.minepressed
+            {
+                background: url("res/minesweeper/cells/pressedmine.png");
+            }
+
+            .cell.questionmark
+            {
+                background: url("res/minesweeper/cells/questionmark.png");
+            }
+
+            .cell.questionmark:hover:active
+            {
+                background: url("res/minesweeper/cells/pressedquestionmark.png");
+            }
+        }
+    }
+}
+
+#winminedialog
+{
+    .content
+    {
+        display: flex;
+        flex-direction: row;
+        padding: 12px;
+        gap: 10px;
+
+        .left
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            div
+            {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 123px;
+                span
+                {
+                    line-height: 20px;
+                }
+                input
+                {
+                    width: 60px;
+                    height: 20px;   
+                }
+            }
+        }
+        .btns
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            button
+            {
+                min-width: 0;
+                width: 75px;
             }
         }
     }

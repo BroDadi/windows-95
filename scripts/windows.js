@@ -404,8 +404,11 @@ function createWindow(
             wndw.remove();
         };
     }
-    wndw.style.width = Math.min(window.innerWidth * 0.75, maxwidth ?? Infinity) + "px";
-    wndw.style.height = Math.min(window.innerHeight * 0.75, maxheight ?? Infinity) + "px";
+    if (resizable)
+    {
+        wndw.style.width = Math.min(window.innerWidth * 0.75, maxwidth ?? Infinity) + "px";
+        wndw.style.height = Math.min(window.innerHeight * 0.75, maxheight ?? Infinity) + "px";
+    }
     if (wndw.style.height + newWindowTop > window.innerHeight || wndw.style.width + newWindowTop > window.innerWidth)
     {
         newWindowLeft = 0;
@@ -419,26 +422,64 @@ function createWindow(
     wndw.innerHTML = `
         <div class="header">
             <div>
-                <img src="${icon}"></img>
-                <span>${title}</span>
             </div>
             <div class="windowbuttons"></div>
         </div>
     `;
+    if (icon)
+    {
+        let img = document.createElement("img");
+        img.src = icon;
+        wndw.querySelector(".header > div").appendChild(img);
+    }
+    let span = document.createElement("span");
+    span.innerText = title;
+    wndw.querySelector(".header > div").appendChild(span);
+
     wndw.querySelector(".windowbuttons").appendChild(buttons);
     if (closable) wndw.querySelector(".windowbuttons").appendChild(close);
 
+    let activeMenuBarItem = null;
     if (menu)
     {
         let menuBar = document.createElement("div");
         menuBar.classList.add("menu-bar");
-        menuBar.innerHTML = "<ul></ul>";
+        menuBar.innerHTML = "<div></div>";
         wndw.appendChild(menuBar);
         for (let i = 0; i < menu.length; i++)
         {
-            let menuItem = document.createElement("li");
-            menuItem.innerText = menu[i];
-            wndw.querySelector(".menu-bar > ul").appendChild(menuItem);
+            let menuItem = document.createElement("button");
+            if (typeof(menu[i]) == "string") menuItem.innerText = menu[i];
+            else
+            {
+                menuItem.innerText = menu[i].name;
+                menuItem.onclick = function(e)
+                {
+                    if (activeMenuBarItem == menuItem)
+                    {
+                        removeSubMenus(menuBar);
+                        activeMenuBarItem = null;
+                        menuItem.classList.remove("selected");
+                        return;
+                    }
+                    removeSubMenus(menuBar);
+                    createSubTopMenu(menuItem, menu[i].children);
+                    activeMenuBarItem = menuItem;
+                    menuItem.classList.add("selected");
+                };
+                menuItem.onmouseover = function()
+                {
+                    if (activeMenuBarItem && activeMenuBarItem != menuItem)
+                    {
+                        removeSubMenus(menuBar);
+                        activeMenuBarItem.classList.remove("selected");
+                        createSubTopMenu(menuItem, menu[i].children);
+                        activeMenuBarItem = menuItem;
+                        menuItem.classList.add("selected");
+                    }
+                };
+            }
+            wndw.querySelector(".menu-bar > div").appendChild(menuItem);
         }
     }
 
@@ -453,7 +494,14 @@ function createWindow(
     };
     if (draggable) enableDraggable(wndw);
     if (resizable) enableResizable(wndw, minwidth, minheight, maxwidth, maxheight);
-    bringToTop(wndw);
+    if (hasdisplay)
+    {
+        bringToTop(wndw);
+    }
+    else
+    {
+        wndw.style.zIndex = 100;
+    }
     return wndw;
 }
 

@@ -51,7 +51,13 @@ let files = {
                             type: "folder",
                             name: currentLang[72],
                             icon: "res/folderprograms",
-                            children: []
+                            children: [
+                            {
+                                type: "shortcut",
+                                name: currentLang[96],
+                                icon: "res/winmine",
+                                dest: "C:\\WINDOWS\\winmine"
+                            }]
                         },
                         {
                             type: "folder",
@@ -142,7 +148,18 @@ let files = {
                 {
                     createPaint();
                 }
-            }, ]
+            },
+            {
+                type: "file",
+                name: "winmine",
+                ext: "exe",
+                icon: "res/pbrush",
+                action: function()
+                {
+                    createMinesweeper();
+                }
+            },
+            ]
         },
         {
             type: "folder",

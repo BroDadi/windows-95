@@ -8,10 +8,7 @@ function removeSubMenus(element)
 
 function createSubMenu(elmnt)
 {
-    if (elmnt.querySelector(".submenu"))
-    {
-        return;
-    }
+    if (elmnt.querySelector(".submenu")) return;
 
     document.querySelectorAll(".submenu").forEach((element) =>
     {
@@ -20,7 +17,7 @@ function createSubMenu(elmnt)
     
     let subMenu = document.createElement("div");
     subMenu.classList.add("submenu");
-    if (document.querySelector("#prog").contains(elmnt))
+    if (document.querySelector("#prog") && document.querySelector("#prog").contains(elmnt))
     {
         let path = "";
         let current = elmnt;
@@ -89,8 +86,6 @@ function createSubMenu(elmnt)
     }
     let top = elmnt.getBoundingClientRect().top - elmnt.parentNode.getBoundingClientRect().top - 3;
     let left = elmnt.clientWidth;
-    subMenu.style.top = top + "px";
-    subMenu.style.left = left + "px";
     if (subMenu.getBoundingClientRect().top + subMenu.clientHeight > window.innerHeight)
     {
         top -= subMenu.clientHeight - 26;
@@ -141,4 +136,57 @@ function sortSubMenu(subMenu)
 function disableContextMenu()
 {
     document.querySelector("#contextmenu")?.remove();
+}
+
+function createSubTopMenu(elmnt, subMenuElements)
+{
+    if (subMenuElements.length == 0) return;
+    if (elmnt.querySelector(".submenu")) return;
+
+    document.querySelectorAll(".submenu").forEach((element) =>
+    {
+        if (!element.contains(elmnt) && !elmnt.contains(element)) element.remove();
+    });
+    
+    let subMenu = document.createElement("div");
+    subMenu.classList.add("submenu");
+
+    subMenuElements.forEach(element =>
+    {
+        if (element.name == "/sep/")
+        {
+            let sep = document.createElement("div");
+            sep.classList.add("sep");
+            subMenu.appendChild(sep);
+        }
+        else
+        {
+            let button = document.createElement("button");
+            button.innerText = `${element.name}`;
+            button.onclick = element.action;
+            subMenu.appendChild(button);
+        }
+    });
+    let top, left;
+    if (elmnt.parentNode.parentNode.classList.contains("menu-bar"))
+    {
+        top = elmnt.clientHeight + "px";
+        left = elmnt.getBoundingClientRect().left - elmnt.parentNode.getBoundingClientRect().left;
+    }
+    else
+    {
+        top = elmnt.getBoundingClientRect().top - elmnt.parentNode.getBoundingClientRect().top - 3;
+        left = elmnt.clientWidth;
+        if (subMenu.getBoundingClientRect().top + subMenu.clientHeight > window.innerHeight)
+        {
+            top -= subMenu.clientHeight - 26;
+        }
+        if (subMenu.getBoundingClientRect().left + subMenu.clientWidth > window.innerWidth)
+        {
+            left = -subMenu.clientWidth;
+        }
+    }
+    elmnt.append(subMenu);
+    subMenu.style.top = top + "px";
+    subMenu.style.left = left + "px";
 }
