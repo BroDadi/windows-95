@@ -81,8 +81,8 @@ function createMinesweeper()
     let gameOver = false;
     let cells = [];
     let mineArray = [];
-    let time = 0;
-    let gridWidth, gridHeight, mineCount, currentMines;
+    let gridWidth, gridHeight, mineCount, currentMines, time;
+    let timeInterval;
     let field = minesweeper.querySelector(".field");
     let mineCounter = minesweeper.querySelector("#mines");
     let timeCounter = minesweeper.querySelector("#time");
@@ -108,6 +108,7 @@ function createMinesweeper()
         if (mines < 10) mines = 10;
         mineCount = mines;
         currentMines = mineCount;
+        time = 0;
         field.innerHTML = "";
         cells = [];
         mineArray = [];
@@ -131,6 +132,8 @@ function createMinesweeper()
             field.append(col);
         }
         updateCounter(mineCounter, mineCount);
+        updateCounter(timeCounter, time);
+        clearInterval(timeInterval);
     }
 
     function startGame(clickx, clicky)
@@ -149,6 +152,7 @@ function createMinesweeper()
             mineArray[m] = [x, y];
             cells[y][x] = 1;
         }
+        timeInterval = setInterval(timerSecond, 1000);
     }
 
     function press(x, y)
@@ -214,6 +218,12 @@ function createMinesweeper()
         updateCounter(mineCounter, currentMines);
     }
 
+    function timerSecond()
+    {
+        time += 1;
+        updateCounter(timeCounter, time);
+    }
+
     function lose(x, y)
     {
         for (let i = 0; i < mineArray.length; i++)
@@ -226,6 +236,7 @@ function createMinesweeper()
         gameOver = true;
         gameStarted = false;
         minesweeper.querySelector("#newgame").classList.add("dead");
+        clearInterval(timeInterval);
     }
 
     function win()
@@ -237,6 +248,7 @@ function createMinesweeper()
         gameOver = true;
         gameStarted = false;
         minesweeper.querySelector("#newgame").classList.add("cool");
+        clearInterval(timeInterval);
     }
 
     function updateCounter(counter, value)
