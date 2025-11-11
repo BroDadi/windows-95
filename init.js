@@ -1,25 +1,32 @@
-window.addEventListener("load", function () {
+window.addEventListener("load", function()
+{
     setInterval(updateTime, 1000);
-    document.querySelector("#startbar").addEventListener("click", function (e) {
-        if (e.target == this) {
+    document.querySelector("#startbar").addEventListener("click", function(e)
+    {
+        if (e.target == this)
+        {
             disableStart();
         }
     });
-    let mutationObserver = new MutationObserver(() => {
+    let mutationObserver = new MutationObserver(() =>
+    {
         windowDisplays();
     });
-    mutationObserver.observe(document.querySelector("#windows"), {
+    mutationObserver.observe(document.querySelector("#windows"),
+    {
         childList: true,
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function()
+{
     const desktop = document.getElementById("desktop");
     let isSelecting = false;
     let startX, startY, endX, endY;
     let selectionBox;
 
-    document.oncontextmenu = function (e) {
+    document.oncontextmenu = function(e)
+    {
         e.preventDefault();
         document.querySelector("#contextmenu")?.remove();
         if (e.target != document.querySelector("#desktop")) return;
@@ -38,14 +45,20 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="sep"></div>
             <button onclick="createProperties();">${currentLang[70]}</button>
         `;
-        for (let i = 0; i < contextMenu.querySelectorAll("button").length; i++) {
+        for (let i = 0; i < contextMenu.querySelectorAll("button").length; i++)
+        {
             let element = contextMenu.querySelectorAll("button")[i];
-            if (element.classList.contains("dropdown")) {
-                element.onmouseover = function () {
+            if (element.classList.contains("dropdown"))
+            {
+                element.onmouseover = function()
+                {
                     createSubMenu(element);
                 };
-            } else {
-                element.onmouseover = function () {
+            }
+            else
+            {
+                element.onmouseover = function()
+                {
                     removeSubMenus(contextMenu);
                 };
             }
@@ -53,8 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(contextMenu);
     };
 
-    desktop.addEventListener("mousedown", function (event) {
-        if (!event.target.classList.contains("shortcut")) {
+    desktop.addEventListener("mousedown", function(event)
+    {
+        if (!event.target.classList.contains("shortcut"))
+        {
             deselectShortcuts();
             isSelecting = true;
             startX = event.clientX;
@@ -69,8 +84,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    desktop.addEventListener("mousemove", function (event) {
-        if (isSelecting) {
+    desktop.addEventListener("mousemove", function(event)
+    {
+        if (isSelecting)
+        {
             endX = event.clientX;
             endY = event.clientY;
             selectionBox.style.width = Math.abs(endX - startX) + "px";
@@ -81,36 +98,40 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    document.addEventListener("mouseup", function () {
-        if (isSelecting) {
+    document.addEventListener("mouseup", function()
+    {
+        if (isSelecting)
+        {
             isSelecting = false;
-            if (selectionBox) {
+            if (selectionBox)
+            {
                 selectionBox.remove();
                 selectionBox = null;
             }
         }
     });
 
-    function selectShortcutsInBox() {
+    function selectShortcutsInBox()
+    {
         const shortcuts = document.querySelectorAll(".shortcut");
-        shortcuts.forEach((shortcut) => {
+        shortcuts.forEach((shortcut) =>
+        {
             const shortcutRect = shortcut.getBoundingClientRect();
             const boxRect = selectionBox.getBoundingClientRect();
 
-            if (
-                shortcutRect.left < boxRect.right &&
-                shortcutRect.right > boxRect.left &&
-                shortcutRect.top < boxRect.bottom &&
-                shortcutRect.bottom > boxRect.top
-            ) {
+            if (shortcutRect.left < boxRect.right && shortcutRect.right > boxRect.left && shortcutRect.top < boxRect.bottom && shortcutRect.bottom > boxRect.top)
+            {
                 shortcut.classList.add("selected");
-            } else {
+            }
+            else
+            {
                 shortcut.classList.remove("selected");
             }
         });
     }
 
-    function isClearTypeEnabled() {
+    function isClearTypeEnabled()
+    {
         var canvas = document.createElement("canvas");
         canvas.width = 35;
         canvas.height = 35;
@@ -122,8 +143,10 @@ document.addEventListener("DOMContentLoaded", function () {
         var data = ctx.getImageData(1, 1, 32, 32).data;
         var count = 0;
 
-        for (var i = 0; i < data.length; i += 4) {
-            if (data[i] !== data[i + 1] || data[i] !== data[i + 2]) {
+        for (var i = 0; i < data.length; i += 4)
+        {
+            if (data[i] !== data[i + 1] || data[i] !== data[i + 2])
+            {
                 count++;
             }
         }
@@ -141,8 +164,15 @@ document.addEventListener("DOMContentLoaded", function () {
     createShortcut("res/mycomputer32.png", currentLang[77], createFileViewer);
 
     let desktopObserver = new MutationObserver(syncFolderWithDesktop);
-    desktopObserver.observe(document.querySelector("#desktop"), { childList: true });
+    desktopObserver.observe(document.querySelector("#desktop"),
+    {
+        childList: true
+    });
 
     let desktopFolderObserver = new MutationObserver(syncDesktopWithFolder);
-    desktopFolderObserver.observe(document.querySelector("#windows"), { childList: true, subtree: true });
+    desktopFolderObserver.observe(document.querySelector("#windows"),
+    {
+        childList: true,
+        subtree: true
+    });
 });

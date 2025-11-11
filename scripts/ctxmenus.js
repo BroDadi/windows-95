@@ -1,6 +1,6 @@
 function removeSubMenus(element)
 {
-    for (let i = 0; i < element.querySelectorAll("* .submenu").length; i++)
+    while (element.querySelectorAll("* .submenu").length > 0)
     {
         element.querySelector("* .submenu").remove();
     }
@@ -28,25 +28,25 @@ function createSubMenu(elmnt)
         }
         path = `C:\\WINDOWS\\${currentLang[90]}\\${path}`.slice(0, -1);
         let folderChildren = findByPath(path).children;
-        for (let i in folderChildren)
+        folderChildren.forEach(function(child)
         {
-            if (folderChildren[i].type == "folder")
+            if (child.type == "folder")
             {
-                let icon = folderChildren[i].icon ? folderChildren[i].icon + "16.png" : "res/folder16.png";
+                let icon = child.icon ? child.icon + "16.png" : "res/folder16.png";
                 let button = document.createElement("button");
                 button.classList.add("dropdown");
-                button.innerHTML = `<img src=${icon}></img>${folderChildren[i].name}`;
+                button.innerHTML = `<img src=${icon}>${child.name}`;
                 subMenu.appendChild(button);
             }
-            else if (folderChildren[i].type == "shortcut")
+            else if (child.type == "shortcut")
             {
-                let icon = folderChildren[i].icon ? folderChildren[i].icon + "16.png" : folderChildren[i].dest.icon + "16.png";
+                let icon = child.icon ? child.icon + "16.png" : child.dest.icon + "16.png";
                 let button = document.createElement("button");
-                button.innerHTML = `<img src=${icon}></img>${folderChildren[i].name}`;
-                button.onclick = findByPath(folderChildren[i].dest).action;
+                button.innerHTML = `<img src=${icon}>${child.name}`;
+                button.onclick = findByPath(child.dest).action;
                 subMenu.appendChild(button);
             }
-        }
+        });
         if (folderChildren.length == 0)
         {
             subMenu.innerHTML = `<button disabled>${currentLang[32]}</button>`;
@@ -65,39 +65,41 @@ function createSubMenu(elmnt)
         }
     }
     elmnt.append(subMenu);
+
     if (subMenu != document.querySelector("#startoptions")) sortSubMenu(subMenu);
-    for (let i = 0; i < subMenu.querySelectorAll("button").length; i++)
+    subMenu.querySelectorAll("button").forEach(function(button)
     {
-        let element = subMenu.querySelectorAll("button")[i];
-        if (element.classList.contains("dropdown"))
+        if (button.classList.contains("dropdown"))
         {
-            element.onmouseover = function()
+            button.onmouseover = function()
             {
-                createSubMenu(element);
+                createSubMenu(button);
             };
         }
         else
         {
-            element.onmouseover = function()
+            button.onmouseover = function()
             {
                 removeSubMenus(subMenu);
             };
         }
-    }
+    });
+
     let top = elmnt.getBoundingClientRect().top - elmnt.parentNode.getBoundingClientRect().top - 3;
     let left = elmnt.clientWidth;
+    
     if (subMenu.getBoundingClientRect().top + subMenu.clientHeight > window.innerHeight)
     {
         top -= subMenu.clientHeight - 26;
+    }
+    if (subMenu.getBoundingClientRect().left + subMenu.clientWidth > window.innerWidth)
+    {
+        left = -subMenu.clientWidth;
     }
     if (elmnt.parentNode.parentNode.id == "startoptions")
     {
         left += 25;
         top += 3;
-    }
-    if (subMenu.getBoundingClientRect().left + subMenu.clientWidth > window.innerWidth)
-    {
-        left = -subMenu.clientWidth;
     }
     subMenu.style.top = top + "px";
     subMenu.style.left = left + "px";
@@ -107,27 +109,22 @@ function sortSubMenu(subMenu)
 {
     let buttons = Array.from(subMenu.querySelectorAll("button"));
 
-    buttons.sort((a, b) =>
+    buttons.sort(function (a, b)
     {
         const aHasClass = a.classList.contains("dropdown");
         const bHasClass = b.classList.contains("dropdown");
 
-        if (aHasClass !== bHasClass)
-        {
-            return aHasClass ? -1 : 1;
-        }
+        if (aHasClass !== bHasClass) return aHasClass ? -1 : 1;
 
         const aText = a.textContent.trim().toLowerCase();
         const bText = b.textContent.trim().toLowerCase();
 
-        if (aText < bText) return -1;
-        if (aText > bText) return 1;
-        return 0;
+        return (aText > bText) ? 1 : (aText < bText) ? -1 : 0;
     });
 
     subMenu.innerHTML = "";
 
-    buttons.forEach((button) =>
+    buttons.forEach(function(button)
     {
         subMenu.appendChild(button);
     });
@@ -168,9 +165,9 @@ function createSubTopMenu(elmnt, subMenuElements)
         }
     });
     let top, left;
-    if (elmnt.parentNode.parentNode.classList.contains("menu-bar"))
+    if (elmnt.parentNode.classList.contains("menu-bar"))
     {
-        top = elmnt.clientHeight + "px";
+        top = elmnt.clientHeight;
         left = elmnt.getBoundingClientRect().left - elmnt.parentNode.getBoundingClientRect().left;
     }
     else

@@ -12,6 +12,12 @@
     src: url(res/PxPlus_IBM_EGA_8x14.ttf);
 }
 
+@font-face
+{
+    font-family: "System";
+    src: url(res/System.ttf);
+}
+
 :root
 {
     --font: "Microsoft Sans Serif";
@@ -62,12 +68,8 @@ button.tray
 
 [disabled]
 {
-    text-shadow: 1px 1px #fff;
-}
-
-button[disabled]
-{
     color: #808080;
+    text-shadow: 1px 1px #fff;
 }
 
 #contextmenu>button[disabled]:hover,
@@ -159,15 +161,14 @@ span
 #contextmenu button,
 .menu-bar .submenu button
 {
+    width: calc(100% + 15px);
     height: 17px !important;
     padding-left: 22px !important;
     box-shadow: none;
     text-align: left;
-    width: calc(100% + 15px);
 }
 
-#contextmenu,
-.menu-bar .submenu
+#contextmenu
 {
     gap: 0 !important;
     box-sizing: border-box;
@@ -175,6 +176,11 @@ span
     padding: 1px;
     display: flex;
     flex-direction: column;
+    padding-right: 18px !important;
+}
+
+.menu-bar .submenu
+{
     padding-right: 18px !important;
 }
 
@@ -246,6 +252,7 @@ span
 #clock
 {
     width: 46px;
+    letter-spacing: 1px;
 }
 
 #start
@@ -300,7 +307,7 @@ span
     width: 100vw;
     height: 100vh;
     position: fixed;
-    z-index: -3;
+    z-index: -4;
     background: #008080;
 }
 
@@ -316,7 +323,7 @@ span
     width: 100vw;
     height: 100vh;
     position: fixed;
-    z-index: -2;
+    z-index: -3;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -373,11 +380,21 @@ span
     height: 16px;
 }
 
+.window>.header>div:not(.windowbuttons)
+{
+    flex-shrink: 1;
+    min-width: 0;
+}
+
 .window>.header span
 {
     text-shadow: 0.5px 0px #c0c0c0, 1.5px 0px #c0c0c0;
     color: transparent;
     letter-spacing: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: none;
 }
 
 .window:focus>.header
@@ -439,6 +456,16 @@ span
     width: 16px;
     height: 14px;
     min-width: 0px;
+}
+
+.window>.blocker
+{
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    z-index: 200;
 }
 
 .close
@@ -570,18 +597,19 @@ span
     margin-left: -1px;
 }
 
-.menu-bar>div
+.menu-bar
 {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #c0c0c0;
+    padding-top: 1px;
+    height: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
 }
 
-.menu-bar>div>button
+.menu-bar>button
 {
-    padding: 5px 12px 3px 6px;
+    padding: 0px 6px 0px 7px;
     font-family: var(--font);
     float: left;
     font-size: 11px;
@@ -589,6 +617,8 @@ span
     user-select: none;
     box-shadow: none;
     min-width: 0;
+    height: 18px;
+    position: relative;
 }
 
 .menu-bar button.selected
@@ -760,7 +790,7 @@ button:focus
     border-image-repeat: repeat;
     mix-blend-mode: difference;
     position: absolute;
-    z-index: 99;
+    z-index: -2;
 }
 
 ul
@@ -802,7 +832,7 @@ input:not([type="radio"])
     height: 20px;
 }
 
-input:not([type="radio"]):focus
+input:not([type="radio"]):not([type="checkbox"]):focus
 {
     outline: none;
 }
@@ -840,6 +870,47 @@ input[type="radio"]+label:before
 input[type="radio"]:checked+label:before
 {
     background: url(res/selectedradio.png);
+}
+
+input[type="checkbox"]
+{
+    display: none;
+}
+
+input[type="checkbox"]+label
+{
+    position: relative;
+    padding-left: 20px;
+    font-family: var(--font);
+    font-size: 11px;
+    user-select: none;
+    cursor: default;
+}
+
+input[type="checkbox"][disabled]+label
+{
+    color: #808080;
+}
+
+input[type="checkbox"]+label:before
+{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 13px;
+    height: 13px;
+    background: url(res/checkbox.png);
+}
+
+input[type="checkbox"]:checked+label:before
+{
+    background: url(res/checkboxchecked.png);
+}
+
+input[type="checkbox"][disabled]+label:before
+{
+    background: url(res/checkboxdisabled.png);
 }
 
 .window.system .buttons
@@ -935,7 +1006,7 @@ select[size] option:checked
     font-family: var(--font);
     font-size: 11px;
     position: absolute;
-    top: -7px;
+    top: -5px;
     left: 5px;
     background: #c0c0c0;
     padding: 0 5px;
@@ -1596,33 +1667,320 @@ button:hover .dropdown-content
             display: flex;
             flex-direction: column;
             gap: 15px;
+
             div
             {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 width: 123px;
+
                 span
                 {
                     line-height: 20px;
                 }
+
                 input
                 {
                     width: 60px;
-                    height: 20px;   
+                    height: 20px;
                 }
             }
         }
+
         .btns
         {
             display: flex;
             flex-direction: column;
             gap: 5px;
+
             button
             {
                 min-width: 0;
                 width: 75px;
             }
         }
+    }
+}
+
+#sol>.content
+{
+    --back: url("res/cards/00-04.png");
+    background-color: #008000;
+    width: 100%;
+    height: calc(100% - 41px);
+    padding: 2px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset -1px -1px 0px 0px #FFFFFF,
+        inset 1px 1px 0px 0px #808080,
+        inset -2px -2px 0px 0px #DFDFDF,
+        inset 2px 2px 0px 0px #000000;
+
+    #stack,
+    #waste,
+    #draggedcards,
+    .card,
+    .cardstack,
+    .foundation,
+    .zalupa
+    {
+        width: 71px;
+        height: 96px;
+    }
+
+    .card
+    {
+        background: var(--back);
+        user-select: none;
+
+        img
+        {
+            display: none;
+            user-select: none;
+        }
+    }
+
+    .card.up
+    {
+        img
+        {
+            display: inline;
+        }
+    }
+
+    #top
+    {
+        padding-top: 5px;
+        padding-bottom: 6px;
+        width: 100%;
+        min-height: 0;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        #stack
+        {
+            position: relative;
+            background: url("res/cards/10-04.png");
+        }
+
+        #waste,
+        .foundation
+        {
+            position: relative;
+        }
+
+        #stack>.card,
+        #waste>.card,
+        .foundation>.card
+        {
+            position: absolute;
+        }
+
+        #stack>.card:nth-child(-n+10),
+        #waste>.card:nth-child(-n+10),
+        .foundation>.card:nth-child(-n+5)
+        {
+            margin-top: 0px;
+        }
+
+        #stack>.card:nth-child(n+11):nth-child(-n+20),
+        #waste>.card:nth-child(n+11):nth-child(-n+20),
+        .foundation>.card:nth-child(n+6):nth-child(-n+9)
+        {
+            margin-top: 1px;
+            margin-left: 2px;
+        }
+
+        #stack>.card:nth-child(n+20):nth-child(-n+24),
+        #waste>.card:nth-child(n+20):nth-child(-n+24),
+        .foundation>.card:nth-child(n+10):nth-child(-n+12)
+        {
+            margin-top: 2px;
+            margin-left: 4px;
+        }
+
+        .foundation>.card:nth-child(13)
+        {
+            margin-top: 3px;
+            margin-left: 6px;
+        }
+
+        .foundation
+        {
+            background: url("res/cards/12-04.png");
+            position: relative;
+        }
+    }
+
+    #cardstacks
+    {
+        width: 100%;
+        min-height: 0;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        flex-grow: 1;
+
+        .card:not(:first-child)
+        {
+            margin-top: -93px;
+        }
+
+        .card.up~.card.up
+        {
+            margin-top: -81px;
+        }
+    }
+
+    #statusbar
+    {
+        width: 100%;
+        height: 16px;
+        flex-shrink: 0;
+        border-top: solid 1px #000000;
+        background: #ffffff;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        span
+        {
+            font-family: "System";
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+    }
+
+    #draggedcards
+    {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        pointer-events: none;
+
+        .card:not(:first-child)
+        {
+            margin-top: -81px;
+        }
+    }
+}
+
+#soldialog
+{
+    width: 273px;
+
+    #backs
+    {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 7px;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+
+        .back
+        {
+            width: 35px;
+            height: 64px;
+            border: solid 1px #c0c0c0;
+            outline: solid 2px #ffffff;
+            box-shadow: none;
+            box-sizing: border-box;
+
+            img
+            {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .back.selected
+        {
+            outline: solid 2px #000080;
+        }
+
+        .back:hover:active>img
+        {
+            filter: invert();
+        }
+    }
+
+    #btns
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        padding: 12px;
+        padding-top: 0;
+
+        button
+        {
+            min-width: 83px;
+        }
+    }
+}
+
+#solsettings
+{
+    width: 342px;
+
+    #radios
+    {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        padding: 12px;
+
+        .groupBox
+        {
+            width: 50%;
+
+            .radiolist
+            {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                padding-left: 9px;
+                margin: 0;
+                height: 100%;
+            }
+        }
+    }
+
+    #checks
+    {
+        display: flex;
+        flex-direction: row;
+        padding: 12px;
+        padding-top: 0px;
+        gap: 12px;
+
+        div
+        {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            flex: 1;
+        }
+    }
+
+    #buttons
+    {
+        display: flex;
+        justify-content: end;
+        gap: 6px;
+        padding: 12px;
+        padding-top: 4px;
     }
 }

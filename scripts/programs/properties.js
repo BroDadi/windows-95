@@ -1,12 +1,10 @@
+let prop;
 function createProperties()
 {
     disableContextMenu();
-    let properties = document.createElement("div");
-    properties.classList.add("window");
-    properties.classList.add("system");
-    properties.id = "properties";
-    properties.innerHTML = `
-    <div class="header"><span>${currentLang[34]}</span><div class="windowbuttons"><button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button></div></div>
+    if (document.querySelector("#properties")) return;
+
+    let html = `
     <div class="tabMenu">
         <div class="tabs">
             <div id="ppbg" class="tab selected">${currentLang[35]}</div>
@@ -55,8 +53,8 @@ function createProperties()
                     </div>
                     <div>
                         <ul id="wptile" class="radiolistH">
-                            <li><input type="radio" id="item1" name="items" value="item1" checked><label for="item1">${currentLang[63]}</label></li>
-                            <li><input type="radio" id="item2" name="items" value="item2"><label for="item2">${currentLang[64]}</label></li>
+                            <li><input type="radio" id="item1" value="item1" checked><label for="item1">${currentLang[63]}</label></li>
+                            <li><input type="radio" id="item2" value="item2"><label for="item2">${currentLang[64]}</label></li>
                         </ul>
                     </div>
                 </div>
@@ -69,7 +67,18 @@ function createProperties()
         <button disabled onclick="setWallpaper(document.querySelector('#wppick').value, document.querySelector('#wptile input:checked + label').innerText); this.setAttribute('disabled','')">${currentLang[33]}</button>
     </div>
     `;
-    properties.tabIndex = 0;
+    let properties = createWindow(
+    {
+        title: currentLang[34],
+        html: html,
+        minimizable: false,
+        maximizable: false,
+        resizable: false,
+        additionalClasses: ["system"],
+        id: "properties",
+        hasdisplay: false,
+    })
+    prop = properties;
     properties.querySelectorAll("select").forEach((select) =>
     {
         sortOther(select);
@@ -94,19 +103,21 @@ function createProperties()
 
 function openDialogPlaceholder()
 {
-    let dialog = document.createElement("div");
-    dialog.innerHTML = `
-    <div class="header"><span>${currentLang[40]}</span><div class="windowbuttons"><button class="close" onclick="this.parentNode.parentNode.parentNode.remove()"></button></div></div>
+    html = `
     <div class="desc"><span>${currentLang[76]}</span></div>
-	<input></input>
+    <input></input>
     <div class="buttons"><button onclick="setCustomWall(this);">${currentLang[15]}</button></div>
     `;
-    dialog.tabIndex = 0;
-    dialog.style.zIndex = 100;
-    dialog.classList.add("window");
-    document.querySelector("#windows.nodisplay").appendChild(dialog);
-    enableDraggable(dialog);
+    let dialog = createWindow(
+    {
+        title: currentLang[40],
+        html: html,
+        maximizable: false,
+        minimizable: false,
+        resizable: false,
+        parentElement: prop,
+        hasdisplay: false
+    });
     dialog.style.left = "calc(50wv - 0.5em)";
     dialog.style.top = "calc(50wv - 0.5em)";
-    dialog.style.minWidth = dialog.clientWidth + "px";
 }

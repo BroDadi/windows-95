@@ -18,7 +18,10 @@ let langs = {
         "[?] is not accessible.\n\nThe device is not ready.", "Retry",
         "Start Menu", "Desktop",
         "Copyright Microsoft Corp", "Invalid directory", "Bad command or file name", "Required parameter missing",
-        "Minesweeper", "Game", "New", "Beginner", "Intermediate", "Expert", "Custom...", "Custom Field", "Width:", "Height:", "Mines:", "Marks (?)", "Color", "Best Times...", "Exit"
+        "Minesweeper", "Game", "New", "Beginner", "Intermediate", "Expert", "Custom...", "Custom Field", "Width:", "Height:", "Mines:", "Marks (?)", "Color", "Best Times...", "Exit",
+        "Solitaire", "Deal Again?", "Deal", "Undo", "Deck...", "Select Card Back", "Options...",
+        "Score: ", "Time: ", "Bonus: ", "Click or press Esc to stop...", "Deal a new game", "Undo last action", "Choose new deck back", "Change Solitaire options", "Exit Solitaire",
+        "Options", "Draw", "Draw one", "Draw three", "Scoring", "Standard", "Vegas", "None", "Timed game", "Status bar", "Outline dragging", "Keep score"
     ],
     ru: [
         "Пуск", "Программы", "Документы", "Настройка", "Поиск", "Справка", "Выполнить", "Остановка", "Завершение работы...",
@@ -39,7 +42,10 @@ let langs = {
         "Нет доступа к '[?]'.\n\nУстройство не готово.", "Повтор",
         "Главное меню", "Рабочий стол",
         "Корпорация Microsoft", "Каталог задан неверно", "Имя команды или файла указано неверно", "Опущен обязательный параметр",
-        "Сапёр", "Игра", "Новая игра", "Новичок", "Любитель", "Профессионал", "Настройка...", "Размер игрового поля", "Ширина:", "Высота:", "Число мин:", "Метки (?)", "Чемпионы...", "Выход"
+        "Сапёр", "Игра", "Новая игра", "Новичок", "Любитель", "Профессионал", "Настройка...", "Размер игрового поля", "Ширина:", "Высота:", "Число мин:", "Метки (?)", "Цвет", "Чемпионы...", "Выход",
+        "Пасьянс \"Косынка\"", "Сдать заново?", "Сдать карты",  "Отменить ход",  "Рубашка...",  "Выбор рубашки", "Параметры...", 
+        "Счёт: ", "Время: ", "Премия: ", "Остановка — Esc...", "Начало новой игры", "Отмена последнего действия", "Выбор новой рубашки для колоды", "Смена параметров настройки", "Выход из программы",
+        "Параметры", "Сдавать", "По одной карте", "По три карты", "Счёт", "На очки", "На деньги", "Не ведётся", "Игра с лимитом времени", "Строка состояния", "Перенос с подсказкой", "Сохранять счёт"
     ],
 };
 

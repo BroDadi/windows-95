@@ -70,6 +70,13 @@ function createMinesweeper()
             {
                 name: currentLang[102],
                 action: callCustomDialog
+            },
+            {
+                name: "/sep/"
+            },
+            {
+                name: currentLang[110],
+                action: function() {minesweeper.remove()}
             }
             ]
         },
@@ -106,6 +113,10 @@ function createMinesweeper()
 
         if (mines > (gridWidth - 1) * (gridHeight - 1)) mines = (gridWidth - 1) * (gridHeight - 1);
         if (mines < 10) mines = 10;
+        localStorage.setItem("winmineWidth", width);
+        localStorage.setItem("winmineHeight", height);
+        localStorage.setItem("winmineMines", mines);
+
         mineCount = mines;
         currentMines = mineCount;
         time = 0;
@@ -274,12 +285,11 @@ function createMinesweeper()
 
     function callCustomDialog()
     {
-        console.log("penis");
         html = `
         <div class="content">
             <div class="left">
-                <div class="inputdiv"><span>${currentLang[104]}</span><input id="height"></div>
-                <div class="inputdiv"><span>${currentLang[105]}</span><input id="width"></div>
+                <div class="inputdiv"><span>${currentLang[105]}</span><input id="height"></div>
+                <div class="inputdiv"><span>${currentLang[104]}</span><input id="width"></div>
                 <div class="inputdiv"><span>${currentLang[106]}</span><input id="mines"></div>
             </div>
 
@@ -297,7 +307,8 @@ function createMinesweeper()
             minimizable: false,
             maximizable: false,
             hasdisplay: false,
-            id: "winminedialog"
+            id: "winminedialog",
+            parentElement: minesweeper
         });
         let width = dialog.querySelector("#width");
         let height = dialog.querySelector("#height");
@@ -308,16 +319,17 @@ function createMinesweeper()
         dialog.querySelector("#ok").onclick = function()
         {
             createGrid(parseInt(width.value), parseInt(height.value), parseInt(mines.value));
-            dialog.remove();
+            dialog.close();
         }
         dialog.querySelector("#cancel").onclick = function()
         {
             createGrid(gridWidth, gridHeight, mineCount);
-            dialog.remove();
+            dialog.close();
         }
     }
 
-    createGrid(8, 8, 10);
+    createGrid(localStorage.getItem("winmineWidth") || 8, localStorage.getItem("winmineHeight") || 8, localStorage.getItem("winmineMines") || 10);
+
     minesweeper.querySelector("#newgame").onclick = function() { createGrid(gridWidth, gridHeight, mineCount) };
     minesweeper.onmousedown = function() { if (!gameOver) minesweeper.querySelector("#newgame").classList.add("surprised") };
     minesweeper.onmouseup = function() { if (!gameOver) minesweeper.querySelector("#newgame").removeAttribute("class") };

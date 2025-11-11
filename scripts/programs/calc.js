@@ -32,8 +32,6 @@ function createCalc()
         html: html,
         maximizable: false,
         resizable: false,
-        maxwidth: 276,
-        maxheight: 272,
         additionalClasses: ["program"],
         menu: [currentLang[11], currentLang[12], currentLang[13]],
         id: "calc"

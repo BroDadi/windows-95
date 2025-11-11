@@ -208,8 +208,8 @@ function enableResizable(elmnt, minwidth, minheight, maxwidth, maxheight)
             {
                 elmnt.style.left = preview.getBoundingClientRect().left + "px";
                 elmnt.style.top = preview.getBoundingClientRect().top + "px";
-                elmnt.style.width = preview.clientWidth + "px";
-                elmnt.style.height = preview.clientHeight + "px";
+                elmnt.style.width = preview.offsetWidth + "px";
+                elmnt.style.height = preview.offsetHeight + "px";
                 preview.remove();
                 highlightDisplay(document.querySelector("#windowdisplays").children[indexOfChild(document.querySelector("#windows").children, elmnt)]);
             }
@@ -364,7 +364,10 @@ function createWindow(
     minheight = null,
     maxwidth = null,
     maxheight = null,
+    startWidth = null,
+    startHeight = null,
     hasdisplay = true,
+    parentElement = null,
 })
 {
     disableStart();
@@ -375,6 +378,14 @@ function createWindow(
     wndw.tabIndex = 0;
     let buttons = document.createElement("div");
     let close;
+    wndw.close = function()
+    {
+        if (parentElement)
+        {
+            parentElement.querySelector(".blocker").remove();
+        }
+        wndw.remove();
+    }
     if (minimizable)
     {
         let min = document.createElement("button");
@@ -399,20 +410,37 @@ function createWindow(
     {
         close = document.createElement("button");
         close.classList.add("close");
-        close.onclick = function()
-        {
-            wndw.remove();
-        };
+        close.onclick = wndw.close;
     }
-    if (resizable)
+
+    if ((!startWidth || !startHeight) && resizable)
     {
         wndw.style.width = Math.min(window.innerWidth * 0.75, maxwidth ?? Infinity) + "px";
         wndw.style.height = Math.min(window.innerHeight * 0.75, maxheight ?? Infinity) + "px";
     }
+    else
+    {
+        wndw.style.width = startWidth + "px";
+        wndw.style.height = startHeight + "px";
+    }
+
     if (wndw.style.height + newWindowTop > window.innerHeight || wndw.style.width + newWindowTop > window.innerWidth)
     {
         newWindowLeft = 0;
         newWindowTop = 0;
+    }
+
+    if (parentElement)
+    {
+        let blocker = document.createElement("div");
+        let ding = new Audio("res/audio/DING.WAV");
+        blocker.classList.add("blocker");
+        blocker.onmousedown = function()
+        {
+            ding.play();
+            setTimeout(function() {wndw.focus()}, 10);
+        }
+        parentElement.appendChild(blocker);
     }
     wndw.style.top = newWindowTop + "px";
     wndw.style.left = newWindowLeft + "px";
@@ -444,7 +472,6 @@ function createWindow(
     {
         let menuBar = document.createElement("div");
         menuBar.classList.add("menu-bar");
-        menuBar.innerHTML = "<div></div>";
         wndw.appendChild(menuBar);
         for (let i = 0; i < menu.length; i++)
         {
@@ -479,7 +506,7 @@ function createWindow(
                     }
                 };
             }
-            wndw.querySelector(".menu-bar > div").appendChild(menuItem);
+            wndw.querySelector(".menu-bar").appendChild(menuItem);
         }
     }
 

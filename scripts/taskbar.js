@@ -1,5 +1,6 @@
 function highlightDisplay(display)
 {
+    if (display == null) return;
     document.querySelectorAll(".windowdisplay").forEach((disp) =>
     {
         disp.classList.remove("pressed");

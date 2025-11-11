@@ -57,6 +57,12 @@ let files = {
                                 name: currentLang[96],
                                 icon: "res/winmine",
                                 dest: "C:\\WINDOWS\\winmine"
+                            },
+                            {
+                                type: "shortcut",
+                                name: currentLang[111],
+                                icon: "res/sol",
+                                dest: "C:\\WINDOWS\\sol"
                             }]
                         },
                         {
@@ -153,10 +159,20 @@ let files = {
                 type: "file",
                 name: "winmine",
                 ext: "exe",
-                icon: "res/pbrush",
+                icon: "res/winmine",
                 action: function()
                 {
                     createMinesweeper();
+                }
+            },
+            {
+                type: "file",
+                name: "sol",
+                ext: "exe",
+                icon: "res/sol",
+                action: function()
+                {
+                    createSolitaire();
                 }
             },
             ]
